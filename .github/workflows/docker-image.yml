@@ -9,7 +9,7 @@ jobs:
 
   build:
 
-    runs-on: github-runner-76bdd44846-5frw6
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v4
