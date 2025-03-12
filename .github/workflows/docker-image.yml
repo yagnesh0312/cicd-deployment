@@ -18,3 +18,23 @@ jobs:
     - name: Push the Docker image
       run: docker push yagnesh.jariwala.com:30002/inventyv/production
 
+
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.PUB_SUB_PUBLISHER }}
+
+    - name: Publish a message to Google Cloud Pub/Sub
+      uses: miraliumre/actions-pubsub@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        topic_name: ${{ secrets.PUBSUB_TOPIC }}
+        message: 'Hello world!'
+
+
+    # - name: Publish Message
+    #   uses: miraliumre/actions-pubsub@v1
+
+    #   with:
+    #       topic: ${{ secrets.PUBSUB_TOPIC }}
+    #       message: ${{ secrets.PUBSUB_MESSAGE }}
