@@ -18,10 +18,10 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login yagnesh.jariwala.com:30002 -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
     
     - name: Build the Docker image
-      run: docker build -t yagnesh.jariwala.com:30002/inventyv/production .
+      run: docker build -t yagnesh.jariwala.com:30002/inventyv/production:latest .
       
     - name: Push the Docker image
-      run: docker push yagnesh.jariwala.com:30002/inventyv/production
+      run: docker push yagnesh.jariwala.com:30002/inventyv/production:latest
 
 
     - name: Authenticate to Google Cloud
