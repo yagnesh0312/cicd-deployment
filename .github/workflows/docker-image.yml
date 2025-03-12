@@ -34,12 +34,5 @@ jobs:
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         topic_name: ${{ secrets.PUBSUB_TOPIC }}
-        message: 'Hello world!'
+        message: '{"type":"production"}'
 
-
-    # - name: Publish Message
-    #   uses: miraliumre/actions-pubsub@v1
-
-    #   with:
-    #       topic: ${{ secrets.PUBSUB_TOPIC }}
-    #       message: ${{ secrets.PUBSUB_MESSAGE }}
