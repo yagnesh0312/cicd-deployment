@@ -17,6 +17,7 @@ cf_port = dotenv.get_key(".env","PORT")
 title = "TODO sample application with Flask and MongoDB"
 heading = "TODO Reminder with Flask and MongoDB"
 
+print(MONGO_URL)
 #mongodb://user_name:password@ip_host:port/Database_Name
 #db = client.Database_Name
 #table_var_name = db.table_name
