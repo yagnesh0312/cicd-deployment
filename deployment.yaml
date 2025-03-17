@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    type: mydeploy
+  name: mydeploy
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: run1
+  template:
+    metadata:
+      labels:
+        type: run1
+      name: myrcpod
+    spec:
+      containers:
+        - image: nginx
+          name: myrccontainers

@@ -1,10 +1,18 @@
 from flask import Flask, render_template,request,redirect,url_for # For flask implementation
 from bson import ObjectId    # For ObjectId to work
 from pymongo import MongoClient
-import os
+import dotenv
+from dotenv import load_dotenv
+load_dotenv()
+
+MONGO_URL = dotenv.get_key(".env","MONGO_CONN_STRING")
+MONGO_DB = dotenv.get_key(".env","MONGO_DB_NAME")
+MONGO_CONN_NAME = dotenv.get_key(".env","MONGO_COLLECTION_NAME")
+
 
 app = Flask(__name__)
-cf_port = os.getenv("PORT")
+cf_port = dotenv.get_key(".env","PORT")
+
 
 title = "TODO sample application with Flask and MongoDB"
 heading = "TODO Reminder with Flask and MongoDB"
@@ -13,9 +21,12 @@ heading = "TODO Reminder with Flask and MongoDB"
 #db = client.Database_Name
 #table_var_name = db.table_name
 
-client = MongoClient("mongodb://mPNHZEJgGbE97H4x:k059FABWg4m2DUvD@10.11.241.41:58384/S6qOHHSP44Ux7RXa") #host uri
-db = client.S6qOHHSP44Ux7RXa                             #Select the database
-todos = db.todo                                   #Select the collection name
+
+
+
+client = MongoClient(f"{MONGO_URL}/{MONGO_DB}") #host uri
+db = client[MONGO_DB]                          #Select the database
+todos = db[MONGO_CONN_NAME]                                  #Select the collection name
 
 def redirect_url():
     return request.args.get('next') or \
@@ -51,9 +62,9 @@ def done ():
 	id=request.values.get("_id")
 	task=todos.find({"_id":ObjectId(id)})
 	if(task[0]["done"]=="yes"):
-		todos.update({"_id":ObjectId(id)}, {"$set": {"done":"no"}})
+		todos.update_one({"_id":ObjectId(id)}, {"$set": {"done":"no"}})
 	else:
-		todos.update({"_id":ObjectId(id)}, {"$set": {"done":"yes"}})
+		todos.update_one({"_id":ObjectId(id)}, {"$set": {"done":"yes"}})
 	redir=redirect_url()	
 
 	return redirect(redir)
@@ -65,14 +76,15 @@ def action ():
 	desc=request.values.get("desc")
 	date=request.values.get("date")
 	pr=request.values.get("pr")
-	todos.insert({ "name":name, "desc":desc, "date":date, "pr":pr, "done":"no"})
+ 
+	todos.insert_one(document={ "name":name, "desc":desc, "date":date, "pr":pr, "done":"no"})
 	return redirect("/list")
 
 @app.route("/remove")
 def remove ():
 	#Deleting a Task with various references
 	key=request.values.get("_id")
-	todos.remove({"_id":ObjectId(key)})
+	todos.delete_one({"_id":ObjectId(key)})
 	return redirect("/")
 
 @app.route("/update")
@@ -89,7 +101,7 @@ def action3 ():
 	date=request.values.get("date")
 	pr=request.values.get("pr")
 	id=request.values.get("_id")
-	todos.update({"_id":ObjectId(id)}, {'$set':{ "name":name, "desc":desc, "date":date, "pr":pr }})
+	todos.update_one({"_id":ObjectId(id)}, {'$set':{ "name":name, "desc":desc, "date":date, "pr":pr }})
 	return redirect("/")
 
 @app.route("/search", methods=['GET'])

@@ -1,0 +1,62 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Enter version number (e.g., 1.0.0)"
+        required: false
+
+jobs:
+  build:
+    runs-on: self-hosted 
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Version Tag
+        id: version
+        run: |
+          if [ -z "${{ github.event.inputs.version }}" ]; then
+            VERSION=$(date +'%Y%m%d')-${{ github.run_number }}
+          else
+            VERSION=${{ github.event.inputs.version }}
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Image Version: $VERSION"
+
+      - name: Log in to Docker Registry
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login yagnesh.jariwala.com:30002 -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Pull Old Image (if exists)
+        continue-on-error: true
+        run: docker pull yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No existing image found"
+
+      - name: Remove Old Image (if exists)
+        continue-on-error: true
+        run: docker rmi yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No old image to remove"
+
+      - name: Build the Docker Image
+        run: |
+          docker build -t yagnesh.jariwala.com:30002/inventyv/production:latest .
+          docker tag yagnesh.jariwala.com:30002/inventyv/production:latest yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }}
+
+      - name: Push Docker Image
+        run: |
+          docker push yagnesh.jariwala.com:30002/inventyv/production:latest
+          docker push yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }}
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.PUB_SUB_PUBLISHER }}
+
+      - name: Publish a message to Google Cloud Pub/Sub
+        uses: miraliumre/actions-pubsub@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          topic_name: ${{ secrets.PUBSUB_TOPIC }}
+          message: '{"type":"production", "version": "${{ env.VERSION }}"}'
