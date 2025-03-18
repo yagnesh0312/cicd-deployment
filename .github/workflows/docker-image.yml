@@ -17,16 +17,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set Version Tag
-        id: versionk
+      - name: Load Version from .env
+        id: load_version
         run: |
-          if [ -z "${{ github.event.inputs.version }}" ]; then
-            VERSION=$(date +'%Y%m%d')-${{ github.run_number }}
-          else
-            VERSION=${{ github.event.inputs.version }}
-          fi
+          VERSION=$(grep '^VERSION=' .env | cut -d '=' -f2)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Image Version: $VERSION"
+          echo "Loaded Version: $VERSION"
 
       - name: Log in to Docker Registry
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login yagnesh.jariwala.com:30002 -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
