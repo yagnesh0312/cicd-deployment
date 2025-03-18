@@ -26,7 +26,7 @@ jobs:
 
       - name: Check if Version Already Exists
         run: |
-          if command docker manifest inspect yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }} ; then
+          if command docker pull yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }} ; then
             echo "Error: Image version v${{ env.VERSION }} already exists in the registry."
             exit 1
           fi
