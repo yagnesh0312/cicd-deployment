@@ -5,20 +5,19 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/emoji.css')}}">
         <script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>  
         <script src="{{ url_for('static',filename='assets/emoji.js')}}"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <style>
             /* General Styles */
             body {
                 font-family: 'Inter', sans-serif;
                 margin: 0;
                 padding: 0;
-                background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+                background: linear-gradient(to bottom right, #6495ED, #7A00E6); /* Blue and purple */
                 color: #333;
             }
 
             h1 {
                 text-align: center;
-                color: #ff0000; /* Red color */
+                color: #7A00E6; /* Purple color */
                 margin-top: 20px;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
                 font-weight: 700;
@@ -29,7 +28,7 @@
                 justify-content: center;
                 list-style: none;
                 padding: 0;
-                background: linear-gradient(to right, #ff0000, #ff0000); /* Red color */
+                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
                 border-radius: 12px;
                 margin: 20px auto;
                 width: fit-content;
@@ -50,14 +49,14 @@
             }
 
             ul li a:hover {
-                background: #cc0000; /* Darker red */
+                background: #6a00ff; /* Darker purple */
                 transform: scale(1.05);
             }
 
             hr {
                 border: 0;
                 height: 2px;
-                background: linear-gradient(to right, #ff0000, #ff0000); /* Red color */
+                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
                 margin: 20px 0;
             }
 
@@ -80,7 +79,7 @@
             }
 
             th {
-                background: linear-gradient(to right, #ff0000, #ff0000); /* Red color */
+                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
                 color: #fff;
                 font-weight: 600;
             }
@@ -96,7 +95,7 @@
 
             /* Buttons */
             button {
-                background: linear-gradient(to right, #ff0000, #ff0000); /* Red color */
+                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
                 color: #fff;
                 border: none;
                 padding: 10px 15px;
@@ -107,7 +106,7 @@
             }
 
             button:hover {
-                background: #cc0000; /* Darker red */
+                background: #6a00ff; /* Darker purple */
                 transform: scale(1.05);
             }
 
@@ -132,16 +131,16 @@
             }
 
             input[type="text"]:focus, textarea:focus, select:focus {
-                border-color: #ff0000; /* Red color */
+                border-color: #6495ED; /* Blue color */
                 outline: none;
-                box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red shadow */
+                box-shadow: 0 0 5px rgba(65, 105, 225, 0.5); /* Blue shadow */
             }
 
             /* Footer */
             footer {
                 text-align: center;
                 padding: 15px;
-                background: linear-gradient(to right, #ff0000, #ff0000); /* Red color */
+                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
                 color: #fff;
                 margin-top: 20px;
                 font-weight: 500;
