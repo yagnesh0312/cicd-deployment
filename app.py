@@ -1,4 +1,4 @@
-from flask import Flask,  render_template, request, redirect, url_for #  For flask implementation
+from flask import Flask, render_template, request, redirect, url_for # For flask implementation
 from bson import ObjectId    #  For ObjectId to work
 from pymongo import MongoClient
 import dotenv
@@ -14,8 +14,8 @@ app = Flask(__name__)
 cf_port = dotenv.get_key(".env", "PORT")
 
 
-title = "TODO sample application with Flask and MongoDB"
-heading = "TODO Reminder with Flask and MongoDB"
+title = "Task Management application with Flask and MongoDB"
+heading = "Task Management backed with Flask and MongoDB"
 
 print(MONGO_URL)
 # mongodb://user_name:password@ip_host:port/Database_Name
@@ -24,47 +24,63 @@ print(MONGO_URL)
 
 
 client = MongoClient(f"{MONGO_URL}/{MONGO_DB}") # host uri
-db = client[MONGO_DB] 							   # Select the database
-todos = db[MONGO_CONN_NAME]                          # Select the collection name
+db = client[MONGO_DB] 							     # Select the database
+task_list = db[MONGO_CONN_NAME]                      # Select the collection name
 
 def redirect_url():
     return request.args.get('next') or \
-        	request.referrer or \
-        	url_for('index')
+        request.referrer or \
+        url_for('index')
 
 # Display all Tasks
+@app.route("/")
 @app.route("/list")
 def lists ():
-	todos_l  =  todos.find()
-	a1 = "active"
-	return render_template('index.html', a1 = a1, todos = todos_l, t = title, h = heading)
+	all_tasks  =  task_list.find()
+	return render_template(
+		'index.html',
+		all = "active",
+		task_list = all_tasks,
+		title = title,
+		heading = heading
+	)
 
 # Display Uncompleted Tasks
-@app.route("/")
 @app.route("/uncompleted")
-def tasks ():
-	todos_l = todos.find({"done":"no"})
-	a2 = "active"
-	return render_template('index.html', a2 = a2, todos = todos_l, t = title, h = heading)
+def uncompleted ():
+	uncompleted_tasks = task_list.find({"done": False })
+	return render_template(
+		'index.html',
+		uncompleted = "active",
+		task_list = uncompleted_tasks,
+		title = title,
+		heading = heading
+	)
 
 # Display the Completed Tasks
 @app.route("/completed")
 def completed ():
-	todos_l = todos.find({"done":"yes"})
-	a3 = "active"
-	return render_template('index.html', a3 = a3, todos = todos_l, t = title, h = heading)
+	completed_tasks = task_list.find({"done": True })
+	return render_template(
+		'index.html',
+		completed = "active",
+		task_list = completed_tasks,
+		title = title,
+		heading = heading
+	)
 
 # Done-or-not ICON
 @app.route("/done")
 def done ():
 	id = request.values.get("_id")
-	task = todos.find({"_id":ObjectId(id)})
-	if(task[0]["done"] == "yes"):
-		todos.update_one({"_id":ObjectId(id)},  {"$set": {"done":"no"}})
-	else:
-		todos.update_one({"_id":ObjectId(id)},  {"$set": {"done":"yes"}})
-	redir = redirect_url()
+	task = task_list.find({"_id":ObjectId(id)})
 
+	if(task[0]["done"] == True):
+		task_list.update_one({"_id" : ObjectId(id)},  {"$set" : { "done": False }})
+	else:
+		task_list.update_one({"_id" : ObjectId(id)},  {"$set" : { "done": True }})
+
+	redir = redirect_url()
 	return redirect(redir)
 
 # Adding a Task
@@ -72,34 +88,40 @@ def done ():
 def action ():
 	name = request.values.get("name")
 	desc = request.values.get("desc")
-	date = request.values.get("date")
-	pr = request.values.get("pr")
+	date = request.values.get("creation_date")
+	priority = request.values.get("priority")
 
-	todos.insert_one(document = { "name":name, "desc":desc, "date":date, "pr":pr, "done":"no"})
+	task_list.insert_one(document = { "name" : name, "desc" : desc, "creation_date" : date, "priority" : priority, "done" : False})
 	return redirect("/list")
 
 # Deleting a Task with various references
 @app.route("/remove")
 def remove ():
 	key = request.values.get("_id")
-	todos.delete_one({"_id":ObjectId(key)})
+	task_list.delete_one({"_id":ObjectId(key)})
 	return redirect("/")
 
 @app.route("/update")
 def update ():
 	id = request.values.get("_id")
-	task = todos.find({"_id":ObjectId(id)})
-	return render_template('update.html', tasks = task, h = heading, t = title)
+	task = task_list.find({"_id":ObjectId(id)})
+	return render_template(
+		'update.html',
+
+		tasks = task,
+		heading = heading,
+		title = title
+	)
 
 # Updating a Task with various references
 @app.route("/action3",  methods = ['POST'])
 def action3 ():
 	name = request.values.get("name")
 	desc = request.values.get("desc")
-	date = request.values.get("date")
-	pr = request.values.get("pr")
+	date = request.values.get("creation_date")
+	priority = request.values.get("priority")
 	id = request.values.get("_id")
-	todos.update_one({"_id":ObjectId(id)},  {'$set':{ "name":name,  "desc":desc,  "date":date,  "pr":pr }})
+	task_list.update_one({"_id":ObjectId(id)},  {'$set':{ "name" : name,  "desc" : desc,  "creation_date" : date,  "priority" : priority }})
 	return redirect("/")
 
 # Searching a Task with various references
@@ -108,14 +130,20 @@ def search():
 	key = request.values.get("key")
 	refer = request.values.get("refer")
 	if(key == "_id"):
-		todos_l  =  todos.find({refer:ObjectId(key)})
+		todos_l  =  task_list.find({refer:ObjectId(key)})
 	else:
-		todos_l  =  todos.find({refer:key})
-	return render_template('searchlist.html', todos = todos_l, t = title, h = heading)
+		todos_l  =  task_list.find({refer:key})
+	return render_template(
+		'searchlist.html',
+
+		task_list = todos_l,
+		title = title,
+		heading = heading
+	)
 
 
 if __name__  ==  '__main__':
     if cf_port is None:
-        app.run(host = '0.0.0.0',  port = 5000,  debug = True)
+        app.run(host = '0.0.0.0', port = 5000, debug = True)
     else:
-        app.run(host = '0.0.0.0',  port = int(cf_port),  debug = True)
+        app.run(host = '0.0.0.0', port = int(cf_port), debug = True)

@@ -23,6 +23,7 @@
                 text-align: center;
                 color: #7A00E6; /* Purple color */
                 margin-top: 20px;
+                color: darkorange;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
                 font-weight: 700;
             }
@@ -89,10 +90,10 @@
                 background: #f8f9fa;
             }
 
-            tr:hover {
+            /* tr:hover {
                 background: #e9ecef;
                 transition: background 0.3s ease;
-            }
+            */
 
             .container table{
                 border-collapse: separate;
@@ -106,6 +107,30 @@
             /* Buttons */
             button {
                 background: linear-gradient(to right, #6495ED, #b983e9); /* Blue and purple */
+                color: #fff;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+
+            .del-btn {
+                background: #d33232;
+                /* background: linear-gradient(to right, #e70a0a, #b983e9); Blue and purple */
+                color: #fff;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+
+            .edit-btn {
+                background: #5353f5;
+                /* background: linear-gradient(to right, #4281f5, #b983e9); Blue and purple */
                 color: #fff;
                 border: none;
                 padding: 10px 15px;
@@ -134,7 +159,7 @@
                 text-align: -webkit-center;
             }
 
-            input[type="text"], textarea, select {
+            input, textarea, select {
                 width: 100%;
                 padding: 6px;
                 margin: 0;
@@ -144,27 +169,7 @@
                 font-size: 16px;
             }
 
-            input[type="number"], textarea, select {
-                width: 100%;
-                padding: 6px;
-                margin: 0;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                box-sizing: border-box;
-                font-size: 16px;
-            }
-
-            input[type="date"], textarea, select {
-                width: 100%;
-                padding: 6px;
-                margin: 0;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                box-sizing: border-box;
-                font-size: 16px;
-            }
-
-            input[type="text"]:focus, textarea:focus, select:focus {
+            input:focus, textarea:focus, select:focus {
                 border-color: #6495ED; /* Blue color */
                 outline: none;
                 box-shadow: 0 0 5px rgba(65, 105, 225, 0.5); /* Blue shadow */
@@ -189,16 +194,16 @@
 </head>
 
 <body>
-    <h1>{{ h }}</h1>
+    <h1>{{ heading }}</h1>
     <ul>
-        <li><a href="/list" class="{{ a1 }}">All</a></li>
-        <li><a href="/" class="{{ a2 }}">Uncompleted</a></li>
-        <li><a href="/completed" class="{{ a3 }}">Completed</a></li>
+        <li><a href="/list" class="{{ all }}">All</a></li>
+        <li><a href="/uncompleted" class="{{ uncompleted }}">Uncompleted</a></li>
+        <li><a href="/completed" class="{{ completed }}">Completed</a></li>
     </ul>
 
     <hr>
 
-    {% if todos[0] %}
+    {% if task_list[0] %}
 
     <div span="right">
         <form action="/search" method="GET">
@@ -209,10 +214,10 @@
 
                     <td>
                         <select name="refer" required>
-                            <option value="name">Task Name</option>
+                            <option value="name">Name</option>
                             <option value="desc">Description</option>
                             <option value="date">Date</option>
-                            <option value="pr">Priority</option>
+                            <option value="priority">Priority</option>
                         </select>
                     </td>
 
@@ -229,46 +234,46 @@
         </form>
     </div>
 
-    <center><b><big>All To-Do</big></b></center>
+    <center><b><big>All Tasks</big></b></center>
 
     <div class="container">
         <table>
 
             <tr id="row">
                 <th class="status">Status</th>
-                <th class="name">Task Name</th>
+                <th class="name">Name</th>
                 <th class="desc">Description</th>
                 <th class="date">Date</th>
-                <th class="pr">Priority</th>
+                <th class="priority">Priority</th>
                 <th class="func1" colspan="2">Actions</th>
             </tr>
 
-            {% for todo in todos %}
+            {% for task in task_list %}
             <tr class="datas">
                 <td>
-                    <a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit"></a>
+                    <a href="./done?_id={{ task['_id'] }}"><input type="image" src="static/images/{{task['done']}}.png" alt="Submit"></a>
                 </td>
 
                 <td class="name">
-                    {{ todo["name"] }}
+                    {{ task["name"] }}
                 </td>
 
                 <td class="desc">
-                    {{ todo["desc"] }}
+                    {{ task["desc"] }}
                 </td>
 
                 <td class="date">
-                    {{ todo["date"] }}
+                    {{ task["date"] }}
                 </td>
 
-                <td class="pr">
-                    {{ todo["pr"] }}
+                <td class="priority">
+                    {{ task["priority"] }}
                 </td>
 
-                <td class="func1"><a href="./remove?_id={{ todo['_id'] }}"><button type="submit">Delete</button></a>
+                <td class="func1"><a href="./remove?_id={{ task['_id'] }}"><button type="submit" class="del-btn">Delete</button></a>
                 </td>
 
-                <td class="func1"><a href="./update?_id={{ todo['_id'] }}"><button type="submit">Edit</button></a>
+                <td class="func1"><a href="./update?_id={{ task['_id'] }}"><button type="submit" class="edit-btn">Edit</button></a>
                 </td>
 
             </tr>
@@ -283,21 +288,37 @@
     <hr/>
 
     <form action="/action" method="POST">
-    <table class="none">
-        <tr>
-            <td><b><big><label>Add new task: </label></big></b></td>
-        </tr>
-        <tr>
-        <tr><td><input type="text" name="name" placeholder="Taskname" /></td></tr>
-        <tr><td><textarea name="desc" rows="1" cols="30" placeholder="Enter Description here..." required></textarea></td></tr>
-        <tr><td><input type="date" name="date" placeholder="Date" /></td></tr>
-        <tr><td><input type="number" name="pr" placeholder="Priority" /></td></tr>
-        <tr><td><button type="submit"> Create </button></td></tr>
-        </tr>
+        <table class="none">
+
+            <tr>
+                <td><b><big><label>Create new task:</label></big></b></td>
+            </tr>
+            <tr>
+                <tr>
+                    <td><input type="text" name="name" placeholder="Name" /></td>
+                </tr>
+
+                <tr>
+                    <td><textarea name="desc" rows="1" cols="30" placeholder="Description" required></textarea></td>
+                </tr>
+
+                <tr>
+                    <td><input type="date" name="date" placeholder="Date" /></td>
+                </tr>
+
+                <tr>
+                    <td><input type="number" name="priority" placeholder="Priority" /></td>
+                </tr>
+
+                <tr>
+                    <td><button type="submit"> Create </button></td>
+                </tr>
+            </tr>
+
+        </table>
     </form>
-    </table>
     <!-- <footer> -->
-        <p>&copy; 2025 To-Do App. All rights reserved.</p>
+        <p style="text-align: center;">&copy; 2025 To-Do App. All rights reserved.</p>
     <!-- </footer> -->
 </body>
 </html>
