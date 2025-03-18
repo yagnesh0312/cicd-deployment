@@ -3,6 +3,7 @@ from bson import ObjectId    #  For ObjectId to work
 from pymongo import MongoClient
 import dotenv
 from dotenv import load_dotenv
+
 load_dotenv()
 
 MONGO_URL = dotenv.get_key(".env", "MONGO_CONN_STRING")
@@ -11,7 +12,7 @@ MONGO_CONN_NAME = dotenv.get_key(".env", "MONGO_COLLECTION_NAME")
 
 
 app = Flask(__name__)
-cf_port = dotenv.get_key(".env", "PORT")
+port = dotenv.get_key(".env", "PORT")
 
 
 title = "Task Management application with Flask and MongoDB"
@@ -32,6 +33,7 @@ def redirect_url():
         request.referrer or \
         url_for('index')
 
+
 # Display all Tasks
 @app.route("/")
 @app.route("/list")
@@ -45,6 +47,7 @@ def lists ():
 		heading = heading
 	)
 
+
 # Display Uncompleted Tasks
 @app.route("/uncompleted")
 def uncompleted ():
@@ -57,6 +60,7 @@ def uncompleted ():
 		heading = heading
 	)
 
+
 # Display the Completed Tasks
 @app.route("/completed")
 def completed ():
@@ -68,6 +72,7 @@ def completed ():
 		title = title,
 		heading = heading
 	)
+
 
 # Done-or-not ICON
 @app.route("/done")
@@ -83,6 +88,7 @@ def done ():
 	redir = redirect_url()
 	return redirect(redir)
 
+
 # Adding a Task
 @app.route("/action",  methods = ['POST'])
 def action ():
@@ -94,6 +100,7 @@ def action ():
 	task_list.insert_one(document = { "name" : name, "desc" : desc, "creation_date" : date, "priority" : priority, "done" : False})
 	return redirect("/list")
 
+
 # Deleting a Task with various references
 @app.route("/remove")
 def remove ():
@@ -101,17 +108,18 @@ def remove ():
 	task_list.delete_one({"_id":ObjectId(key)})
 	return redirect("/")
 
+
 @app.route("/update")
 def update ():
 	id = request.values.get("_id")
 	task = task_list.find({"_id":ObjectId(id)})
 	return render_template(
 		'update.html',
-
 		tasks = task,
 		heading = heading,
 		title = title
 	)
+
 
 # Updating a Task with various references
 @app.route("/action3",  methods = ['POST'])
@@ -121,21 +129,32 @@ def action3 ():
 	date = request.values.get("creation_date")
 	priority = request.values.get("priority")
 	id = request.values.get("_id")
-	task_list.update_one({"_id":ObjectId(id)},  {'$set':{ "name" : name,  "desc" : desc,  "creation_date" : date,  "priority" : priority }})
+
+	task_list.update_one({"_id":ObjectId(id)},  {
+			'$set':{
+				"name" : name,
+				"desc" : desc,
+				"creation_date" : date,
+				"priority" : priority
+			}
+		})
+
 	return redirect("/")
+
 
 # Searching a Task with various references
 @app.route("/search",  methods = ['GET'])
 def search():
 	key = request.values.get("key")
 	refer = request.values.get("refer")
+
 	if(key == "_id"):
 		todos_l  =  task_list.find({refer:ObjectId(key)})
 	else:
 		todos_l  =  task_list.find({refer:key})
+
 	return render_template(
 		'searchlist.html',
-
 		task_list = todos_l,
 		title = title,
 		heading = heading
@@ -143,7 +162,7 @@ def search():
 
 
 if __name__  ==  '__main__':
-    if cf_port is None:
+    if port is None:
         app.run(host = '0.0.0.0', port = 5000, debug = True)
     else:
-        app.run(host = '0.0.0.0', port = int(cf_port), debug = True)
+        app.run(host = '0.0.0.0', port = int(port), debug = True)
