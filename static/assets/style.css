@@ -5,13 +5,13 @@ h1{
 body{
 	color:black;
 	background-color:white;
-	left-margin:10px;
-	right-margin:10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 table{
 	width:95%;
 	border-collapse:collapse;
-	table-layout:fixed;
+	/* table-layout:fixed; */
 }
 td
 {

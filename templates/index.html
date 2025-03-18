@@ -1,17 +1,21 @@
 <html>
     <head>
+
         <title>{{t}}</title>
+
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/style.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/emoji.css')}}">
-        <script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>  
+
+        <script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>
         <script src="{{ url_for('static',filename='assets/emoji.js')}}"></script>
+
         <style>
             /* General Styles */
             body {
                 font-family: 'Inter', sans-serif;
                 margin: 0;
                 padding: 0;
-                background: linear-gradient(to bottom right, #6495ED, #7A00E6); /* Blue and purple */
+                background: linear-gradient(to bottom right, #dee9ff, #ffebf9); /* Blue and purple */
                 color: #333;
             }
 
@@ -27,8 +31,8 @@
                 display: flex;
                 justify-content: center;
                 list-style: none;
-                padding: 0;
-                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
+                padding: 10 0 10 0;
+                background: linear-gradient(to right, #6495ED, #b37ae6); /* Blue and purple */
                 border-radius: 12px;
                 margin: 20px auto;
                 width: fit-content;
@@ -62,24 +66,21 @@
 
             /* Table Styles */
             table {
-                width: 90%;
-                margin: 20px auto;
-                border-collapse: collapse;
+                border-collapse: separate;
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-                background: #fff;
-                border-radius: 12px;
+                border-radius: 4px;
                 overflow: hidden;
             }
 
             th, td {
                 padding: 15px;
                 text-align: center;
-                border-bottom: 1px solid #ddd;
+                border: 1px solid #ddd;
                 font-size: 16px;
             }
 
             th {
-                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
+                background: linear-gradient(to right, #6495ED, #9a78b8); /* Blue and purple */
                 color: #fff;
                 font-weight: 600;
             }
@@ -93,9 +94,18 @@
                 transition: background 0.3s ease;
             }
 
+            .container table{
+                border-collapse: separate;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+                background: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                padding: 10px;
+            }
+
             /* Buttons */
             button {
-                background: linear-gradient(to right, #6495ED, #7A00E6); /* Blue and purple */
+                background: linear-gradient(to right, #6495ED, #b983e9); /* Blue and purple */
                 color: #fff;
                 border: none;
                 padding: 10px 15px;
@@ -112,6 +122,7 @@
 
             /* Form Styles */
             form {
+                text-align: -webkit-center;
                 width: 90%;
                 margin: 20px auto;
                 padding: 20px;
@@ -119,11 +130,34 @@
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
                 border-radius: 12px;
             }
+            .container{
+                text-align: -webkit-center;
+            }
 
             input[type="text"], textarea, select {
                 width: 100%;
-                padding: 12px;
-                margin: 10px 0;
+                padding: 6px;
+                margin: 0;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            input[type="number"], textarea, select {
+                width: 100%;
+                padding: 6px;
+                margin: 0;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+
+            input[type="date"], textarea, select {
+                width: 100%;
+                padding: 6px;
+                margin: 0;
                 border: 1px solid #ddd;
                 border-radius: 8px;
                 box-sizing: border-box;
@@ -149,79 +183,122 @@
             footer p {
                 margin: 0;
             }
+
         </style>
-    </head>
+
+</head>
+
 <body>
     <h1>{{ h }}</h1>
     <ul>
-        <li><a href="/list" class="{{ a1 }}">ALL</a></li>
+        <li><a href="/list" class="{{ a1 }}">All</a></li>
         <li><a href="/" class="{{ a2 }}">Uncompleted</a></li>
         <li><a href="/completed" class="{{ a3 }}">Completed</a></li>
     </ul>
+
     <hr>
+
     {% if todos[0] %}
+
     <div span="right">
-    <form action="/search" method="GET">
-        <table class="none" id="close">
-        <tr>
-        <td></td><td></td>
-        <td><big><b>Search Reference:</b></big></td>
-        <td><select name="refer" required>
-            <option value="name">Task Name</option>
-            <option value="desc">Description</option>
-            <option value="date">Date</option>
-            <option value="pr">Priority</option>
-        </select></td>
-        <td><input type="text" name="key" placeholder="Search Task" size="15" /></td>
-        <td><button type="submit">Search</button></td>
-        </tr>
-        </table>
-    </form>
+        <form action="/search" method="GET">
+
+            <table class="none" id="close">
+                <tr>
+                    <td><big>Search task by:</big></td>
+
+                    <td>
+                        <select name="refer" required>
+                            <option value="name">Task Name</option>
+                            <option value="desc">Description</option>
+                            <option value="date">Date</option>
+                            <option value="pr">Priority</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <input type="text" name="key" placeholder="Search Task" size="15" />
+                    </td>
+
+                    <td>
+                        <button type="submit">Search</button>
+                    </td>
+                </tr>
+            </table>
+
+        </form>
     </div>
-    <b><big>To-Do LIST :</big></b>
-    <table>
-        <tr id="row">
-            <th class="status">Status</th>
-            <th class="name">Task Name</th>
-            <th class="desc">Description</th>
-            <th class="date">Date</th>
-            <th class="pr">Priority</th>
-            <th class="func1">Remove</th>
-            <th class="func2">Modify</th>
-        </tr>
-    {% for todo in todos %}
-        <tr class="datas">
-            <td><a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit"></a></td>
-            <td class="name">{{ todo["name"] }}</td>
-            <td class="desc">{{ todo["desc"] }}</td>
-            <td class="date">{{ todo["date"] }}</td>
-            <td class="pr">{{ todo["pr"] }}</td>
-            <td class="func1"><a href="./remove?_id={{ todo['_id'] }}"><button type="submit">DELETE</button></a></td>
-            <td class="func1"><a href="./update?_id={{ todo['_id'] }}"><button type="submit">EDIT</button></a></td>
-        </tr>
-    {% endfor %}
-    </table>
+
+    <center><b><big>All To-Do</big></b></center>
+
+    <div class="container">
+        <table>
+
+            <tr id="row">
+                <th class="status">Status</th>
+                <th class="name">Task Name</th>
+                <th class="desc">Description</th>
+                <th class="date">Date</th>
+                <th class="pr">Priority</th>
+                <th class="func1" colspan="2">Actions</th>
+            </tr>
+
+            {% for todo in todos %}
+            <tr class="datas">
+                <td>
+                    <a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit"></a>
+                </td>
+
+                <td class="name">
+                    {{ todo["name"] }}
+                </td>
+
+                <td class="desc">
+                    {{ todo["desc"] }}
+                </td>
+
+                <td class="date">
+                    {{ todo["date"] }}
+                </td>
+
+                <td class="pr">
+                    {{ todo["pr"] }}
+                </td>
+
+                <td class="func1"><a href="./remove?_id={{ todo['_id'] }}"><button type="submit">Delete</button></a>
+                </td>
+
+                <td class="func1"><a href="./update?_id={{ todo['_id'] }}"><button type="submit">Edit</button></a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
     {% else %}
         <h4 style="text-align: center; color: #555;">No Tasks in the List !!</h4>
     {% endif %}
+
     <hr/>
+
     <form action="/action" method="POST">
     <table class="none">
         <tr>
-            <td><b><big><label>Add a Task : </label></big></b></td>
+            <td><b><big><label>Add new task: </label></big></b></td>
         </tr>
         <tr>
-        <td><input type="text" name="name" placeholder="Taskname" /></td>
-        <td><textarea name="desc" rows="1" cols="30" placeholder="Enter Description here..." required></textarea></td>
-        <td><input type="text" name="date" placeholder="Date" /></td>
-        <td><input type="text" name="pr" placeholder="Priority" /></td>
-        <td><button type="submit"> Create </button></td>
+        <tr><td><input type="text" name="name" placeholder="Taskname" /></td></tr>
+        <tr><td><textarea name="desc" rows="1" cols="30" placeholder="Enter Description here..." required></textarea></td></tr>
+        <tr><td><input type="date" name="date" placeholder="Date" /></td></tr>
+        <tr><td><input type="number" name="pr" placeholder="Priority" /></td></tr>
+        <tr><td><button type="submit"> Create </button></td></tr>
         </tr>
     </form>
     </table>
-    <footer>
+    <!-- <footer> -->
         <p>&copy; 2025 To-Do App. All rights reserved.</p>
-    </footer>
+    <!-- </footer> -->
 </body>
 </html>
 

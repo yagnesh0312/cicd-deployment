@@ -1,127 +1,121 @@
-from flask import Flask, render_template,request,redirect,url_for # For flask implementation
-from bson import ObjectId    # For ObjectId to work
+from flask import Flask,  render_template, request, redirect, url_for #  For flask implementation
+from bson import ObjectId    #  For ObjectId to work
 from pymongo import MongoClient
 import dotenv
 from dotenv import load_dotenv
 load_dotenv()
 
-MONGO_URL = dotenv.get_key(".env","MONGO_CONN_STRING")
-MONGO_DB = dotenv.get_key(".env","MONGO_DB_NAME")
-MONGO_CONN_NAME = dotenv.get_key(".env","MONGO_COLLECTION_NAME")
+MONGO_URL = dotenv.get_key(".env", "MONGO_CONN_STRING")
+MONGO_DB = dotenv.get_key(".env", "MONGO_DB_NAME")
+MONGO_CONN_NAME = dotenv.get_key(".env", "MONGO_COLLECTION_NAME")
 
 
 app = Flask(__name__)
-cf_port = dotenv.get_key(".env","PORT")
+cf_port = dotenv.get_key(".env", "PORT")
 
 
 title = "TODO sample application with Flask and MongoDB"
 heading = "TODO Reminder with Flask and MongoDB"
 
 print(MONGO_URL)
-#mongodb://user_name:password@ip_host:port/Database_Name
-#db = client.Database_Name
-#table_var_name = db.table_name
+# mongodb://user_name:password@ip_host:port/Database_Name
+# db  =  client.Database_Name
+# table_var_name  =  db.table_name
 
 
-
-
-client = MongoClient(f"{MONGO_URL}/{MONGO_DB}") #host uri
-db = client[MONGO_DB]                          #Select the database
-todos = db[MONGO_CONN_NAME]                                  #Select the collection name
+client = MongoClient(f"{MONGO_URL}/{MONGO_DB}") # host uri
+db = client[MONGO_DB] 							   # Select the database
+todos = db[MONGO_CONN_NAME]                          # Select the collection name
 
 def redirect_url():
     return request.args.get('next') or \
-           request.referrer or \
-           url_for('index')
+        	request.referrer or \
+        	url_for('index')
 
+# Display all Tasks
 @app.route("/list")
 def lists ():
-	#Display the all Tasks
-	todos_l = todos.find()
-	a1="active"
-	return render_template('index.html',a1=a1,todos=todos_l,t=title,h=heading)
+	todos_l  =  todos.find()
+	a1 = "active"
+	return render_template('index.html', a1 = a1, todos = todos_l, t = title, h = heading)
 
+# Display Uncompleted Tasks
 @app.route("/")
 @app.route("/uncompleted")
 def tasks ():
-	#Display the Uncompleted Tasks
 	todos_l = todos.find({"done":"no"})
-	a2="active"
-	return render_template('index.html',a2=a2,todos=todos_l,t=title,h=heading)
+	a2 = "active"
+	return render_template('index.html', a2 = a2, todos = todos_l, t = title, h = heading)
 
-
+# Display the Completed Tasks
 @app.route("/completed")
 def completed ():
-	#Display the Completed Tasks
 	todos_l = todos.find({"done":"yes"})
-	a3="active"
-	return render_template('index.html',a3=a3,todos=todos_l,t=title,h=heading)
+	a3 = "active"
+	return render_template('index.html', a3 = a3, todos = todos_l, t = title, h = heading)
 
+# Done-or-not ICON
 @app.route("/done")
 def done ():
-	#Done-or-not ICON
-	id=request.values.get("_id")
-	task=todos.find({"_id":ObjectId(id)})
-	if(task[0]["done"]=="yes"):
-		todos.update_one({"_id":ObjectId(id)}, {"$set": {"done":"no"}})
+	id = request.values.get("_id")
+	task = todos.find({"_id":ObjectId(id)})
+	if(task[0]["done"] == "yes"):
+		todos.update_one({"_id":ObjectId(id)},  {"$set": {"done":"no"}})
 	else:
-		todos.update_one({"_id":ObjectId(id)}, {"$set": {"done":"yes"}})
-	redir=redirect_url()	
+		todos.update_one({"_id":ObjectId(id)},  {"$set": {"done":"yes"}})
+	redir = redirect_url()
 
 	return redirect(redir)
 
-@app.route("/action", methods=['POST'])
+# Adding a Task
+@app.route("/action",  methods = ['POST'])
 def action ():
-	#Adding a Task
-	name=request.values.get("name")
-	desc=request.values.get("desc")
-	date=request.values.get("date")
-	pr=request.values.get("pr")
- 
-	todos.insert_one(document={ "name":name, "desc":desc, "date":date, "pr":pr, "done":"no"})
+	name = request.values.get("name")
+	desc = request.values.get("desc")
+	date = request.values.get("date")
+	pr = request.values.get("pr")
+
+	todos.insert_one(document = { "name":name, "desc":desc, "date":date, "pr":pr, "done":"no"})
 	return redirect("/list")
 
+# Deleting a Task with various references
 @app.route("/remove")
 def remove ():
-	#Deleting a Task with various references
-	key=request.values.get("_id")
+	key = request.values.get("_id")
 	todos.delete_one({"_id":ObjectId(key)})
 	return redirect("/")
 
 @app.route("/update")
 def update ():
-	id=request.values.get("_id")
-	task=todos.find({"_id":ObjectId(id)})
-	return render_template('update.html',tasks=task,h=heading,t=title)
+	id = request.values.get("_id")
+	task = todos.find({"_id":ObjectId(id)})
+	return render_template('update.html', tasks = task, h = heading, t = title)
 
-@app.route("/action3", methods=['POST'])
+# Updating a Task with various references
+@app.route("/action3",  methods = ['POST'])
 def action3 ():
-	#Updating a Task with various references
-	name=request.values.get("name")
-	desc=request.values.get("desc")
-	date=request.values.get("date")
-	pr=request.values.get("pr")
-	id=request.values.get("_id")
-	todos.update_one({"_id":ObjectId(id)}, {'$set':{ "name":name, "desc":desc, "date":date, "pr":pr }})
+	name = request.values.get("name")
+	desc = request.values.get("desc")
+	date = request.values.get("date")
+	pr = request.values.get("pr")
+	id = request.values.get("_id")
+	todos.update_one({"_id":ObjectId(id)},  {'$set':{ "name":name,  "desc":desc,  "date":date,  "pr":pr }})
 	return redirect("/")
 
-@app.route("/search", methods=['GET'])
+# Searching a Task with various references
+@app.route("/search",  methods = ['GET'])
 def search():
-	#Searching a Task with various references
-
-	key=request.values.get("key")
-	refer=request.values.get("refer")
-	if(key=="_id"):
-		todos_l = todos.find({refer:ObjectId(key)})
+	key = request.values.get("key")
+	refer = request.values.get("refer")
+	if(key == "_id"):
+		todos_l  =  todos.find({refer:ObjectId(key)})
 	else:
-		todos_l = todos.find({refer:key})
-	return render_template('searchlist.html',todos=todos_l,t=title,h=heading)
+		todos_l  =  todos.find({refer:key})
+	return render_template('searchlist.html', todos = todos_l, t = title, h = heading)
 
-#if __name__ == "__main__":
 
-#    app.run()
-if __name__ == '__main__':
-   if cf_port is None:
-       app.run(host='0.0.0.0', port=5000, debug=True)
-   else:
-       app.run(host='0.0.0.0', port=int(cf_port), debug=True)    
+if __name__  ==  '__main__':
+    if cf_port is None:
+        app.run(host = '0.0.0.0',  port = 5000,  debug = True)
+    else:
+        app.run(host = '0.0.0.0',  port = int(cf_port),  debug = True)
