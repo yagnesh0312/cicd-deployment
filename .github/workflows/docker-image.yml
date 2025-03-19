@@ -43,7 +43,8 @@ jobs:
           docker rm cicd-test || echo "No container to remove"
           docker build -t cicd-test -f Dockerfile.test .
           docker container run --name cicd-test cicd-test
-          if docker wait cicd-test -eq 0 ; then
+          docker wait cicd-test
+          if [ $? -eq 0 ]; then
             echo "Test Passed"
           else
             echo "Test Failed"
