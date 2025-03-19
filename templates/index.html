@@ -205,85 +205,53 @@
 
     {% if task_list[0] %}
 
-    <div span="right">
-        <form action="/search" method="GET">
-
-            <table class="none" id="close">
-                <tr>
-                    <td><big>Search task by:</big></td>
-
-                    <td>
-                        <select name="refer" required>
-                            <option value="name">Name</option>
-                            <option value="desc">Description</option>
-                            <option value="date">Date</option>
-                            <option value="priority">Priority</option>
-                        </select>
-                    </td>
-
-                    <td>
-                        <input type="text" name="key" placeholder="Search Task" size="15" />
-                    </td>
-
-                    <td>
-                        <button type="submit">Search</button>
-                    </td>
-                </tr>
-            </table>
-
+    <div>
+        <form action="/search" method="GET" style="margin-bottom: 20px; text-align: center;">
+            <label for="refer" style="font-size: 18px; display: block; margin-bottom: 10px;">Search task by:</label>
+            <select name="refer" required style="margin-bottom: 10px; padding: 5px;">
+                <option value="name">Name</option>
+                <option value="desc">Description</option>
+                <option value="date">Date</option>
+                <option value="priority">Priority</option>
+            </select>
+            <input type="text" name="key" placeholder="Search Task" size="15" style="margin-bottom: 10px; padding: 5px;" />
+            <button type="submit" style="padding: 5px 10px;">Search</button>
         </form>
     </div>
 
     <center><b><big>All Tasks</big></b></center>
-
-    <div class="container">
-        <table>
-
-            <tr id="row">
-                <th class="status">Status</th>
-                <th class="name">Name</th>
-                <th class="desc">Description</th>
-                <th class="date">Date</th>
-                <th class="priority">Priority</th>
-                <th class="func1" colspan="2">Actions</th>
-            </tr>
-
-            {% for task in task_list %}
-            <tr class="datas">
-                <td>
-                    <a href="./done?_id={{ task['_id'] }}"><input type="image" src="static/images/{{task['done']}}.png" alt="Submit"></a>
-                </td>
-
-                <td class="name">
-                    {{ task["name"] }}
-                </td>
-
-                <td class="desc">
-                    {{ task["desc"] }}
-                </td>
-
-                <td class="date">
-                    {{ task["date"] }}
-                </td>
-
-                <td class="priority">
-                    {{ task["priority"] }}
-                </td>
-
-                <td class="func1"><a href="./remove?_id={{ task['_id'] }}"><button type="submit" class="del-btn">Delete</button></a>
-                </td>
-
-                <td class="func1"><a href="./update?_id={{ task['_id'] }}"><button type="submit" class="edit-btn">Edit</button></a>
-                </td>
-
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;margin: 0px 5%;">
+        {% for task in task_list %}
+        <div class="card" style="background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 15px;">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center;">
+                    <a href="./done?_id={{ task['_id'] }}" style="margin-right: 10px;">
+                        <input type="image" src="static/images/{{task['done']}}.png" alt="Submit" style="height: 24px; width: 24px;">
+                    </a>
+                    <h2 style="margin: 0;">{{ task["name"] }}</h2>
+                </div>
+                <div style="display: flex;">
+                    <a href="./remove?_id={{ task['_id'] }}" style="margin-right: 10px;">
+                        <button type="submit" class="del-btn" style="padding: 5px 10px;">Delete</button>
+                    </a>
+                    <a href="./update?_id={{ task['_id'] }}">
+                        <button type="submit" class="edit-btn" style="padding: 5px 10px;">Edit</button>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <p style="margin: 0; overflow: auto;">{{ task["desc"] }}</p>
+                <p style="margin: 0;">{{ task["date"] }}</p>
+                <p style="margin: 0;">{{ task["priority"] }}</p>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
     {% else %}
         <h4 style="text-align: center; color: #555;">No Tasks in the List !!</h4>
     {% endif %}
+
 
     <hr/>
 

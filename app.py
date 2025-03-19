@@ -18,7 +18,6 @@ port = dotenv.get_key(".env", "PORT")
 title = "Task Management application with Flask and MongoDB"
 heading = "Task Management backed with Flask and MongoDB"
 
-print(MONGO_URL)
 # mongodb://user_name:password@ip_host:port/Database_Name
 # db  =  client.Database_Name
 # table_var_name  =  db.table_name
@@ -27,7 +26,7 @@ print(MONGO_URL)
 client = MongoClient(f"{MONGO_URL}/{MONGO_DB}") # host uri
 db = client[MONGO_DB] 							     # Select the database
 task_list = db[MONGO_CONN_NAME]                      # Select the collection name
-
+print(task_list)
 def redirect_url():
     return request.args.get('next') or \
         request.referrer or \

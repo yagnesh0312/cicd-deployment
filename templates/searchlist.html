@@ -6,7 +6,7 @@
 <body>
 	<h1>{{h}}</h1>
 	<hr>
-	{% if todos[0] %}
+	{% if task_list[0] %}
 	<h3>Result of the Search : ToDO List</h3>
 	<table>
 	    <tr id="row">
@@ -18,7 +18,7 @@
 		<td class="func">Delete</td>
 		<td class="func">Modify</td>
 	    </tr>
-		{% for todo in todos %}
+		{% for todo in task_list %}
 		<tr class="datas">
 			<td><a href="./done?_id={{ todo['_id'] }}"><input type="image" src="static/images/{{todo['done']}}.png" alt="Submit ME"></a></td>
 			<td class="name">{{ todo["name"] }}</td>
