@@ -40,6 +40,7 @@ jobs:
       - name: Test Docker Image Generated
         run: |
           docker image rm cicd-test || echo "No image to remove"
+          docker rm cicd-test || echo "No container to remove"
           docker build -t cicd-test -f Dockerfile.test .
           docker container run --name cicd-test cicd-test
           if docker wait cicd-test -eq 0 ; then
