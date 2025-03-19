@@ -16,7 +16,7 @@ port = dotenv.get_key(".env", "PORT")
 
 
 title = "Task Management application with Flask and MongoDB"
-heading = "Task Management backed with Flask and MongoDB"
+heading = "Task Management"
 
 # mongodb://user_name:password@ip_host:port/Database_Name
 # db  =  client.Database_Name

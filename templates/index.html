@@ -11,6 +11,12 @@
 
         <style>
             /* General Styles */
+            *{
+                margin: 0;
+                padding: 0;
+                /* box-sizing: border-box; */
+            }
+
             body {
                 font-family: 'Inter', sans-serif;
                 margin: 0;
@@ -20,41 +26,43 @@
             }
 
             h1 {
-                text-align: center;
+                text-align: -webkit-start;
+                display: inline;
+
                 color: #7A00E6; /* Purple color */
-                margin-top: 20px;
+                /* margin-top: 20px; */
                 color: darkorange;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
                 font-weight: 700;
             }
 
             ul {
-                display: flex;
-                justify-content: center;
+                display: inline-flex;
                 list-style: none;
-                padding: 10 0 10 0;
-                background: linear-gradient(to right, #6495ED, #b37ae6); /* Blue and purple */
+                height: fit-content;
+                padding: 6 0 6 0;
+                background: linear-gradient(to right, #6495ED, #b37ae6);
                 border-radius: 12px;
-                margin: 20px auto;
                 width: fit-content;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             ul li {
-                margin: 0 10px;
+                margin: 0 6px;
             }
 
             ul li a {
                 text-decoration: none;
                 color: #fff;
-                padding: 12px 25px;
+                padding: 6px 16px;
                 border-radius: 8px;
                 font-weight: 600;
                 transition: background 0.3s ease, transform 0.2s ease;
             }
 
             ul li a:hover {
-                background: #6a00ff; /* Darker purple */
+                background: #ffffff00; /* Darker purple */
+                text-decoration: underline;
                 transform: scale(1.05);
             }
 
@@ -147,25 +155,33 @@
 
             /* Form Styles */
             form {
-                text-align: -webkit-center;
+                /* text-align: -webkit-center; */
+                display: flex;
                 width: 90%;
                 margin: 20px auto;
-                padding: 20px;
+                padding: 12px;
+                align-items: center;
+                justify-content: space-between;
                 background: #fff;
                 box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
                 border-radius: 12px;
             }
+
+            form label {
+                font-size: 18px;
+            }
+
             .container{
                 text-align: -webkit-center;
             }
 
             input, textarea, select {
-                width: 100%;
+                /* width: ; */
                 padding: 6px;
-                margin: 0;
+                /* margin: 0; */
                 border: 1px solid #ddd;
                 border-radius: 8px;
-                box-sizing: border-box;
+                /* box-sizing: border-box; */
                 font-size: 16px;
             }
 
@@ -189,36 +205,54 @@
                 margin: 0;
             }
 
+            .navbar{
+                display: flex;
+                justify-content: start;
+                align-items: start;
+                margin: 20px 0;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
         </style>
 
 </head>
 
 <body>
-    <h1>{{ heading }}</h1>
-    <ul>
-        <li><a href="/list" class="{{ all }}">All</a></li>
-        <li><a href="/uncompleted" class="{{ uncompleted }}">Uncompleted</a></li>
-        <li><a href="/completed" class="{{ completed }}">Completed</a></li>
-    </ul>
+    <nav>
+
+
+        <div class="topbar">
+
+            <form action="/search" method="GET">
+                <h1>{{ heading }}</h1>
+
+                <ul>
+                    <li><a href="/list" class="{{ all }}">All</a></li>
+                    <li><a href="/uncompleted" class="{{ uncompleted }}">Uncompleted</a></li>
+                    <li><a href="/completed" class="{{ completed }}">Completed</a></li>
+                </ul>
+{% if task_list[0] %}
+                <label for="refer" style="height: fit-content;">Search task by:
+                    <select name="refer" required>
+                        <option value="name">Name</option>
+                        <option value="desc">Description</option>
+                        <option value="creation_date">Date</option>
+                        <option value="priority">Priority</option>
+                    </select>
+                    <input type="text" name="key" placeholder="Search" size="12"/>
+                    <button type="submit" style="padding: 5px 10px;">Search</button>
+                </label>
+                 {% endif %}
+            </form>
+            </div>
+
+    </nav>
 
     <hr>
 
-    {% if task_list[0] %}
-
-    <div>
-        <form action="/search" method="GET" style="margin-bottom: 20px; text-align: center;">
-            <label for="refer" style="font-size: 18px; display: block; margin-bottom: 10px;">Search task by:</label>
-            <select name="refer" required style="margin-bottom: 10px; padding: 5px;">
-                <option value="name">Name</option>
-                <option value="desc">Description</option>
-                <option value="date">Date</option>
-                <option value="priority">Priority</option>
-            </select>
-            <input type="text" name="key" placeholder="Search Task" size="15" style="margin-bottom: 10px; padding: 5px;" />
-            <button type="submit" style="padding: 5px 10px;">Search</button>
-        </form>
-    </div>
-
+        {% if task_list[0] %}
     <center><b><big>All Tasks</big></b></center>
     <div class="container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;margin: 0px 5%;">
         {% for task in task_list %}
@@ -239,10 +273,10 @@
                     </a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="text-align: left;">
+                <p style="margin: 0;font-size: 10px;">{{ task["priority"] }}</p>
+                <p style="margin: 0; font-size: 10px;">{{ task["creation_date"] }}</p>
                 <p style="margin: 0; overflow: auto;">{{ task["desc"] }}</p>
-                <p style="margin: 0;">{{ task["date"] }}</p>
-                <p style="margin: 0;">{{ task["priority"] }}</p>
             </div>
         </div>
         {% endfor %}
@@ -255,7 +289,7 @@
 
     <hr/>
 
-    <form action="/action" method="POST">
+    <form action="/action" method="POST" style="justify-content: center;">
         <table class="none">
 
             <tr>
@@ -263,19 +297,19 @@
             </tr>
             <tr>
                 <tr>
-                    <td><input type="text" name="name" placeholder="Name" /></td>
+                    <td><input type="text" name="name" style="width: 100%;" placeholder="Name" /></td>
                 </tr>
 
                 <tr>
-                    <td><textarea name="desc" rows="1" cols="30" placeholder="Description" required></textarea></td>
+                    <td><textarea name="desc" rows="1" cols="30" style="width: 100%;" placeholder="Description" required></textarea></td>
                 </tr>
 
                 <tr>
-                    <td><input type="date" name="date" placeholder="Date" /></td>
+                    <td><input type="date" name="creation_date" style="width: 100%;" placeholder="Date" /></td>
                 </tr>
 
                 <tr>
-                    <td><input type="number" name="priority" placeholder="Priority" /></td>
+                    <td><input type="number" name="priority" style="width: 100%;" placeholder="Priority" /></td>
                 </tr>
 
                 <tr>
