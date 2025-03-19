@@ -17,12 +17,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Load Version from .env
-        id: load_version
+      - name: Determine Version
+        id: determine_version
         run: |
-          VERSION=$(grep '^VERSION=' .env | cut -d '=' -f2)
+          if [ "${{ github.event.inputs.version }}" ]; then
+            VERSION=${{ github.event.inputs.version }}
+            echo "Using input version: $VERSION"
+          else
+            VERSION=$(grep '^VERSION=' .env | cut -d '=' -f2)
+            echo "Using version from .env: $VERSION"
+          fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "Loaded Version: $VERSION"
+
 
       - name: Check if Version Already Exists
         run: |
@@ -36,7 +42,7 @@ jobs:
           docker image rm cicd-test || echo "No image to remove"
           docker build -t cicd-test -f Dockerfile.test .
           docker container run --name cicd-test cicd-test
-          if -n docker wait cicd-test ; then
+          if docker wait cicd-test -eq 0 ; then
             echo "Test Passed"
           else
             echo "Test Failed"
