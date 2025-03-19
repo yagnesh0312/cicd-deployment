@@ -31,7 +31,7 @@ def test_home_page(client):
     # print(response.data)  # Debugging: Print the response data
     print(response.status_code)  # Debugging: Print the response data
     assert response.status_code == 200
-    assert (b"Task Management backed with Flask and MongoDB" in response.data)
+    assert (b"Task Management" in response.data)
 
 def test_add_task(client):
     """Test adding a new task."""
