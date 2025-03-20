@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
         run: docker pull yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No existing image found"
 
-      - name: Remove Old Image (if exists)
+      - name: Remove Old Image (if exists)  
         continue-on-error: true
         run: docker rmi yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No old image to remove"
 

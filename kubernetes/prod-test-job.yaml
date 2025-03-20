@@ -1,0 +1,62 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob
+  namespace: deploy-test
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - args:
+            - |
+              status=0
+              sleep 2
+              echo "Job Started !!"
+              while [ $status -eq 0 ]; do
+                  kubectl get pods -n deploy-test
+                  
+                  # Extract container-level status reasons
+                  data=$(kubectl get pods -n deploy-test -o jsonpath='{.items[*].status.containerStatuses[*].state.waiting.reason}')
+                  echo "Pod Statuses: $data"
+                  
+                  if echo "$data" | grep -q "ErrImagePull"; then
+                      echo "Exiting due to ErrImagePull"
+                      exit 1
+                  elif echo "$data" | grep -q "CrashLoopBackOff"; then
+                      echo "Exiting due to CrashLoopBackOff"
+                      exit 1
+                  elif echo "$data" | grep -q "ImagePullBackOff"; then
+                      echo "Exiting due to ImagePullBackOff"
+                      exit 1
+                  elif echo "$data" | grep -q "Error"; then
+                      echo "Exiting due to Error"
+                      exit 1
+                  elif echo "$data" | grep -q "Failed"; then
+                      echo "Exiting due to Failed"
+                      exit 1
+                  elif echo "$data" | grep -q "ContainerCreating"; then
+                      echo "Containers are still creating... Waiting"
+                      sleep 5
+                  elif [ -z "$data" ]; then
+                      status=1
+                      echo "Success: No issues detected"
+                  else
+                      echo "Still Pending... Waiting"
+                      sleep 5
+                  fi
+              done
+              exit 0
+          command:
+            - bash
+            - '-c'
+          image: bitnami/kubectl
+          name: myjob
+          volumeMounts:
+            - mountPath: /.kube
+              name: kubectl-config
+      restartPolicy: Never
+      volumes:
+        - hostPath:
+            path: /root/.kube
+          name: kubectl-config
