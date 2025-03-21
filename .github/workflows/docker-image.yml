@@ -10,7 +10,6 @@ on:
         required: false
 
 env:
-  VERSION: ${{ github.event.inputs.version }}
   DOCKER_REGISTRY: yagnesh.jariwala.com:30002
   DOCKER_IMAGE_NAME: inventyv/production
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -18,10 +17,10 @@ env:
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
   PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
-  MONGO_CONN_STRING: ${{secrets.MONGO_CONN_STRING}}
-  MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
-  MONGO_COLLECTION_NAME: ${{secrets.MONGO_COLLECTION_NAME}}
-  PORT: ${{secrets.PORT}}
+  MONGO_CONN_STRING: ${{ secrets.MONGO_CONN_STRING }}
+  MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+  MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+  PORT: ${{ secrets.PORT }}
 
 jobs:
   build:
@@ -31,17 +30,24 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Determine Version
+      - name: Determine Version from Commit Message
         id: determine_version
         run: |
           if [ "${{ github.event.inputs.version }}" ]; then
             VERSION=${{ github.event.inputs.version }}
             echo "Using input version: $VERSION"
           else
-            VERSION=$(date +%Y.%m.%d.%H.%M.%S)
-            echo "Using generated version: $VERSION"
+            # Extract the latest commit message
+            COMMIT_MESSAGE=$(git log -1 --pretty=%B | tr -d '\n')
+            # Extract the first word as the version
+            VERSION=$(echo "$COMMIT_MESSAGE" | awk '{print $1}')
+            # Extract the rest of the commit message
+            MESSAGE=$(echo "$COMMIT_MESSAGE" | cut -d' ' -f2-)
+            echo "Using version from commit message: $VERSION"
+            echo "Commit message: $MESSAGE"
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
 
       - name: Check if Version Already Exists
         run: |
