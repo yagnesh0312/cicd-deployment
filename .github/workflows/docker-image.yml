@@ -2,12 +2,26 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
     inputs:
       version:
         description: "Enter version number (e.g., 1.0.0)"
         required: false
+
+env:
+  VERSION: ${{ github.event.inputs.version }}
+  DOCKER_REGISTRY: yagnesh.jariwala.com:30002
+  DOCKER_IMAGE_NAME: inventyv/production
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
+  PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
+  MONGO_CONN_STRING: ${{secrets.MONGO_CONN_STRING}}
+  MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
+  MONGO_COLLECTION_NAME: ${{secrets.MONGO_COLLECTION_NAME}}
+  PORT: ${{secrets.PORT}}
 
 jobs:
   build:
@@ -29,10 +43,9 @@ jobs:
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-
       - name: Check if Version Already Exists
         run: |
-          if command docker pull yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }} ; then
+          if command docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }} ; then
             echo "Error: Image version v${{ env.VERSION }} already exists in the registry."
             exit 1
           fi
@@ -42,7 +55,13 @@ jobs:
           docker image rm cicd-test || echo "No image to remove"
           docker rm cicd-test || echo "No container to remove"
           docker build -t cicd-test -f Dockerfile.test .
-          docker container run --name cicd-test cicd-test
+          docker container run --name cicd-test \
+            -e MONGO_CONN_STRING=${{ env.MONGO_CONN_STRING }} \
+            -e MONGO_DB_NAME=${{ env.MONGO_DB_NAME }} \
+            -e MONGO_COLLECTION_NAME=${{ env.MONGO_COLLECTION_NAME }} \
+            -e PORT=${{ env.PORT }} \
+            -e VERSION=${{ env.VERSION }} \
+            cicd-test
           docker wait cicd-test
           if [ $? -eq 0 ]; then
             echo "Test Passed"
@@ -52,37 +71,39 @@ jobs:
           fi
 
       - name: Log in to Docker Registry
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login yagnesh.jariwala.com:30002 -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ env.DOCKER_PASSWORD }}" | docker login ${{ env.DOCKER_REGISTRY }} -u "${{ env.DOCKER_USERNAME }}" --password-stdin
 
       - name: Pull Old Image (if exists)
         continue-on-error: true
-        run: docker pull yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No existing image found"
+        run: docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No existing image found"
 
-      - name: Remove Old Image (if exists)  
+      - name: Remove Old Image (if exists)
         continue-on-error: true
-        run: docker rmi yagnesh.jariwala.com:30002/inventyv/production:latest || echo "No old image to remove"
+        run: docker rmi ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No old image to remove"
 
       - name: Build the Docker Image
         run: |
-          docker build -t yagnesh.jariwala.com:30002/inventyv/production:latest .
-          docker tag yagnesh.jariwala.com:30002/inventyv/production:latest yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }}
+          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
+          docker tag ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
 
       - name: Push Docker Image
         run: |
-          docker push yagnesh.jariwala.com:30002/inventyv/production:latest
-          docker push yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }}
-      - name: cleanup
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
+
+      - name: Cleanup
         run: |
-          docker image rm -f yagnesh.jariwala.com:30002/inventyv/production:latest
-          docker image rm -f yagnesh.jariwala.com:30002/inventyv/production:v${{ env.VERSION }}
+          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.PUB_SUB_PUBLISHER }}
+          credentials_json: ${{ env.PUBSUB_CREDENTIALS }}
 
       - name: Publish a message to Google Cloud Pub/Sub
         uses: miraliumre/actions-pubsub@v1
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          topic_name: ${{ secrets.PUBSUB_TOPIC }}
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          topic_name: ${{ env.PUBSUB_TOPIC }}
           message: '{"type":"production", "version": "${{ env.VERSION }}"}'
