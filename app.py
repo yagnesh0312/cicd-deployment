@@ -3,12 +3,12 @@ from bson import ObjectId    #  For ObjectId to work
 from pymongo import MongoClient
 import dotenv
 from dotenv import load_dotenv
-
+import os
 load_dotenv()
 
-MONGO_URL = dotenv.get_key(".env", "MONGO_CONN_STRING")
-MONGO_DB = dotenv.get_key(".env", "MONGO_DB_NAME")
-MONGO_CONN_NAME = dotenv.get_key(".env", "MONGO_COLLECTION_NAME")
+MONGO_URL = os.environ.get("MONGO_CONN_STRING")
+MONGO_DB = os.environ.get("MONGO_DB_NAME")
+MONGO_CONN_NAME = os.environ.get("MONGO_COLLECTION_NAME")
 
 
 app = Flask(__name__)
