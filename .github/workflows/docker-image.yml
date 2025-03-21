@@ -38,8 +38,8 @@ jobs:
             VERSION=${{ github.event.inputs.version }}
             echo "Using input version: $VERSION"
           else
-            VERSION=$(grep '^VERSION=' .env | cut -d '=' -f2)
-            echo "Using version from .env: $VERSION"
+            VERSION=$(date +%Y.%m.%d.%H.%M.%S)
+            echo "Using generated version: $VERSION"
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
