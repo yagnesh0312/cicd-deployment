@@ -12,7 +12,7 @@ MONGO_CONN_NAME = os.environ.get("MONGO_COLLECTION_NAME")
 
 
 app = Flask(__name__)
-port = dotenv.get_key(".env", "PORT")
+port = os.environ.get("PORT")
 
 
 title = "Task Management application By Yagnesh"

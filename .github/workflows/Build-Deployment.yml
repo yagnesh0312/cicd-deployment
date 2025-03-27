@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image Build and Deployment
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
         required: false
 
 env:
-  DOCKER_REGISTRY: yagnesh.jariwala.com:30002
+  DOCKER_REGISTRY: yagnesh.com:30002
   DOCKER_IMAGE_NAME: inventyv/production
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
