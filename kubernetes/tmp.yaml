@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob
+  namespace: deploy-test
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+        - args:
+            - |
+              status=0
+              echo "Job Started !!"
+
+              echo "Checking if service is running on my-production-svc-test.deploy-test.svc.cluster.local:31112..."
+              curl my-production-svc-test.deploy-test.svc.cluster.local:31112
+              if [ $? -eq 0 ]; then
+                  echo "Service is running on port 31112"
+              else
+                  echo "Error: Service is not running on port 31112"
+                  exit 1
+              fi
+
+              exit 0
+          command:
+            - bash
+            - '-c'
+          image: bitnami/kubectl
+          name: myjob
+          volumeMounts:
+            - mountPath: /.kube
+              name: kubectl-config
+      restartPolicy: Never
+      volumes:
+        - hostPath:
+            path: /root/.kube
+          name: kubectl-config

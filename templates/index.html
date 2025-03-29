@@ -215,16 +215,28 @@
             .topbar {
                 align-items: flex-start;
             }
+
+            .logout-btn {
+                background: #d33232; /* Red color for logout */
+                color: #fff;
+                padding: 6px 16px;
+                border-radius: 8px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+
+            .logout-btn:hover {
+                background: #a82828; /* Darker red on hover */
+                transform: scale(1.05);
+            }
         </style>
 
 </head>
 
 <body>
     <nav>
-
-
         <div class="topbar">
-
             <form action="/search" method="GET">
                 <h1>{{ heading }}</h1>
 
@@ -232,8 +244,9 @@
                     <li><a href="/list" class="{{ all }}">All</a></li>
                     <li><a href="/uncompleted" class="{{ uncompleted }}">Uncompleted</a></li>
                     <li><a href="/completed" class="{{ completed }}">Completed</a></li>
+                    <li><a href="/logout" class="logout-btn">Logout</a></li> <!-- Added Logout Button -->
                 </ul>
-{% if task_list[0] %}
+                {% if task_list[0] %}
                 <label for="refer" style="height: fit-content;">Search task by:
                     <select name="refer" required>
                         <option value="name">Name</option>
