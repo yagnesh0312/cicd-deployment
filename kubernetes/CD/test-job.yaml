@@ -46,29 +46,16 @@ spec:
                       sleep 5
                   fi
               done
-
-              # Check if the service is running on the specified port
-              echo "Checking if service is running on my-production-svc-test.deploy-test.svc.cluster.local:31112..."
-              curl my-production-svc-test.deploy-test.svc.cluster.local:31112
-              if [ $? -eq 0 ]; then
-                  echo "Service is running on port 31112"
-              else
-                  echo "Error: Service is not running on port 31112"
-                  exit 1
-              fi
-
               exit 0
           command:
             - bash
             - '-c'
           image: bitnami/kubectl
-          name: myjob
-          volumeMounts:
-            - mountPath: /.kube
-              name: kubectl-config
-        - name: checkurl
+          name: pod-status-checker
+        - args:
+            - curl
+            - 'my-production-svc-test.deploy-test.svc.cluster.local:3000'
+          image: 'rancher/curl'
+          name: service-checker
       restartPolicy: Never
-      volumes:
-        - hostPath:
-            path: /root/.kube
-          name: kubectl-config
+      serviceAccountName: test-job-sa

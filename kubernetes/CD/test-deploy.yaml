@@ -22,7 +22,6 @@ spec:
         - envFrom:
             - secretRef:
                 name: production-env
-          image: >-
-            yagnesh.jariwala.com:30002/inventyv/production:v1.0.25
+          image: 'yagnesh.com:30002/inventyv/production:v0.0.12'
           imagePullPolicy: Always
           name: poding
