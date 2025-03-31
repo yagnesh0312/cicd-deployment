@@ -83,9 +83,10 @@
         background: linear-gradient(
           to right,
           #6495ed,
-          #7a00e6
+          #7a00e6,
+          #d1aecc
         ); /* Blue and purple */
-        margin: 20px 0;
+        margin: 2px 2px;
       }
 
       /* Table Styles */
@@ -108,7 +109,8 @@
         background: linear-gradient(
           to right,
           #6495ed,
-          #9a78b8
+          #9a78b8,
+          #d1aecc
         ); /* Blue and purple */
         color: #fff;
         font-weight: 600;
@@ -137,7 +139,8 @@
         background: linear-gradient(
           to right,
           #6495ed,
-          #b983e9
+          #b983e9,
+          #d1aecc
         ); /* Blue and purple */
         color: #fff;
         border: none;
@@ -222,11 +225,12 @@
       /* Footer */
       footer {
         text-align: center;
-        padding: 15px;
+        padding: 8px;
         background: linear-gradient(
           to right,
           #6495ed,
-          #7a00e6
+          #7a00e6,
+          #d1aecc
         ); /* Blue and purple */
         color: #fff;
         font-weight: 500;
@@ -254,6 +258,7 @@
         font-weight: 600;
         text-decoration: none;
         transition: background 0.3s ease, transform 0.2s ease;
+        margin: 10px;
       }
 
       .logout-btn:hover {
@@ -351,7 +356,7 @@
     <!-- Sidebar -->
     <main>
       <nav>
-        <h1 style="margin-top: 10px;">{{ heading }}</h1>
+        <h1 style="margin-top: 10px">{{ heading }}</h1>
         <ul>
           <li>
             <button
@@ -371,6 +376,7 @@
               + Add Task
             </button>
           </li>
+
           <li><a href="/list" class="{{ all }}">All Tasks</a></li>
           <li>
             <a href="/uncompleted" class="{{ uncompleted }}">Uncompleted</a>
@@ -378,22 +384,17 @@
           <li><a href="/completed" class="{{ completed }}">Completed</a></li>
         </ul>
 
-        <!-- Search Bar -->
-
         <a href="/logout" class="logout-btn">Logout</a>
       </nav>
 
       <!-- Main Content -->
       <div class="main-content">
-        <!-- <hr /> -->
-        <form
-          action="/search"
-          method="GET"
-          style="width: --webkit-fill-available; margin-top: 10px"
-        >
-          <label for="refer" style="color: white; font-size: 14px"
-            >Search by:</label
-          >
+
+        <form action="/search" method="GET"
+          style="width: --webkit-fill-available; margin-top: 10px">
+
+          <label for="refer" style="color: white; font-size: 14px">Search by:</label>
+
           <select
             name="refer"
             id="refer"
@@ -411,6 +412,7 @@
             <option value="creation_date">Date</option>
             <option value="priority">Priority</option>
           </select>
+
           <input
             type="text"
             name="key"
@@ -424,6 +426,7 @@
             "
             required
           />
+
           <button
             type="submit"
             style="
@@ -440,11 +443,12 @@
             Search
           </button>
         </form>
+
         <!-- Task List Section -->
         <div id="task-list-section">
           {% if task_list[0] %}
 
-          <b><big>All Tasks</big></b>
+          <!-- <b><big>All Tasks</big></b> -->
           <div
             class="container"
             style="
@@ -454,15 +458,17 @@
             "
           >
             {% for task in task_list %}
+
             <div
               class="card"
               style="
                 background-color: #fff;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 15px;
+                padding: 10px;
               "
             >
+
               <div
                 class="card-header"
                 style="
@@ -476,55 +482,57 @@
                     href="./done?_id={{ task['_id'] }}"
                     style="margin-right: 10px"
                   >
-                    <input
-                      type="image"
-                      src="static/images/{{task['done']}}.png"
-                      alt="Submit"
+                    <img
+                      src="static/images/{{task['done']}}.svg"
+                      style="height: 28px; width: 28px"
+                    />
+                  </a>
+
+                  <h2 style="margin: 0">{{ task["name"] }}</h2>
+                </div>
+
+                <div style="display: flex">
+                  <a
+                    href="./update?_id={{ task['_id'] }}"
+                    style="margin-right: 8px"
+                  >
+                    <img
+                      src="static/assets/edit.svg"
                       style="height: 24px; width: 24px"
                     />
                   </a>
-                  <h2 style="margin: 0">{{ task["name"] }}</h2>
-                </div>
-                <div style="display: flex">
-                  <a
-                    href="./remove?_id={{ task['_id'] }}"
-                    style="margin-right: 10px"
-                  >
-                    <button
-                      type="submit"
-                      class="del-btn"
-                      style="padding: 5px 10px"
-                    >
-                      Delete
-                    </button>
-                  </a>
-                  <a href="./update?_id={{ task['_id'] }}">
-                    <button
-                      type="submit"
-                      class="edit-btn"
-                      style="padding: 5px 10px"
-                    >
-                      Edit
-                    </button>
+                  <a href="./remove?_id={{ task['_id'] }}">
+                    <img
+                      src="static/assets/delete.svg"
+                      style="height: 24px; width: 24px"
+                    />
                   </a>
                 </div>
               </div>
+
+              <hr />
+
               <div class="card-body" style="text-align: left">
-                <p style="margin: 0; font-size: 10px">{{ task["priority"] }}</p>
-                <p style="margin: 0; font-size: 10px">
-                  {{ task["creation_date"] }}
-                </p>
-                <p style="margin: 0; overflow: auto">{{ task["desc"] }}</p>
+                <div style="display: flex; justify-content: space-between">
+                  <div>
+                    <p style="margin: 0; font-size: 12px; margin: 4px 0px;">{{ task["creation_date"] }}</p>
+                    <p style="margin: 0; overflow: auto">{{ task["desc"] }}</p>
+                  </div>
+                  <p style="margin: 0; font-size: 20px">[{{ task["priority"] }}]</p>
+                </div>
               </div>
+
             </div>
             {% endfor %}
           </div>
+
           {% else %}
           <h4 style="text-align: center; color: #555">
             No Tasks in the List !!
           </h4>
           {% endif %}
         </div>
+
         <!-- Add Task Form Section -->
         <div id="add-task-form-section" style="display: none">
           <form action="/action" method="POST" style="justify-content: center">
@@ -536,6 +544,7 @@
                   >
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <input
@@ -547,6 +556,7 @@
                   />
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <textarea
@@ -559,6 +569,7 @@
                   ></textarea>
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <input
@@ -570,6 +581,7 @@
                   />
                 </td>
               </tr>
+
               <tr>
                 <td>
                   <input
@@ -581,6 +593,7 @@
                   />
                 </td>
               </tr>
+
               <tr>
                 <td><button type="submit">Create</button></td>
               </tr>
