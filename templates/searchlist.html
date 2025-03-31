@@ -38,6 +38,7 @@
 
       table {
         width: 100%;
+        padding: 4px;
         border-collapse: separate;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
@@ -61,6 +62,7 @@
 
       tr:nth-child(even) {
         background: #f8f9fa;
+        border-radius: 120px;
       }
 
       button {
@@ -111,7 +113,7 @@
 
   <body>
 
-    <h1>{{ h }}</h1>
+    <h1>{{ heading }}</h1>
 
     <div class="container">
       {% if task_list[0] %}
@@ -133,27 +135,36 @@
         </thead>
 
         <tbody>
-          {% for todo in task_list %}
+          {% for task in task_list %}
           <tr>
             <td>
-              <a href="./done?_id={{ todo['_id'] }}">
-                <img src="static/images/{{ todo['done'] }}.svg" style="height: 32px; width: 32px" />
+              <a href="./done?_id={{ task['_id'] }}">
+                <img src="static/images/{{ task['done'] }}.svg" style="height: 32px; width: 32px" />
               </a>
             </td>
 
-            <td>{{ todo["name"] }}</td>
-            <td>{{ todo["desc"] }}</td>
-            <td>{{ todo["creation_date"] }}</td>
-            <td>{{ todo["priority"] }}</td>
+            <td>{{ task["name"] }}</td>
+            <td>{{ task["desc"] }}</td>
+            <td>{{ task["creation_date"] }}</td>
+            <td  style="
+            background: radial-gradient(circle, white,
+                {% if task["priority"]|int <= 3 %} red
+                {% elif task["priority"]|int <= 7 %} yellow
+                {% else %} green
+                {% endif %}
+              );
+            ">
+            ({{ task["priority"] }})
+          </td>
 
             <td>
-              <a href="./update?_id={{ todo['_id'] }}">
+              <a href="./update?_id={{ task['_id'] }}">
                 <img src="static/assets/edit.svg" style="height: 32px; width: 32px" />
               </a>
             </td>
 
             <td>
-              <a href="./remove?_id={{ todo['_id'] }}">
+              <a href="./remove?_id={{ task['_id'] }}">
                 <img src="static/assets/delete.svg" style="height: 32px; width: 32px" />
               </a>
             </td>

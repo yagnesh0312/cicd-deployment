@@ -184,7 +184,7 @@
       form {
         /* text-align: -webkit-center; */
         display: flex;
-        width:  -webkit-fill-available;
+        width: -webkit-fill-available;
         margin: 20px auto;
         padding: 12px;
         align-items: center;
@@ -251,14 +251,7 @@
       }
 
       .logout-btn {
-        background: #d33232; /* Red color for logout */
-        color: #fff;
-        padding: 6px 16px;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.3s ease, transform 0.2s ease;
-        margin: 10px;
+
       }
 
       .logout-btn:hover {
@@ -330,13 +323,19 @@
         background: #d33232; /* Red color for logout */
         color: white;
         padding: 10px 20px;
+        gap:10px;
+        /* display: block; */
+        text-align: center;
+        margin-top: auto; /* Push logout button to the bottom */
+        background: #d33232; /* Red color for logout */
+        color: #fff;
+        display: flex;
+        align-items: center;
         border-radius: 8px;
         font-weight: 600;
         text-decoration: none;
         transition: background 0.3s ease, transform 0.2s ease;
-        display: block;
-        text-align: center;
-        margin-top: auto; /* Push logout button to the bottom */
+        margin-bottom: 10px;
       }
 
       .logout-btn:hover {
@@ -384,16 +383,23 @@
           <li><a href="/completed" class="{{ completed }}">Completed</a></li>
         </ul>
 
-        <a href="/logout" class="logout-btn">Logout</a>
+        <a href="/logout" class="logout-btn">
+          <span> Logout </span>
+          <img src="static/images/logout.svg" style="height: 24px; width: 24px" />
+        </a>
       </nav>
 
       <!-- Main Content -->
       <div class="main-content">
-
-        <form action="/search" method="GET"
-          style="justify-content: space-between; gap: 30px; width: --webkit-fill-available; margin-top: 0px">
-
-          <!-- <label for="refer" style="color: black; font-size: 14px">Search by:</label> -->
+        <form
+          action="/search"
+          method="GET"
+          style="
+            justify-content: space-between;
+            gap: 30px;
+            width: --webkit-fill-available;
+            margin-top: 0px;
+          ">
 
           <select
             name="refer"
@@ -404,9 +410,9 @@
               border-radius: 8px;
               /* border: none; */
               border-width: 2px;
-              "
+            "
             required
-            >
+          >
             <option value="name">Name</option>
             <option value="desc">Description</option>
             <option value="creation_date">Date</option>
@@ -414,10 +420,10 @@
           </select>
 
           <input
-          type="text"
-          name="key"
-          placeholder="search..."
-          style="
+            type="text"
+            name="key"
+            placeholder="search..."
+            style="
               width: 100%;
               padding: 10px;
               border-radius: 8px;
@@ -469,7 +475,6 @@
                 padding: 10px;
               "
             >
-
               <div
                 class="card-header"
                 style="
@@ -516,21 +521,56 @@
               <div class="card-body" style="text-align: left">
                 <div style="display: flex; justify-content: space-between">
                   <div>
-                    <p style="margin: 0; font-size: 12px; margin: 4px 0px;">{{ task["creation_date"] }}</p>
-                    <p style="margin: 0; overflow: auto">{{ task["desc"] }}</p>
+                    <p style="font-size: 12px; margin: 4px 0px">{{ task["creation_date"] }}</p>
+                    <p style="overflow: auto">{{ task["desc"] }}</p>
                   </div>
-                  <p style="margin: 0; font-size: 20px">[{{ task["priority"] }}]</p>
+
+                  <!-- <p style="font-size: 16px"> -->
+                  {% if task["priority"]|int <= 3 %}
+                  <div
+                    style="
+                      background-color: red;
+                      height: 16px;
+                      width: 16px;
+                      margin: 2px 2px;
+                      border: 1px solid black;
+                      border-radius: 100%;
+                    "
+                  ></div>
+                  {% elif task["priority"]|int <= 7 %}
+                  <div
+                    style="
+                      background-color: yellow;
+                      height: 16px;
+                      width: 16px;
+                      margin: 2px 2px;
+                      border: 1px solid black;
+                      border-radius: 100%;
+                    "
+                  ></div>
+                  {% else %}
+                  <div
+                    style="
+                      background-color: greenyellow;
+                      height: 16px;
+                      width: 16px;
+                      margin: 2px 2px;
+                      border: 1px solid black;
+                      border-radius: 100%;
+                    "
+                  ></div>
+                  {% endif %}
+                  <!-- ({{ task["priority"] }}) -->
                 </div>
               </div>
-
             </div>
             {% endfor %}
           </div>
 
           {% else %}
-            <h4 style="text-align: center; color: #555">
-              No Tasks in the List !!
-            </h4>
+          <h4 style="text-align: center; color: #555">
+            No Tasks in the List !!
+          </h4>
           {% endif %}
         </div>
 
