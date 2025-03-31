@@ -44,7 +44,7 @@ jobs:
       - name: Check if Version Already Exists
         run: |
           if command docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_TAG ; then
-            echo "Error: Image version $LATEST_VERSION_TAG already exists in the registry."
+            echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
             exit 1
           fi
 
@@ -83,17 +83,17 @@ jobs:
       - name: Build the Docker Image
         run: |
           docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
-          docker tag ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker tag ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
       - name: Push Docker Image
         run: |
           docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
       - name: Cleanup
         run: |
           docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
@@ -105,4 +105,4 @@ jobs:
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
           topic_name: ${{ env.PUBSUB_TOPIC }}
-          message: '{"type":"production", "version": "$LATEST_VERSION_TAG"}'
+          message: '{"type":"production", "version": "${{ env.RELEASE_VERSION }}}'
