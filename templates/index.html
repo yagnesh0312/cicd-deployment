@@ -40,7 +40,7 @@
         text-align: -webkit-start;
         display: inline;
 
-        color: #7a00e6; /* Purple color */
+        /* color: #7a00e6; Purple color */
         /* margin-top: 20px; */
         color: darkorange;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -250,14 +250,11 @@
         align-items: flex-start;
       }
 
-      .logout-btn {
-
-      }
-
       .logout-btn:hover {
         background: #a82828; /* Darker red on hover */
         transform: scale(1.05);
       }
+
       main {
         display: flex;
         flex-direction: row;
@@ -291,6 +288,13 @@
         margin-bottom: 20px;
         font-size: 24px;
         text-align: center;
+      }
+
+      nav hr {
+        width: 100%;
+        margin: 4px 0;
+        height: 2px;
+        background: salmon;
       }
 
       nav ul {
@@ -348,31 +352,42 @@
         padding: 20px;
         width: -webkit-fill-available;
       }
+
+      .priority-indicator {
+        height: 16px;
+        width: 16px;
+        margin: 2px 2px;
+        border: 1px solid black;
+        border-radius: 100%;
+      }
+
     </style>
+
   </head>
 
   <body>
-    <!-- Sidebar -->
     <main>
+
+      <!-- Sidebar -->
       <nav>
-        <h1 style="margin-top: 10px">{{ heading }}</h1>
-        <ul>
+        <h1 style="margin-top: 16px">{{ heading }}</h1>
+
+        <hr />
+
+        <ul style="margin-top: 4px;">
           <li>
             <button
               id="show-add-task-form"
               onclick="toggleAddTaskForm()"
               style="
-                background: none;
-                border: none;
                 color: white;
                 font-size: 16px;
                 cursor: pointer;
                 padding: 10px 20px;
-                /* text-align: left; */
                 width: 100%;
               "
             >
-              + Add Task
+              Create new task
             </button>
           </li>
 
@@ -391,6 +406,8 @@
 
       <!-- Main Content -->
       <div class="main-content">
+
+        <!-- Search bar -->
         <form
           action="/search"
           method="GET"
@@ -428,8 +445,6 @@
               padding: 10px;
               border-radius: 8px;
               border-width: 2px;
-              /* border: none; */
-              /* margin-bottom: 10px; */
             "
             required
           />
@@ -437,7 +452,6 @@
           <button
             type="submit"
             style="
-              /* width: 100%; */
               padding: 10px;
               background: #6495ed;
               color: white;
@@ -471,10 +485,11 @@
               style="
                 background-color: #fff;
                 border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 padding: 10px;
               "
             >
+
               <div
                 class="card-header"
                 style="
@@ -483,6 +498,8 @@
                   align-items: center;
                 "
               >
+
+                <!-- Task status and title -->
                 <div style="display: flex; align-items: center">
                   <a
                     href="./done?_id={{ task['_id'] }}"
@@ -497,6 +514,7 @@
                   <h2 style="margin: 0">{{ task["name"] }}</h2>
                 </div>
 
+                <!-- Edit/Delete Buttons -->
                 <div style="display: flex">
                   <a
                     href="./update?_id={{ task['_id'] }}"
@@ -504,7 +522,7 @@
                   >
                     <img
                       src="static/assets/edit.svg"
-                      style="height: 24px; width: 24px"
+                      style="height: 22px; width: 22px"
                     />
                   </a>
                   <a href="./remove?_id={{ task['_id'] }}">
@@ -514,6 +532,7 @@
                     />
                   </a>
                 </div>
+
               </div>
 
               <hr />
@@ -525,42 +544,15 @@
                     <p style="overflow: auto">{{ task["desc"] }}</p>
                   </div>
 
-                  <!-- <p style="font-size: 16px"> -->
+                  <!-- Priority Indicator -->
                   {% if task["priority"]|int <= 3 %}
-                  <div
-                    style="
-                      background-color: red;
-                      height: 16px;
-                      width: 16px;
-                      margin: 2px 2px;
-                      border: 1px solid black;
-                      border-radius: 100%;
-                    "
-                  ></div>
+                    <div class="priority-indicator" style="background-color: red;"></div>
                   {% elif task["priority"]|int <= 7 %}
-                  <div
-                    style="
-                      background-color: yellow;
-                      height: 16px;
-                      width: 16px;
-                      margin: 2px 2px;
-                      border: 1px solid black;
-                      border-radius: 100%;
-                    "
-                  ></div>
+                    <div class="priority-indicator" style="background-color: yellow;"></div>
                   {% else %}
-                  <div
-                    style="
-                      background-color: greenyellow;
-                      height: 16px;
-                      width: 16px;
-                      margin: 2px 2px;
-                      border: 1px solid black;
-                      border-radius: 100%;
-                    "
-                  ></div>
+                    <div class="priority-indicator" style="background-color: greenyellow;"></div>
                   {% endif %}
-                  <!-- ({{ task["priority"] }}) -->
+
                 </div>
               </div>
             </div>
@@ -641,6 +633,7 @@
             </table>
           </form>
         </div>
+
       </div>
     </main>
 
@@ -667,8 +660,9 @@
 
     <footer>
       <p style="text-align: center">
-        &copy; 2025 To-Do App. All rights reserved.
+        &COPY; 2025 Task management. All rights reserved.
       </p>
     </footer>
+
   </body>
 </html>
