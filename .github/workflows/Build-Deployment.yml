@@ -6,21 +6,17 @@ on:
         - 'v*.*.*'
 
   workflow_dispatch:
-    # inputs:
-    #   version:
-    #     description: "Enter version number (e.g., 1.0.0)"
-    #     required: false
 
 env:
-  # DOCKER_REGISTRY: yagnesh.com:30002
-  DOCKER_REGISTRY: yagneshjariwala
+  DOCKER_REGISTRY: yagnesh.com:30002
   DOCKER_IMAGE_NAME: inventyv/production
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
   PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
+
   MONGO_CONN_STRING: ${{ secrets.MONGO_CONN_STRING }}
   MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
   MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
@@ -28,8 +24,7 @@ env:
 
 jobs:
   build:
-    # runs-on: self-hosted
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
 
