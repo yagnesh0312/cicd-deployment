@@ -105,4 +105,4 @@ jobs:
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
           topic_name: ${{ env.PUBSUB_TOPIC }}
-          message: '{"type":"production", "version": "${{ env.RELEASE_VERSION }}}'
+          message: '{"type":"production", "version": "${{ env.RELEASE_VERSION }}"}'
