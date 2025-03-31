@@ -12,11 +12,9 @@ env:
   DOCKER_IMAGE_NAME: inventyv/production
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
   PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
-
   MONGO_CONN_STRING: ${{ secrets.MONGO_CONN_STRING }}
   MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
   MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
@@ -30,7 +28,8 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
-
+        with:
+          fetch-depth: 0  
       - name: Get latest tag
         id: get_latest_version_tag
         uses: actions-ecosystem/action-get-latest-tag@v1
