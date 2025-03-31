@@ -12,10 +12,12 @@ on:
     #     required: false
 
 env:
-  HARBOR_REGISTRY: yagnesh.com:30002
-  HARBOR_IMAGE_NAME: inventyv/production
-  HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
-  HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
+  # DOCKER_REGISTRY: yagnesh.com:30002
+  DOCKER_REGISTRY: yagneshjariwala
+  DOCKER_IMAGE_NAME: inventyv/production
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  # DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
   PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
@@ -45,7 +47,7 @@ jobs:
 
       - name: Check if Version Already Exists
         run: |
-          if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_TAG ; then
+          if command docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_TAG ; then
             echo "Error: Image version $LATEST_VERSION_TAG already exists in the registry."
             exit 1
           fi
@@ -71,30 +73,30 @@ jobs:
           fi
 
       - name: Log in to Docker Registry
-        run: echo "${{ env.HARBOR_PASSWORD }}" | docker login ${{ env.HARBOR_REGISTRY }} -u "${{ env.HARBOR_USERNAME }}" --password-stdin
+        run: echo "${{ env.DOCKER_PASSWORD }}" | docker login ${{ env.DOCKER_REGISTRY }} -u "${{ env.DOCKER_USERNAME }}" --password-stdin
 
       - name: Pull Old Image (if exists)
         continue-on-error: true
-        run: docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No existing image found"
+        run: docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No existing image found"
 
       - name: Remove Old Image (if exists)
         continue-on-error: true
-        run: docker rmi ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No old image to remove"
+        run: docker rmi ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No old image to remove"
 
       - name: Build the Docker Image
         run: |
-          docker build -t ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest .
-          docker tag ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
+          docker tag ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Push Docker Image
         run: |
-          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
-          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Cleanup
         run: |
-          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
-          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
+          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
