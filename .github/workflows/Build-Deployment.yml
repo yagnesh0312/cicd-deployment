@@ -23,20 +23,21 @@ env:
 jobs:
   build:
     runs-on: self-hosted
-
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  
-      - name: Get latest tag
-        id: get_latest_version_tag
-        uses: actions-ecosystem/action-get-latest-tag@v1
+
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
 
       - name: Use the latest tag
         run: |
-          LATEST_VERSION_TAG=${{ steps.get_latest_version_tag.outputs.tag }}
+          LATEST_VERSION_TAG=${{ env.RELEASE_VERSION }}
           echo "Latest tag is $LATEST_VERSION_TAG"
 
       - name: Check if Version Already Exists
