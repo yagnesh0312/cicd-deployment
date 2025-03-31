@@ -69,7 +69,7 @@ def signup():
         users.insert_one({"username": username, "password": password})
         flash("Signup successful! Please log in.", "success")
         return redirect("/login")
-    return render_template("signup.html", title="Signup", heading="Signup")
+    return render_template("signup.html", title="Signup", heading="SIGNUP")
 
 
 # Logout
@@ -93,10 +93,31 @@ def login_required(func):
 
 # Display all Tasks
 @app.route("/")
-@app.route("/list")
+@app.route("/list", methods=["GET", "POST"])
 @login_required
 def lists():
     username = session["username"]  # Get the logged-in user's username
+
+    if request.method == "POST":
+        # Handle adding a new task
+        name = request.form.get("name")
+        desc = request.form.get("desc")
+        date = request.form.get("creation_date")
+        priority = request.form.get("priority")
+
+        # Insert the task with the associated username
+        task_list.insert_one({
+            "name": name,
+            "desc": desc,
+            "creation_date": date,
+            "priority": priority,
+            "done": False,
+            "username": username
+        })
+        flash("Task added successfully!", "success")
+        return redirect("/list")
+
+    # Display the list of tasks
     all_tasks = task_list.find({"username": username})  # Filter tasks by username
     return render_template(
         'index.html',
