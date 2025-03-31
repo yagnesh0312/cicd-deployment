@@ -391,22 +391,22 @@
       <div class="main-content">
 
         <form action="/search" method="GET"
-          style="width: --webkit-fill-available; margin-top: 10px">
+          style="justify-content: space-between; gap: 30px; width: --webkit-fill-available; margin-top: 0px">
 
-          <label for="refer" style="color: white; font-size: 14px">Search by:</label>
+          <!-- <label for="refer" style="color: black; font-size: 14px">Search by:</label> -->
 
           <select
             name="refer"
             id="refer"
             style="
               width: 100%;
-              padding: 5px;
-              margin-bottom: 10px;
+              padding: 10px;
               border-radius: 8px;
-              border: none;
-            "
+              /* border: none; */
+              border-width: 2px;
+              "
             required
-          >
+            >
             <option value="name">Name</option>
             <option value="desc">Description</option>
             <option value="creation_date">Date</option>
@@ -414,15 +414,16 @@
           </select>
 
           <input
-            type="text"
-            name="key"
-            placeholder="Search..."
-            style="
+          type="text"
+          name="key"
+          placeholder="search..."
+          style="
               width: 100%;
               padding: 10px;
               border-radius: 8px;
-              border: none;
-              margin-bottom: 10px;
+              border-width: 2px;
+              /* border: none; */
+              /* margin-bottom: 10px; */
             "
             required
           />
@@ -430,7 +431,7 @@
           <button
             type="submit"
             style="
-              width: 100%;
+              /* width: 100%; */
               padding: 10px;
               background: #6495ed;
               color: white;
@@ -440,7 +441,7 @@
               cursor: pointer;
             "
           >
-            Search
+            <img src="static/images/search.svg" style="height: 24px; width: 24px" />
           </button>
         </form>
 
@@ -527,9 +528,9 @@
           </div>
 
           {% else %}
-          <h4 style="text-align: center; color: #555">
-            No Tasks in the List !!
-          </h4>
+            <h4 style="text-align: center; color: #555">
+              No Tasks in the List !!
+            </h4>
           {% endif %}
         </div>
 

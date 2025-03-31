@@ -108,12 +108,18 @@
       }
     </style>
   </head>
+
   <body>
+
     <h1>{{ h }}</h1>
+
     <div class="container">
       {% if task_list[0] %}
+
       <h3>Search Results</h3>
+
       <table>
+
         <thead>
           <tr>
             <th>Status</th>
@@ -121,45 +127,50 @@
             <th>Task Description</th>
             <th>Date</th>
             <th>Priority</th>
-            <th>Delete</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
+
         <tbody>
           {% for todo in task_list %}
           <tr>
             <td>
               <a href="./done?_id={{ todo['_id'] }}">
-                <input
-                  type="image"
-                  src="static/images/{{ todo['done'] }}.png"
-                  alt="Submit"
-                  style="height: 24px; width: 24px"
-                />
+                <img src="static/images/{{ todo['done'] }}.svg" style="height: 32px; width: 32px" />
               </a>
             </td>
+
             <td>{{ todo["name"] }}</td>
             <td>{{ todo["desc"] }}</td>
             <td>{{ todo["creation_date"] }}</td>
             <td>{{ todo["priority"] }}</td>
-            <td>
-              <a href="./remove?_id={{ todo['_id'] }}">
-                <button type="button" class="del-btn">Delete</button>
-              </a>
-            </td>
+
             <td>
               <a href="./update?_id={{ todo['_id'] }}">
-                <button type="button" class="edit-btn">Edit</button>
+                <img src="static/assets/edit.svg" style="height: 32px; width: 32px" />
               </a>
             </td>
+
+            <td>
+              <a href="./remove?_id={{ todo['_id'] }}">
+                <img src="static/assets/delete.svg" style="height: 32px; width: 32px" />
+              </a>
+            </td>
+
           </tr>
           {% endfor %}
         </tbody>
       </table>
+
       {% else %}
-      <div class="no-results">No Results Found!</div>
+        <div class="no-results">No Results Found!</div>
+
       {% endif %}
+
       <a href="/" class="back-link">Return to Task List</a>
+
     </div>
+
   </body>
 </html>
