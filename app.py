@@ -219,7 +219,7 @@ def update():
     return render_template(
         'update.html',
         tasks=task,
-        heading=heading,
+        heading="Update Task",
         title=title
     )
 
@@ -227,7 +227,7 @@ def update():
 # Updating a Task with various references
 @app.route("/action3", methods=['POST'])
 @login_required
-def action3():
+def update_task():
     name = request.values.get("name")
     desc = request.values.get("desc")
     date = request.values.get("creation_date")
