@@ -3,19 +3,19 @@ name: Docker Image Build and Deployment
 on:
   push:
     tags:
-        - '*.*.*'
+        - 'v*.*.*'
 
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Enter version number (e.g., 1.0.0)"
-        required: false
+    # inputs:
+    #   version:
+    #     description: "Enter version number (e.g., 1.0.0)"
+    #     required: false
 
 env:
-  DOCKER_REGISTRY: yagnesh.com:30002
-  DOCKER_IMAGE_NAME: inventyv/production
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  HARBOR_REGISTRY: yagnesh.com:30002
+  HARBOR_IMAGE_NAME: inventyv/production
+  HARBOR_USERNAME: ${{ secrets.HARBOR_USERNAME }}
+  HARBOR_PASSWORD: ${{ secrets.HARBOR_PASSWORD }}
   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
   PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
@@ -26,35 +26,27 @@ env:
 
 jobs:
   build:
-    runs-on: self-hosted
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # - name: Determine Version from Commit Message
-      #   id: determine_version
-      #   run: |
-      #     if [ "${{ github.event.inputs.version }}" ]; then
-      #       VERSION=${{ github.event.inputs.version }}
-      #       echo "Using input version: $VERSION"
-      #     else
-      #       # Extract the latest commit message
-      #       COMMIT_MESSAGE=$(git log -1 --pretty=%B | tr -d '\n')
-      #       # Extract the first word as the version
-      #       VERSION=$(echo "$COMMIT_MESSAGE" | awk '{print $1}')
-      #       # Extract the rest of the commit message
-      #       MESSAGE=$(echo "$COMMIT_MESSAGE" | cut -d' ' -f2-)
-      #       echo "Using version from commit message: $VERSION"
-      #       echo "Commit message: $MESSAGE"
-      #     fi
-      #     echo "VERSION=$VERSION" >> $GITHUB_ENV
-      #     echo "MESSAGE=$MESSAGE" >> $GITHUB_ENV
+      - name: Get latest tag
+        id: get_latest_version_tag
+        uses: actions-ecosystem/action-get-latest-tag@v1
+
+      - name: Use the latest tag
+        run: |
+          LATEST_VERSION_TAG=${{ steps.get_latest_version_tag.outputs.tag }}
+          echo "Latest tag is $LATEST_VERSION_TAG"
 
       - name: Check if Version Already Exists
         run: |
-          if command docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }} ; then
-            echo "Error: Image version v${{ env.VERSION }} already exists in the registry."
+          if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_TAG ; then
+            echo "Error: Image version $LATEST_VERSION_TAG already exists in the registry."
             exit 1
           fi
 
@@ -79,30 +71,30 @@ jobs:
           fi
 
       - name: Log in to Docker Registry
-        run: echo "${{ env.DOCKER_PASSWORD }}" | docker login ${{ env.DOCKER_REGISTRY }} -u "${{ env.DOCKER_USERNAME }}" --password-stdin
+        run: echo "${{ env.HARBOR_PASSWORD }}" | docker login ${{ env.HARBOR_REGISTRY }} -u "${{ env.HARBOR_USERNAME }}" --password-stdin
 
       - name: Pull Old Image (if exists)
         continue-on-error: true
-        run: docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No existing image found"
+        run: docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No existing image found"
 
       - name: Remove Old Image (if exists)
         continue-on-error: true
-        run: docker rmi ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest || echo "No old image to remove"
+        run: docker rmi ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No old image to remove"
 
       - name: Build the Docker Image
         run: |
-          docker build -t ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest .
-          docker tag ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
+          docker build -t ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest .
+          docker tag ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Push Docker Image
         run: |
-          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          docker push ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
+          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
+          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Cleanup
         run: |
-          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
-          docker image rm -f ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:v${{ env.VERSION }}
+          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
+          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
@@ -114,4 +106,4 @@ jobs:
         with:
           project_id: ${{ env.GCP_PROJECT_ID }}
           topic_name: ${{ env.PUBSUB_TOPIC }}
-          message: '{"type":"production", "version": "${{ env.VERSION }}"}'
+          message: '{"type":"production", "version": "$LATEST_VERSION_TAG"}'
