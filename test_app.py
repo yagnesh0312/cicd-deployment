@@ -161,7 +161,7 @@ def test_update_task(client):
     }).inserted_id
 
     # Update the task
-    response = client.post("/action3", data={
+    response = client.post("/updatetask", data={
         "_id": str(task_id),
         "name": "Updated Task",
         "desc": "Updated description",

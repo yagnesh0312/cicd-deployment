@@ -226,7 +226,7 @@ def update():
 
 
 # Updating a Task with various references
-@app.route("/action3", methods=['POST'])
+@app.route("/updatetask", methods=['POST'])
 @login_required
 def update_task():
     name = request.values.get("name")

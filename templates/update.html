@@ -124,7 +124,7 @@
     <div class="update-container">
       <h1>{{ heading }}</h1>
 
-      <form action="/action3" method="POST">
+      <form action="/updatetask" method="POST">
         {% for task in tasks %}
 
         <input type="hidden" name="_id" value="{{ task['_id'] }}" />
