@@ -71,7 +71,7 @@ def test_add_task(client):
     })
 
     # Add a task
-    response = client.post("/action", data={
+    response = client.post("/create", data={
         "name": "Test Task",
         "desc": "This is a test task.",
         "creation_date": "2025-03-28",

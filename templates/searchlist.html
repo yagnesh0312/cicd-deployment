@@ -1,18 +1,10 @@
 <html>
   <head>
-    <title>{{ t }}</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='assets/style.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='assets/emoji.css') }}"
-    />
-    <script src="{{ url_for('static', filename='assets/twemoji.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='assets/emoji.js') }}"></script>
+
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/style.css') }}" />
+
     <style>
       body {
         font-family: "Inter", sans-serif;

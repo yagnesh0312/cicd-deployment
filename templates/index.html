@@ -1,20 +1,9 @@
 <html>
   <head>
-    <title>{{t}}</title>
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static',filename='assets/style.css')}}"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static',filename='assets/emoji.css')}}"
-    />
+    <title>{{ title }}</title>
 
-    <script src="{{ url_for('static',filename='assets/twemoji.min.js')}}"></script>
-    <script src="{{ url_for('static',filename='assets/emoji.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/style.css')}}" />
 
     <style>
       /* General Styles */
@@ -463,6 +452,7 @@
           >
             <img src="static/images/search.svg" style="height: 24px; width: 24px" />
           </button>
+
         </form>
 
         <!-- Task List Section -->
@@ -568,22 +558,22 @@
 
         <!-- Add Task Form Section -->
         <div id="add-task-form-section" style="display: none">
-          <form action="/action" method="POST" style="justify-content: center">
+          <form action="/create" method="POST" style="justify-content: center">
+
             <table class="none">
-              <tr>
+
+              <!-- <tr>
                 <td>
-                  <b
-                    ><big><label>Create new task:</label></big></b
-                  >
+                  <b><big><label>Create new task:</label></big></b>
                 </td>
-              </tr>
+              </tr> -->
 
               <tr>
                 <td>
                   <input
                     type="text"
                     name="name"
-                    style="width: 100%"
+                    style="width: 50%; border: 2px solid darkgray;"
                     placeholder="Name"
                     required
                   />
@@ -596,7 +586,7 @@
                     name="desc"
                     rows="1"
                     cols="30"
-                    style="width: 100%"
+                    style="width: 50%; border: 2px solid darkgray;"
                     placeholder="Description"
                     required
                   ></textarea>
@@ -608,7 +598,7 @@
                   <input
                     type="date"
                     name="creation_date"
-                    style="width: 100%"
+                    style="width: 50%; border: 2px solid darkgray;"
                     placeholder="Date"
                     required
                   />
@@ -620,8 +610,8 @@
                   <input
                     type="number"
                     name="priority"
-                    style="width: 100%"
-                    placeholder="Priority"
+                    style="width: 50%; border: 2px solid darkgray;"
+                    placeholder="Priority (1..10)"
                     required
                   />
                 </td>
@@ -631,7 +621,9 @@
                 <td><button type="submit">Create</button></td>
               </tr>
             </table>
+
           </form>
+
         </div>
 
       </div>
