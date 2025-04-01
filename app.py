@@ -174,13 +174,14 @@ def done():
 
 
 # Adding a Task
-@app.route("/action", methods=['POST'])
+@app.route("/create", methods=['POST'])
 @login_required
-def action():
+def create_task():
     name = request.values.get("name")
     desc = request.values.get("desc")
     date = request.values.get("creation_date")
-    priority = request.values.get("priority")
+    priority = int(request.values.get("priority"))
+    priority_in_range = max(0, min(priority, 10))
     username = session["username"]  # Get the logged-in user's username
 
     # Insert the task with the associated username
@@ -188,7 +189,7 @@ def action():
         "name": name,
         "desc": desc,
         "creation_date": date,
-        "priority": priority,
+        "priority": priority_in_range,
         "done": False,
         "username": username  # Associate the task with the user
     })
@@ -258,13 +259,13 @@ def search():
 
     # Search tasks only for the logged-in user
     if refer == "_id":
-        todos_l = task_list.find({"_id": ObjectId(key), "username": username})
+        tasks = task_list.find({"_id": ObjectId(key), "username": username})
     else:
-        todos_l = task_list.find({refer: key, "username": username})
+        tasks = task_list.find({refer: key, "username": username})
 
     return render_template(
         'searchlist.html',
-        task_list=todos_l,
+        task_list=tasks,
         title=title,
         heading=heading
     )
