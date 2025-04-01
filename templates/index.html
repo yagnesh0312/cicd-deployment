@@ -349,6 +349,11 @@
         padding: 20px;
         width: -webkit-fill-available;
       }
+
+      #show-add-task-form:hover {
+        background: linear-gradient(45deg, #2575fc, #6a11cb); /* Reverse gradient */
+        transform: scale(1.05); /* Slightly enlarge the button */
+      }
     </style>
   </head>
 
@@ -363,14 +368,18 @@
               id="show-add-task-form"
               onclick="toggleAddTaskForm()"
               style="
-                background: none;
+                background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient background */
                 border: none;
                 color: white;
-                font-size: 16px;
+                font-size: 18px;
+                font-weight: bold;
                 cursor: pointer;
-                padding: 10px 20px;
-                /* text-align: left; */
+                padding: 12px 20px;
+                border-radius: 8px;
                 width: 100%;
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+                transition: background 0.3s ease, transform 0.2s ease;
               "
             >
               + Add Task
