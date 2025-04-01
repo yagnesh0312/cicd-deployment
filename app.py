@@ -259,15 +259,22 @@ def search():
 
     # Search tasks only for the logged-in user
     if refer == "_id":
-        tasks = task_list.find({"_id": ObjectId(key), "username": username})
+        try:
+            tasks = task_list.find({"_id": ObjectId(key), "username": username})
+        except Exception:
+            tasks = []  # Handle invalid ObjectId
     else:
-        tasks = task_list.find({refer: key, "username": username})
+        # Use $regex for case-insensitive and partial matching
+        tasks = task_list.find({
+            refer: {"$regex": key, "$options": "i"},  # Case-insensitive regex
+            "username": username
+        })
 
     return render_template(
         'searchlist.html',
         task_list=tasks,
-        title=title,
-        heading=heading
+        title="Search Results",
+        heading="Search Results"
     )
 
 
