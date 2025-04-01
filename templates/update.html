@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <title>{{ title }}</title>
 
     <style>
@@ -119,26 +118,28 @@
         text-decoration: underline;
       }
     </style>
-
   </head>
 
   <body>
     <div class="update-container">
-
       <h1>{{ heading }}</h1>
 
       <form action="/action3" method="POST">
-
         {% for task in tasks %}
 
         <input type="hidden" name="_id" value="{{ task['_id'] }}" />
 
         <table>
-
           <tr>
             <td><b>Task name:</b></td>
             <td>
-              <input type="text" name="name" value="{{ task['name'] }}" placeholder="Enter task name" required/>
+              <input
+                type="text"
+                name="name"
+                value="{{ task['name'] }}"
+                placeholder="Enter task name"
+                required
+              />
             </td>
           </tr>
 
@@ -150,33 +151,44 @@
                 rows="3"
                 placeholder="Enter task description"
                 required
-                >{{ task['desc'] }}</textarea>
+              >
+{{ task['desc'] }}</textarea
+              >
             </td>
           </tr>
 
           <tr>
             <td><b>Date:</b></td>
             <td>
-              <input type="date" name="date" value="{{ task['creation_date'] }}" required />
+              <input
+                type="date"
+                name="creation_date"
+                value="{{ task['creation_date'] }}"
+                required
+              />
             </td>
           </tr>
 
           <tr>
             <td><b>Priority:</b></td>
             <td>
-              <input type="number" name="pr" value="{{ task['priority'] }}" placeholder="Enter priority" required />
+              <input
+                type="number"
+                name="priority"
+                value="{{ task['priority'] }}"
+                min="1"
+                max="10"
+                placeholder="Enter priority"
+                required
+              />
             </td>
           </tr>
-
         </table>
         {% endfor %}
         <button type="submit"><b>Update Task</b></button>
-
       </form>
 
       <a href="/"><b>Return to Task List</b></a>
-
     </div>
-
   </body>
 </html>
