@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ t }}</title>
+
+    <title>{{ title }}</title>
+
     <style>
       * {
         margin: 0;
@@ -74,7 +76,6 @@
       .update-container textarea {
         width: 100%;
         padding: 12px;
-        margin-bottom: 20px;
         border: none;
         border-radius: 8px;
         font-size: 16px;
@@ -118,68 +119,64 @@
         text-decoration: underline;
       }
     </style>
+
   </head>
+
   <body>
     <div class="update-container">
-      <h1>{{ h }}</h1>
+
+      <h1>{{ heading }}</h1>
+
       <form action="/action3" method="POST">
+
         {% for task in tasks %}
+
         <input type="hidden" name="_id" value="{{ task['_id'] }}" />
 
         <table>
+
           <tr>
-            <td>Task Name:</td>
+            <td><b>Task name:</b></td>
             <td>
-              <input
-                type="text"
-                name="name"
-                value="{{ task['name'] }}"
-                placeholder="Enter task name"
-                required
-              />
+              <input type="text" name="name" value="{{ task['name'] }}" placeholder="Enter task name" required/>
             </td>
           </tr>
+
           <tr>
-            <td>Description:</td>
+            <td><b>Description:</b></td>
             <td>
               <textarea
                 name="desc"
                 rows="3"
                 placeholder="Enter task description"
                 required
-              >
-{{ task['desc'] }}</textarea
-              >
+                >{{ task['desc'] }}</textarea>
             </td>
           </tr>
+
           <tr>
-            <td>Date:</td>
+            <td><b>Date:</b></td>
             <td>
-              <input
-                type="date"
-                name="date"
-                value="{{ task['date'] }}"
-                required
-              />
+              <input type="date" name="date" value="{{ task['creation_date'] }}" required />
             </td>
           </tr>
+
           <tr>
-            <td>Priority:</td>
+            <td><b>Priority:</b></td>
             <td>
-              <input
-                type="number"
-                name="pr"
-                value="{{ task['pr'] }}"
-                placeholder="Enter priority"
-                required
-              />
+              <input type="number" name="pr" value="{{ task['priority'] }}" placeholder="Enter priority" required />
             </td>
           </tr>
+
         </table>
         {% endfor %}
-        <button type="submit">Update Task</button>
+        <button type="submit"><b>Update Task</b></button>
+
       </form>
-      <a href="/">Return to Task List</a>
+
+      <a href="/"><b>Return to Task List</b></a>
+
     </div>
+
   </body>
 </html>

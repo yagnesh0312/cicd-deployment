@@ -40,7 +40,7 @@
         text-align: -webkit-start;
         display: inline;
 
-        color: #7a00e6; /* Purple color */
+        /* color: #7a00e6; Purple color */
         /* margin-top: 20px; */
         color: darkorange;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -184,7 +184,7 @@
       form {
         /* text-align: -webkit-center; */
         display: flex;
-        width:  -webkit-fill-available;
+        width: -webkit-fill-available;
         margin: 20px auto;
         padding: 12px;
         align-items: center;
@@ -250,21 +250,11 @@
         align-items: flex-start;
       }
 
-      .logout-btn {
-        background: #d33232; /* Red color for logout */
-        color: #fff;
-        padding: 6px 16px;
-        border-radius: 8px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: background 0.3s ease, transform 0.2s ease;
-        margin: 10px;
-      }
-
       .logout-btn:hover {
         background: #a82828; /* Darker red on hover */
         transform: scale(1.05);
       }
+
       main {
         display: flex;
         flex-direction: row;
@@ -300,6 +290,13 @@
         text-align: center;
       }
 
+      nav hr {
+        width: 100%;
+        margin: 4px 0;
+        height: 2px;
+        background: salmon;
+      }
+
       nav ul {
         list-style: none;
         padding: 0;
@@ -330,13 +327,19 @@
         background: #d33232; /* Red color for logout */
         color: white;
         padding: 10px 20px;
+        gap:10px;
+        /* display: block; */
+        text-align: center;
+        margin-top: auto; /* Push logout button to the bottom */
+        background: #d33232; /* Red color for logout */
+        color: #fff;
+        display: flex;
+        align-items: center;
         border-radius: 8px;
         font-weight: 600;
         text-decoration: none;
         transition: background 0.3s ease, transform 0.2s ease;
-        display: block;
-        text-align: center;
-        margin-top: auto; /* Push logout button to the bottom */
+        margin-bottom: 10px;
       }
 
       .logout-btn:hover {
@@ -350,39 +353,45 @@
         width: -webkit-fill-available;
       }
 
-      #show-add-task-form:hover {
-        background: linear-gradient(45deg, #2575fc, #6a11cb); /* Reverse gradient */
-        transform: scale(1.05); /* Slightly enlarge the button */
+      .priority-indicator {
+        height: 16px;
+        width: 16px;
+        margin: 2px 2px;
+        border: 1px solid black;
+        border-radius: 100%;
       }
+
     </style>
+
   </head>
 
   <body>
-    <!-- Sidebar -->
     <main>
+
+      <!-- Sidebar -->
       <nav>
-        <h1 style="margin-top: 10px">{{ heading }}</h1>
-        <ul>
+        <h1 style="margin-top: 16px">{{ heading }}</h1>
+
+        <hr />
+
+        <ul style="margin-top: 4px;">
           <li>
             <button
               id="show-add-task-form"
               onclick="toggleAddTaskForm()"
               style="
-                background: linear-gradient(45deg, #6a11cb, #2575fc); /* Gradient background */
-                border: none;
                 color: white;
                 font-size: 18px;
                 font-weight: bold;
                 cursor: pointer;
-                padding: 12px 20px;
-                border-radius: 8px;
+                padding: 10px 20px;
                 width: 100%;
                 text-align: center;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
                 transition: background 0.3s ease, transform 0.2s ease;
               "
             >
-              + Add Task
+              Create new task
             </button>
           </li>
 
@@ -393,26 +402,35 @@
           <li><a href="/completed" class="{{ completed }}">Completed</a></li>
         </ul>
 
-        <a href="/logout" class="logout-btn">Logout</a>
+        <a href="/logout" class="logout-btn">
+          <span> Logout </span>
+          <img src="static/images/logout.svg" style="height: 24px; width: 24px" />
+        </a>
       </nav>
 
       <!-- Main Content -->
       <div class="main-content">
 
-        <form action="/search" method="GET"
-          style="width: --webkit-fill-available; margin-top: 10px">
-
-          <label for="refer" style="color: white; font-size: 14px">Search by:</label>
+        <!-- Search bar -->
+        <form
+          action="/search"
+          method="GET"
+          style="
+            justify-content: space-between;
+            gap: 30px;
+            width: --webkit-fill-available;
+            margin-top: 0px;
+          ">
 
           <select
             name="refer"
             id="refer"
             style="
               width: 100%;
-              padding: 5px;
-              margin-bottom: 10px;
+              padding: 10px;
               border-radius: 8px;
-              border: none;
+              /* border: none; */
+              border-width: 2px;
             "
             required
           >
@@ -425,13 +443,12 @@
           <input
             type="text"
             name="key"
-            placeholder="Search..."
+            placeholder="search..."
             style="
               width: 100%;
               padding: 10px;
               border-radius: 8px;
-              border: none;
-              margin-bottom: 10px;
+              border-width: 2px;
             "
             required
           />
@@ -439,7 +456,6 @@
           <button
             type="submit"
             style="
-              width: 100%;
               padding: 10px;
               background: #6495ed;
               color: white;
@@ -449,7 +465,7 @@
               cursor: pointer;
             "
           >
-            Search
+            <img src="static/images/search.svg" style="height: 24px; width: 24px" />
           </button>
         </form>
 
@@ -473,7 +489,7 @@
               style="
                 background-color: #fff;
                 border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 padding: 10px;
               "
             >
@@ -486,6 +502,8 @@
                   align-items: center;
                 "
               >
+
+                <!-- Task status and title -->
                 <div style="display: flex; align-items: center">
                   <a
                     href="./done?_id={{ task['_id'] }}"
@@ -500,6 +518,7 @@
                   <h2 style="margin: 0">{{ task["name"] }}</h2>
                 </div>
 
+                <!-- Edit/Delete Buttons -->
                 <div style="display: flex">
                   <a
                     href="./update?_id={{ task['_id'] }}"
@@ -507,7 +526,7 @@
                   >
                     <img
                       src="static/assets/edit.svg"
-                      style="height: 24px; width: 24px"
+                      style="height: 22px; width: 22px"
                     />
                   </a>
                   <a href="./remove?_id={{ task['_id'] }}">
@@ -517,6 +536,7 @@
                     />
                   </a>
                 </div>
+
               </div>
 
               <hr />
@@ -524,13 +544,21 @@
               <div class="card-body" style="text-align: left">
                 <div style="display: flex; justify-content: space-between">
                   <div>
-                    <p style="margin: 0; font-size: 12px; margin: 4px 0px;">{{ task["creation_date"] }}</p>
-                    <p style="margin: 0; overflow: auto">{{ task["desc"] }}</p>
+                    <p style="font-size: 12px; margin: 4px 0px">{{ task["creation_date"] }}</p>
+                    <p style="overflow: auto">{{ task["desc"] }}</p>
                   </div>
-                  <p style="margin: 0; font-size: 20px">[{{ task["priority"] }}]</p>
+
+                  <!-- Priority Indicator -->
+                  {% if task["priority"]|int <= 3 %}
+                    <div class="priority-indicator" style="background-color: red;"></div>
+                  {% elif task["priority"]|int <= 7 %}
+                    <div class="priority-indicator" style="background-color: yellow;"></div>
+                  {% else %}
+                    <div class="priority-indicator" style="background-color: greenyellow;"></div>
+                  {% endif %}
+
                 </div>
               </div>
-
             </div>
             {% endfor %}
           </div>
@@ -609,6 +637,7 @@
             </table>
           </form>
         </div>
+
       </div>
     </main>
 
@@ -635,8 +664,9 @@
 
     <footer>
       <p style="text-align: center">
-        &copy; 2025 To-Do App. All rights reserved.
+        &COPY; 2025 Task management. All rights reserved.
       </p>
     </footer>
+
   </body>
 </html>
