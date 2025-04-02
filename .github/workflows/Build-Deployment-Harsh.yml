@@ -1,4 +1,4 @@
-name: Docker Image Build and Deployment
+name: Docker Image Build and Deployment - Harsh
 
 on:
   push:
@@ -33,7 +33,6 @@ jobs:
         uses: actions/checkout@v4
       - name: Get Release Version
         run: |
-          echo ${GITHUB_REF#refs/*} >> $GITHUB_ENV
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           LATEST_VERSION_TAG=${{ env.RELEASE_VERSION }}
           echo "Latest tag is $LATEST_VERSION_TAG"
@@ -44,7 +43,13 @@ jobs:
             echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
             exit 1
           fi
+      - name: check pubsub Repository
+        run: |
+          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}"
+          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}"
+          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}"
 
+          
       - name: Test Docker Image Generated and Run Tests
         run: |
           docker image rm cicd-test || echo "No image to remove"
