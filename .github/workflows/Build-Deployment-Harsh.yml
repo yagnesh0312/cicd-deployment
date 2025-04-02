@@ -1,29 +1,32 @@
 name: Docker Image Build and Deployment
 
 on:
-  # push:
-  #   tags:
-  #       - 'v*.*.*'
+  push:
+    tags:
+        - 'v*.*.*'
 
   workflow_dispatch:
 
 env:
-  HARBOR_REGISTRY: yagnesh.com:30002
+  HARBOR_REGISTRY: harbor.harsh.com:30002
   HARBOR_IMAGE_NAME: inventyv/production
-  HARBOR_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  HARBOR_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  PUBSUB_TOPIC: ${{ secrets.PUBSUB_TOPIC }}
-  PUBSUB_CREDENTIALS: ${{ secrets.PUB_SUB_PUBLISHER }}
-  MONGO_CONN_STRING: ${{ secrets.MONGO_CONN_STRING }}
+  HARBOR_USERNAME: ${{ secrets.HARSH_DOCKER_USERNAME }}
+  HARBOR_PASSWORD: ${{ secrets.HARSH_DOCKER_PASSWORD }}
+
+  GCP_PROJECT_ID: ${{ secrets.HARSH_GCP_PROJECT_ID }}
+  PUBSUB_TOPIC: ${{ secrets.HARSH_PUBSUB_TOPIC }}
+  PUBSUB_CREDENTIALS: ${{ secrets.HARSH_PUBSUB_CRED }}
+
+  MONGO_CONN_STRING: ${{ secrets.HARSH_MONGO_CONN_STRING }}
   MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
   MONGO_COLLECTION_NAME: ${{ secrets.MONGO_COLLECTION_NAME }}
+
   PORT: ${{ secrets.PORT }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: harsh-runner
 
     steps:
       - name: Checkout Repository
