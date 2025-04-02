@@ -38,7 +38,7 @@ def test_login(client):
         "username": "testuser",
         "password": "password123"
     }, follow_redirects=True)
-    assert b"2025 To-Do App." in response.data
+    assert b"2025 Task management" in response.data
     assert b"Task Management" in response.data  # Ensure the redirected page renders correctly
 
     # Test login with incorrect credentials
@@ -75,7 +75,7 @@ def test_add_task(client):
         "name": "Test Task",
         "desc": "This is a test task.",
         "creation_date": "2025-03-28",
-        "priority": "High"
+        "priority": 9
     }, follow_redirects=True)
     assert b"Test Task" in response.data
 
@@ -95,8 +95,8 @@ def test_view_tasks(client):
     })
 
     # Add tasks
-    task_list.insert_one({"name": "Task 1", "username": "testuser", "done": False})
-    task_list.insert_one({"name": "Task 2", "username": "testuser", "done": True})
+    task_list.insert_one({"name": "Task 1", "username": "testuser", "done": False,"priority": 1})
+    task_list.insert_one({"name": "Task 2", "username": "testuser", "done": True,"priority": 1})
 
     # View all tasks
     response = client.get("/list")
@@ -113,7 +113,7 @@ def test_done_task(client):
     })
 
     # Add a task
-    task_id = task_list.insert_one({"name": "Task 1", "username": "testuser", "done": False}).inserted_id
+    task_id = task_list.insert_one({"name": "Task 1", "username": "testuser", "done": False,"priority":1}).inserted_id
 
     # Mark the task as done
     response = client.get(f"/done?_id={task_id}", follow_redirects=True)
@@ -156,7 +156,7 @@ def test_update_task(client):
         "name": "Task 1",
         "desc": "Old description",
         "creation_date": "2025-03-28",
-        "priority": "Low",
+        "priority": 1,
         "username": "testuser"
     }).inserted_id
 
@@ -166,11 +166,11 @@ def test_update_task(client):
         "name": "Updated Task",
         "desc": "Updated description",
         "creation_date": "2025-03-29",
-        "priority": "High"
+        "priority": 9
     }, follow_redirects=True)
 
     # Check if the task was updated
     task = task_list.find_one({"_id": ObjectId(task_id)})
     assert task["name"] == "Updated Task"
     assert task["desc"] == "Updated description"
-    assert task["priority"] == "High"
+    assert int(task["priority"]) == 9
