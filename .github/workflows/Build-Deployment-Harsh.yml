@@ -1,9 +1,9 @@
 name: Docker Image Build and Deployment - Harsh
 
 on:
-  # push:
-  #   tags:
-  #       - 'v*.*.*'
+  push:
+    tags:
+        - 'v*.*.*'
 
   workflow_dispatch:
 
@@ -45,11 +45,11 @@ jobs:
           fi
       - name: check pubsub Repository
         run: |
-          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}"
-          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}"
-          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}"
+          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> /x
+          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> /x
+          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> /x
 
-          
+
       - name: Test Docker Image Generated and Run Tests
         run: |
           docker image rm cicd-test || echo "No image to remove"
