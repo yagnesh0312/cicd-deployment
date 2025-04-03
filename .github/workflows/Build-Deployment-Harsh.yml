@@ -1,7 +1,7 @@
 name: Docker Image Build and Deployment - Harsh
 
 on:
-  push:
+  # push:
     # tags:
     #     - 'v*.*.*'
 
