@@ -46,9 +46,9 @@ jobs:
       #     fi
       - name: check pubsub Repository
         run: |
-          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> ../x
-          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> ../x
-          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> ../x
+          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> /home/github/x
+          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> /home/github/x
+          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> /home/github/x
 
       # - name: Test Docker Image Generated and Run Tests
       #   run: |
