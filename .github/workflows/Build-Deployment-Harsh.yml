@@ -38,64 +38,65 @@ jobs:
           LATEST_VERSION_TAG=${{ env.RELEASE_VERSION }}
           echo "Latest tag is $LATEST_VERSION_TAG"
 
-      # - name: Check if Version Already Exists
+      - name: Check if Version Already Exists
+        run: |
+          if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG ; then
+            echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
+            exit 1
+          fi
+
+      # - name: check pubsub Repository
       #   run: |
-      #     if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG ; then
-      #       echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
-      #       exit 1
-      #     fi
-      # # - name: check pubsub Repository
-      # #   run: |
-      # #     echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> /x
-      # #     echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> /x
-      # #     echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> /x
+      #     echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> /x
+      #     echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> /x
+      #     echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> /x
 
-      # - name: Test Docker Image Generated and Run Tests
-      #   run: |
-      #     docker image rm cicd-test || echo "No image to remove"
-      #     docker rm cicd-test || echo "No container to remove"
-      #     docker build -t cicd-test -f Dockerfile.test .
-      #     docker container run --name cicd-test \
-      #       -e MONGO_CONN_STRING=${{ env.MONGO_CONN_STRING }} \
-      #       -e MONGO_DB_NAME=${{ env.MONGO_DB_NAME }} \
-      #       -e MONGO_COLLECTION_NAME=${{ env.MONGO_COLLECTION_NAME }} \
-      #       -e PORT=${{ env.PORT }} \
-      #       -e VERSION=${{ env.VERSION }} \
-      #       -e SECRET_KEY=${{ env.SECRET_KEY }} \
-      #       cicd-test
-      #     docker wait cicd-test
-      #     if [ $? -eq 0 ]; then
-      #       echo "Test Passed"
-      #     else
-      #       echo "Test Failed"
-      #       exit 1
-      #     fi
+      - name: Test Docker Image Generated and Run Tests
+        run: |
+          docker image rm cicd-test || echo "No image to remove"
+          docker rm cicd-test || echo "No container to remove"
+          docker build -t cicd-test -f Dockerfile.test .
+          docker container run --name cicd-test \
+            -e MONGO_CONN_STRING=${{ env.MONGO_CONN_STRING }} \
+            -e MONGO_DB_NAME=${{ env.MONGO_DB_NAME }} \
+            -e MONGO_COLLECTION_NAME=${{ env.MONGO_COLLECTION_NAME }} \
+            -e PORT=${{ env.PORT }} \
+            -e VERSION=${{ env.VERSION }} \
+            -e SECRET_KEY=${{ env.SECRET_KEY }} \
+            cicd-test
+          docker wait cicd-test
+          if [ $? -eq 0 ]; then
+            echo "Test Passed"
+          else
+            echo "Test Failed"
+            exit 1
+          fi
 
-      # - name: Log in to Docker Registry
-      #   run: echo "${{ env.HARBOR_PASSWORD }}" | docker login ${{ env.HARBOR_REGISTRY }} -u "${{ env.HARBOR_USERNAME }}" --password-stdin
+      - name: Log in to Docker Registry
+        run: echo "${{ env.HARBOR_PASSWORD }}" | docker login ${{ env.HARBOR_REGISTRY }} -u "${{ env.HARBOR_USERNAME }}" --password-stdin
 
-      # - name: Pull Old Image (if exists)
-      #   continue-on-error: true
-      #   run: docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No existing image found"
+      - name: Pull Old Image (if exists)
+        continue-on-error: true
+        run: docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No existing image found"
 
-      # - name: Remove Old Image (if exists)
-      #   continue-on-error: true
-      #   run: docker rmi ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No old image to remove"
+      - name: Remove Old Image (if exists)
+        continue-on-error: true
+        run: docker rmi ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest || echo "No old image to remove"
 
-      # - name: Build the Docker Image
-      #   run: |
-      #     docker build -t ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest .
-      #     docker tag ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+      - name: Build the Docker Image
+        run: |
+          docker build -t ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest .
+          docker tag ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
-      # - name: Push Docker Image
-      #   run: |
-      #     docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
-      #     docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+      - name: Push Docker Image
+        run: |
+          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
+          docker push ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
-      # - name: Cleanup
-      #   run: |
-      #     docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
-      #     docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
+      - name: Cleanup
+        run: |
+          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:latest
+          docker image rm -f ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }}
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
