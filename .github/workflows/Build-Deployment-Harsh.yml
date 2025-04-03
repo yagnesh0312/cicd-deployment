@@ -26,7 +26,7 @@ env:
 
 jobs:
   build:
-    runs-on: harsh-runner
+    runs-on: yagnesh-runner
 
     steps:
       - name: Checkout Repository
