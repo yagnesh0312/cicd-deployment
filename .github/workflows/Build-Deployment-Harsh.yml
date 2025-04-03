@@ -2,8 +2,8 @@ name: Docker Image Build and Deployment - Harsh
 
 on:
   push:
-    # tags:
-    #     - 'v*.*.*'
+    tags:
+        - 'v*.*.*'
 
   workflow_dispatch:
 
