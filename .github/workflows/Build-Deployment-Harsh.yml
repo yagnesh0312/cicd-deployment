@@ -39,14 +39,11 @@ jobs:
           echo "Latest tag is ${{ env.RELEASE_VERSION }}"
 
       - name: Check if Version Already Exists
-          echo "Latest tag is $LATEST_VERSION_TAG"
-
-      # - name: Check if Version Already Exists
-      #   run: |
-      #     if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG ; then
-      #       echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
-      #       exit 1
-      #     fi
+        run: |
+          if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG ; then
+            echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
+            exit 1
+          fi
       - name: check pubsub Repository
         run: |
           if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:${{ env.RELEASE_VERSION }} ; then
