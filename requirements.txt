@@ -2,3 +2,4 @@ flask
 pymongo
 dotenv
 pytest
+prometheus-flask-exporter

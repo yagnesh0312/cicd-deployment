@@ -1,9 +1,9 @@
 name: Docker Image Build and Deployment - Harsh
 
 on:
-  push:
-    tags:
-        - 'v*.*.*'
+  # push:
+  #   tags:
+  #       - 'v*.*.*'
 
   workflow_dispatch:
 
@@ -141,7 +141,7 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: "${{ secrets.HARSH_PUBSUB_CRED }}"
+          credentials_json: "${{ env.PUBSUB_CREDENTIALS }}"
 
       - name: Publish a message to Google Cloud Pub/Sub
         uses: miraliumre/actions-pubsub@v1

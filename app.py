@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from bson import ObjectId    # For ObjectId to work
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash  # For password hashing
+from prometheus_flask_exporter import PrometheusMetrics  # Import PrometheusMetrics
 
 from dotenv import load_dotenv
 import os
@@ -13,10 +14,13 @@ MONGO_CONN_NAME = os.environ.get("MONGO_COLLECTION_NAME")
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")  # Secret key for session management
-port = os.environ.get("PORT")
+port = int(os.environ.get("PORT", 3000))  # Default to port 3000 if not set
 
 title = "Task Management Application"
 heading = "Task Management"
+
+# Initialize Prometheus metrics
+metrics = PrometheusMetrics(app, path="/metrics",defaults_prefix="task_management_app")
 
 client = MongoClient(f"{MONGO_URL}/{MONGO_DB}")  # host uri
 db = client[MONGO_DB]  # Select the database
@@ -29,6 +33,9 @@ def redirect_url():
         request.referrer or \
         url_for('lists')  # Use 'lists' as the fallback route
 
+# @app.route("/metrics")
+# def metrics_route():
+#     return "Custom metrics route"
 
 # Login Page
 @app.route("/login", methods=["GET", "POST"])
@@ -91,11 +98,16 @@ def login_required(func):
     return wrapper
 
 
+def track_task_operations():
+    pass
+
+
 # Display all Tasks
 @app.route("/")
 @app.route("/list", methods=["GET", "POST"])
 @login_required
 def lists():
+    track_task_operations()  # Track task operations
     username = session["username"]  # Get the logged-in user's username
 
     if request.method == "POST":
@@ -297,9 +309,6 @@ def test_login(client):
     }, follow_redirects=True)
     assert b"Invalid username or password!" in response.data
 
-
+print(app.url_map)
 if __name__ == '__main__':
-    if port is None:
-        app.run(host='0.0.0.0', port=5000, debug=True)
-    else:
-        app.run(host='0.0.0.0', port=int(port), debug=True)
+    app.run(host="0.0.0.0", port=port)
