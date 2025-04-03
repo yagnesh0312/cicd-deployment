@@ -2,8 +2,8 @@ name: Docker Image Build and Deployment - Harsh
 
 on:
   push:
-    tags:
-        - 'v*.*.*'
+    # tags:
+    #     - 'v*.*.*'
 
   workflow_dispatch:
 
@@ -37,18 +37,18 @@ jobs:
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           LATEST_VERSION_TAG=${{ env.RELEASE_VERSION }}
           echo "Latest tag is $LATEST_VERSION_TAG"
-
+      
       # - name: Check if Version Already Exists
       #   run: |
       #     if command docker pull ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_IMAGE_NAME }}:$LATEST_VERSION_TAG ; then
       #       echo "Error: Image version ${{ env.RELEASE_VERSION }} already exists in the registry."
       #       exit 1
       #     fi
-      # # - name: check pubsub Repository
-      # #   run: |
-      # #     echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> /x
-      # #     echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> /x
-      # #     echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> /x
+      - name: check pubsub Repository
+        run: |
+          echo "GCP_PROJECT_ID=${{ secrets.HARSH_GCP_PROJECT_ID }}" >> ../x
+          echo "PUBSUB_TOPIC=${{ secrets.HARSH_PUBSUB_TOPIC }}" >> ../x
+          echo "PUBSUB_CREDENTIALS=${{ secrets.HARSH_PUBSUB_CRED }}" >> ../x
 
       # - name: Test Docker Image Generated and Run Tests
       #   run: |
