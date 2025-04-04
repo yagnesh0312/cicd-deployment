@@ -3,7 +3,7 @@ name: Docker Image Build and Deployment
 on:
   push:
     tags:
-        - 'yv*.*.*'
+        - 'v1.*.*'
 
   workflow_dispatch:
 

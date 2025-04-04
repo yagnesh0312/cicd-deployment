@@ -3,7 +3,7 @@ name: Docker Image Build and Deployment - Harsh
 on:
   push:
     tags:
-        - 'hv*.*.*'
+        - 'v0.*.*'
 
   workflow_dispatch:
 
