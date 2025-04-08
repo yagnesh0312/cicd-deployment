@@ -4,6 +4,7 @@
     <title>{{ title }}</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='assets/style.css')}}" />
+    <link rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon" />
 
     <style>
       /* General Styles */
@@ -359,7 +360,7 @@
 
       <!-- Sidebar -->
       <nav>
-        <h1 style="margin-top: 16px">{{ heading }}</h1>
+        <h1 style="margin-top: 16px; color: #7a00e6;">{{ heading }}</h1>
 
         <hr />
 
@@ -393,7 +394,7 @@
 
         <a href="/logout" class="logout-btn">
           <span> Logout </span>
-          <img src="static/images/logout.svg" style="height: 24px; width: 24px" />
+          <img src="static/assets/logout.svg" style="height: 24px; width: 24px" />
         </a>
       </nav>
 
@@ -454,7 +455,7 @@
               cursor: pointer;
             "
           >
-            <img src="static/images/search.svg" style="height: 24px; width: 24px" />
+            <img src="static/assets/search.svg" style="height: 24px; width: 24px" />
           </button>
 
         </form>
@@ -500,7 +501,7 @@
                     style="margin-right: 10px"
                   >
                     <img
-                      src="static/images/{{task['done']}}.svg"
+                      src="static/assets/{{task['done']}}.svg"
                       style="height: 28px; width: 28px"
                     />
                   </a>
