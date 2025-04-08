@@ -295,8 +295,9 @@
             "editorMode": "code",
             "exemplar": true,
             "expr": "task_management_app_http_request_duration_seconds_sum / task_management_app_http_request_duration_seconds_count",
+            "instant": true,
             "interval": "",
-            "legendFormat": "{{method}} {{endpoint}}",
+            "legendFormat": "{{path}} {{method}}",
             "range": true,
             "refId": "A"
           }
@@ -759,7 +760,7 @@
       }
     ],
     "preload": false,
-    "refresh": "5s",
+    "refresh": "1s",
     "schemaVersion": 41,
     "tags": [],
     "templating": {
@@ -796,5 +797,5 @@
     "timezone": "",
     "title": "Flask Monitoring",
     "uid": "flask-monitoring",
-    "version": 9
+    "version": 2
   }
