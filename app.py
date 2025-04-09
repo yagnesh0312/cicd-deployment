@@ -290,6 +290,15 @@ def search():
     )
 
 
+import time
+import random # Import time module for delay
+
+@app.route("/slow")
+def slow_response():
+    time.sleep(random.randint(1,6))  # Simulate a delay of 10 seconds
+    return "This is a slow response!", 200
+
+
 def test_login(client):
     # Add a test user to the database
     users.insert_one({"username": "testuser", "password": "password123"})
