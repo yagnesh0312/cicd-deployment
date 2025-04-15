@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="690px" preserveAspectRatio="none" style="width:609px;height:690px;background:#FFFFFF;" version="1.1" viewBox="0 0 609 690" width="609px" zoomAndPan="magnify"><defs/><g><!--MD5=[d0083cf0b2d9f17e335f85bf9624e57e]
+cluster User--><g id="cluster_User"><polygon fill="none" points="229,16,239,6,393,6,393,98,383,108,229,108,229,16" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="383" x2="393" y1="16" y2="6"/><line style="stroke:#181818;stroke-width:1.0;" x1="229" x2="383" y1="16" y2="16"/><line style="stroke:#181818;stroke-width:1.0;" x1="383" x2="383" y1="16" y2="108"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="37" x="288.5" y="31.9951">User</text></g><!--MD5=[48d25f4f255ff9ed3328dd21a0d169f6]
+cluster Frontend (UI)--><g id="cluster_Frontend (UI)"><path d="M219.5,132 L324.5,132 A3.75,3.75 0 0 1 327,134.5 L334,154.2969 L402.5,154.2969 A2.5,2.5 0 0 1 405,156.7969 L405,332.5 A2.5,2.5 0 0 1 402.5,335 L219.5,335 A2.5,2.5 0 0 1 217,332.5 L217,134.5 A2.5,2.5 0 0 1 219.5,132 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="217" x2="334" y1="154.2969" y2="154.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="104" x="221" y="146.9951">Frontend (UI)</text></g><!--MD5=[4c0c151f6e6d8db55a3cbd10966d5ee6]
+cluster Backend (Flask App)--><g id="cluster_Backend (Flask App)"><path d="M8.5,359 L169.5,359 A3.75,3.75 0 0 1 172,361.5 L179,381.2969 L599.5,381.2969 A2.5,2.5 0 0 1 602,383.7969 L602,559.5 A2.5,2.5 0 0 1 599.5,562 L8.5,562 A2.5,2.5 0 0 1 6,559.5 L6,361.5 A2.5,2.5 0 0 1 8.5,359 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="179" y1="381.2969" y2="381.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="160" x="10" y="373.9951">Backend (Flask App)</text></g><!--MD5=[6e4cf48063f24b1c5b31d2fd97b806d7]
+cluster Database 'project' (MongoDB)--><g id="cluster_Database 'project' (MongoDB)"><path d="M219.5,586 L453.5,586 A3.75,3.75 0 0 1 456,588.5 L463,608.2969 L587.5,608.2969 A2.5,2.5 0 0 1 590,610.7969 L590,680.5 A2.5,2.5 0 0 1 587.5,683 L219.5,683 A2.5,2.5 0 0 1 217,680.5 L217,588.5 A2.5,2.5 0 0 1 219.5,586 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="217" x2="463" y1="608.2969" y2="608.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="233" x="221" y="600.9951">Database 'project' (MongoDB)</text></g><!--MD5=[0605153d46e66a1141daee4f82280783]
+entity Web Browser--><g id="elem_Web Browser"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="132" x="245" y="46"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="357" y="51"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="355" y="53"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="355" y="57"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="260" y="78.9951">Web Browser</text></g><!--MD5=[4b3b2ae43d23c7d7c3e0bfda9f3f6323]
+entity HTML Templates--><g id="elem_HTML Templates"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="233.5" y="167"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="368.5" y="172"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="366.5" y="174"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="366.5" y="178"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="248.5" y="199.9951">HTML Templates</text></g><!--MD5=[07de53520b288124eb9e963a8401b6ae]
+entity Jinja2 Templating--><g id="elem_Jinja2 Templating"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="156" x="233" y="273"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="369" y="278"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="367" y="280"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="367" y="284"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="248" y="305.9951">Jinja2 Templating</text></g><!--MD5=[1b56209a00fbfe5de3581e3ee4db46d8]
+entity Flask Framework--><g id="elem_Flask Framework"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="233.5" y="394"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="368.5" y="399"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="366.5" y="401"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="366.5" y="405"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="248.5" y="426.9951">Flask Framework</text></g><!--MD5=[256bfad3b3453fd0b5edb08a48790e3e]
+entity Session Management--><g id="elem_Session Management"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="190" x="22" y="500"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="192" y="505"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="190" y="507"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="190" y="511"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="37" y="532.9951">Session Management</text></g><!--MD5=[eb318607444d89aca1bdd7dad4e1f6b5]
+entity Task Routes--><g id="elem_Task Routes"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="127" x="247.5" y="500"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="354.5" y="505"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="352.5" y="507"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="352.5" y="511"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="262.5" y="532.9951">Task Routes</text></g><!--MD5=[6c644c6ab63e822c8fc3ec5a707deba4]
+entity User Authentication--><g id="elem_User Authentication"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="176" x="410" y="500"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="566" y="505"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="564" y="507"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="564" y="511"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="425" y="532.9951">User Authentication</text></g><!--MD5=[aa09337acfd6b976b609130f3ddc0450]
+entity Users Collection--><g id="elem_Users Collection"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="152" x="422" y="621"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="554" y="626"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="552" y="628"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="552" y="632"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="437" y="653.9951">Users Collection</text></g><!--MD5=[c9d5546e10dbdbce0fdac3fb18e52540]
+entity Tasks Collection--><g id="elem_Tasks Collection"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153" x="233.5" y="621"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="366.5" y="626"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="364.5" y="628"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="364.5" y="632"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="248.5" y="653.9951">Tasks Collection</text></g><!--MD5=[0ce38c0488af4b4c26fc3bba122ef785]
+link Web Browser to HTML Templates--><g id="link_Web Browser_HTML Templates"><path d="M311,92.04 C311,92.04 311,161.63 311,161.63 " fill="none" id="Web Browser-to-HTML Templates" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311,166.63,315,157.63,311,161.63,307,157.63,311,166.63" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="69" x="241" y="122.9069">Renders UI</text></g><!--MD5=[c1f1e81d49c0e95e855bab5037e5e355]
+link HTML Templates to Jinja2 Templating--><g id="link_HTML Templates_Jinja2 Templating"><path d="M311,213 C311,213 311,267.68 311,267.68 " fill="none" id="HTML Templates-to-Jinja2 Templating" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311,272.68,315,263.68,311,267.68,307,263.68,311,272.68" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="111" x="199" y="236.4069">Dynamic Content</text></g><!--MD5=[6c7e7d6827b196903f65ea352b570ae7]
+link Jinja2 Templating to Flask Framework--><g id="link_Jinja2 Templating_Flask Framework"><path d="M311,319.04 C311,319.04 311,388.63 311,388.63 " fill="none" id="Jinja2 Templating-to-Flask Framework" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311,393.63,315,384.63,311,388.63,307,384.63,311,393.63" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="115" x="195" y="349.9069">Handles Requests</text></g><!--MD5=[f030e35162ad33cfedf7bba923647306]
+link Flask Framework to Session Management--><g id="link_Flask Framework_Session Management"><path d="M240.5,440 C240.5,471.18 240.5,523 240.5,523 C240.5,523 217.17,523 217.17,523 " fill="none" id="Flask Framework-to-Session Management" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="212.17,523,221.17,527,217.17,523,221.17,519,212.17,523" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="153" x="86.5" y="489.2369">Manages User Sessions</text></g><!--MD5=[927fa41032fdec1bb156dc3ce90d413f]
+link Flask Framework to Task Routes--><g id="link_Flask Framework_Task Routes"><path d="M311,440 C311,440 311,494.68 311,494.68 " fill="none" id="Flask Framework-to-Task Routes" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311,499.68,315,490.68,311,494.68,307,490.68,311,499.68" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="159" x="151" y="463.4069">Handles Task Operations</text></g><!--MD5=[f160f72eb671ef5b4aaa3f841a5e7e92]
+link Flask Framework to User Authentication--><g id="link_Flask Framework_User Authentication"><path d="M380.5,440 C380.5,471.18 380.5,523 380.5,523 C380.5,523 404.85,523 404.85,523 " fill="none" id="Flask Framework-to-User Authentication" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="409.85,523,400.85,519,404.85,523,400.85,527,409.85,523" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144" x="381.5" y="489.7369">Manages Login/Signup</text></g><!--MD5=[34d3973014ccc0b84e00486e913c900a]
+link User Authentication to Users Collection--><g id="link_User Authentication_Users Collection"><path d="M498,546.04 C498,546.04 498,615.63 498,615.63 " fill="none" id="User Authentication-to-Users Collection" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="498,620.63,502,611.63,498,615.63,494,611.63,498,620.63" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123" x="374" y="576.9069">Verifies Credentials</text></g><!--MD5=[33d8f514b569e6be207c50f4502e09d6]
+link Task Routes to Tasks Collection--><g id="link_Task Routes_Tasks Collection"><path d="M311,546.04 C311,546.04 311,615.63 311,615.63 " fill="none" id="Task Routes-to-Tasks Collection" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="311,620.63,315,611.63,311,615.63,307,611.63,311,620.63" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="171" x="139" y="576.9069">CRUD Operations on Tasks</text></g><!--MD5=[0f95ec80f6602fb2b566754ca9be4855]
+@startuml
+skinparam linetype ortho
+
+node "User" {
+  [Web Browser]
+}
+
+package "Frontend (UI)" {
+  [HTML Templates]
+  [Jinja2 Templating]
+}
+
+package "Backend (Flask App)" {
+  [Flask Framework]
+  [Session Management]
+  [Task Routes]
+  [User Authentication]
+}
+
+package "Database 'project' (MongoDB)" {
+  [Users Collection]
+  [Tasks Collection]
+}
+
+' Relationships
+[Web Browser] - -> [HTML Templates] : Renders UI
+[HTML Templates] - -> [Jinja2 Templating] : Dynamic Content
+[Jinja2 Templating] - -> [Flask Framework] : Handles Requests
+[Flask Framework] - -> [Session Management] : Manages User Sessions
+[Flask Framework] - -> [Task Routes] : Handles Task Operations
+[Flask Framework] - -> [User Authentication] : Manages Login/Signup
+
+[User Authentication] - -> [Users Collection] : Verifies Credentials
+[Task Routes] - -> [Tasks Collection] : CRUD Operations on Tasks
+@enduml
+
+@startuml
+skinparam linetype ortho
+
+node "User" {
+  [Web Browser]
+}
+
+package "Frontend (UI)" {
+  [HTML Templates]
+  [Jinja2 Templating]
+}
+
+package "Backend (Flask App)" {
+  [Flask Framework]
+  [Session Management]
+  [Task Routes]
+  [User Authentication]
+}
+
+package "Database 'project' (MongoDB)" {
+  [Users Collection]
+  [Tasks Collection]
+}
+
+[Web Browser] - -> [HTML Templates] : Renders UI
+[HTML Templates] - -> [Jinja2 Templating] : Dynamic Content
+[Jinja2 Templating] - -> [Flask Framework] : Handles Requests
+[Flask Framework] - -> [Session Management] : Manages User Sessions
+[Flask Framework] - -> [Task Routes] : Handles Task Operations
+[Flask Framework] - -> [User Authentication] : Manages Login/Signup
+
+[User Authentication] - -> [Users Collection] : Verifies Credentials
+[Task Routes] - -> [Tasks Collection] : CRUD Operations on Tasks
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

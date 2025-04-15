@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="871.875px" preserveAspectRatio="none" style="width:687px;height:871px;background:#FFFFFF;" version="1.1" viewBox="0 0 687 871" width="687.5px" zoomAndPan="magnify"><defs><filter height="300%" id="ffvq01f2du9sy" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="3.125"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="6.25" dy="6.25" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[dfcbb0fc0c60b39529a2a0b58a506b92]
+cluster Flask Backend Application--><g id="cluster_Flask Backend Application"><path d="M144.5313,363.2813 L464.8438,363.2813 A5.8594,5.8594 0 0 1 468.75,367.1875 L479.6875,398.1201 L480.4688,398.1201 A3.9063,3.9063 0 0 1 484.375,402.0264 L484.375,854.6875 A3.9063,3.9063 0 0 1 480.4688,858.5938 L144.5313,858.5938 A3.9063,3.9063 0 0 1 140.625,854.6875 L140.625,367.1875 A3.9063,3.9063 0 0 1 144.5313,363.2813 " fill="none" filter="url(#ffvq01f2du9sy)" style="stroke:#000000;stroke-width:2.34375;"/><line style="stroke:#000000;stroke-width:2.34375;" x1="140.625" x2="479.6875" y1="398.1201" y2="398.1201"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="318.75" x="146.875" y="386.7111">Flask Backend Application</text></g><!--MD5=[7a43269fac721b1ccfb3b5f042acc3e7]
+entity Routes--><g id="elem_Routes"><rect fill="#E3F2FD" filter="url(#ffvq01f2du9sy)" height="72.3389" rx="15.625" ry="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="278.125" x="176.5625" y="417.9688"/><rect fill="#E3F2FD" height="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="23.4375" x="423.4375" y="425.7813"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="420.3125" y="428.9063"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="420.3125" y="435.1563"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="215.625" x="200" y="469.5236">Routes / Controllers</text></g><!--MD5=[37543c6189ad49c0288bd1868c9070d8]
+entity Logic--><g id="elem_Logic"><rect fill="#E3F2FD" filter="url(#ffvq01f2du9sy)" height="72.3389" rx="15.625" ry="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="225" x="203.125" y="583.5938"/><rect fill="#E3F2FD" height="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="23.4375" x="396.875" y="591.4063"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="393.75" y="594.5313"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="393.75" y="600.7813"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="162.5" x="226.5625" y="635.1486">Business Logic</text></g><!--MD5=[39222abbbfd087a4fdab60e627dc976f]
+entity Auth--><g id="elem_Auth"><rect fill="#E3F2FD" filter="url(#ffvq01f2du9sy)" height="72.3389" rx="15.625" ry="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="281.25" x="175" y="761.7188"/><rect fill="#E3F2FD" height="15.625" style="stroke:#1976D2;stroke-width:0.78125;" width="23.4375" x="425" y="769.5313"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="421.875" y="772.6563"/><rect fill="#E3F2FD" height="3.125" style="stroke:#1976D2;stroke-width:0.78125;" width="6.25" x="421.875" y="778.9063"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="218.75" x="198.4375" y="813.2736">Authentication Layer</text></g><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><g id="elem_User"><ellipse cx="187.5" cy="21.875" fill="#00008B" filter="url(#ffvq01f2du9sy)" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.78125;"/><path d="M187.5,34.375 L187.5,76.5625 M167.1875,46.875 L207.8125,46.875 M187.5,76.5625 L167.1875,100 M187.5,76.5625 L207.8125,100 " fill="none" filter="url(#ffvq01f2du9sy)" style="stroke:#181818;stroke-width:0.78125;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="50" x="162.5" y="127.3361">User</text></g><!--MD5=[e9dede37b31fdda9664526f66258b036]
+entity Browser--><g id="elem_Browser"><path d="M105.1593,240.2268 C110.9286,227.8308 119.9625,228.235 127.3144,238.6925 C134.0053,228.4724 140.3009,230.2726 146.9357,238.7513 C152.5287,226.6371 162.0001,225.7077 169.0178,237.4316 C176.3418,228.4838 183.0692,228.9099 188.8505,239.0358 C192.9866,227.6411 202.3683,228.8748 208.9138,236.4935 C217.2059,228.2116 225.5971,228.2882 230.4209,240.1893 C237.6887,230.4956 244.2102,228.608 252.1652,239.4622 C256.8787,229.5935 266.4564,229.9134 272.1127,238.4398 C283.4375,243.4324 284.254,249.3354 275.5582,257.8769 C284.842,261.7144 288.5373,269.9251 279.7372,277.5952 C285.7623,283.8366 286.3775,288.9225 277.5592,293.0755 C284.4864,300.5035 284.0312,311.273 271.9852,313.531 C267.5992,324.9031 257.1047,326.1788 250.1429,316.1614 C243.2133,325.3317 236.6099,326.6889 229.7187,316.1217 C225.4941,327.4807 215.453,327.8676 208.7003,318.712 C204.3986,328.9842 198.1065,329.3747 190.0218,322.9419 C183.9088,330.6211 173.7986,331.0968 169.5427,320.8236 C161.9965,329.4318 154.436,328.9317 148.7879,318.7293 C142.6051,327.8916 132.6772,327.2844 128.578,316.6069 C119.7281,327.0721 111.9771,325.9182 105.9293,313.797 C96.5088,310.269 94.1079,304.297 100.1556,295.8052 C90.5584,291.0159 89.5665,284.6162 96.7112,276.7937 C89.5891,268.7791 92.1194,261.5889 101.4004,257.5767 C95.6958,250.3177 96.9478,244.4709 105.1593,240.2268 " fill="#FFECB3" filter="url(#ffvq01f2du9sy)" style="stroke:#FF9800;stroke-width:0.78125;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="143.75" x="115.625" y="269.5236">Web Browser</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="76.5625" x="149.2188" y="294.9875">(Client)</text></g><!--MD5=[f6181eb7291fdfcdc70f8bd8cb7742a2]
+entity Mongo--><g id="elem_Mongo"><path d="M510.9375,764.8438 C510.9375,749.2188 585.9375,749.2188 585.9375,749.2188 C585.9375,749.2188 660.9375,749.2188 660.9375,764.8438 L660.9375,829.834 C660.9375,845.459 585.9375,845.459 585.9375,845.459 C585.9375,845.459 510.9375,845.459 510.9375,829.834 L510.9375,764.8438 " fill="#FFFFFF" filter="url(#ffvq01f2du9sy)" style="stroke:#388E3C;stroke-width:0.78125;"/><path d="M510.9375,764.8438 C510.9375,780.4688 585.9375,780.4688 585.9375,780.4688 C585.9375,780.4688 660.9375,780.4688 660.9375,764.8438 " fill="none" style="stroke:#388E3C;stroke-width:0.78125;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="107.8125" x="532.0313" y="807.0236">MongoDB</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="118.75" x="526.5625" y="832.4875">(Database)</text></g><!--MD5=[e4691f12f5fa5579288963399b8c83c6]
+entity Prometheus--><g id="elem_Prometheus"><rect fill="#FFFDE7" filter="url(#ffvq01f2du9sy)" height="82.1777" rx="11.7188" ry="11.7188" style="stroke:#444444;stroke-width:0.78125;" width="214.0625" x="338.2813" y="233.5938"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="132.8125" x="378.9063" y="269.5236">Prometheus</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="182.8125" x="353.9063" y="294.9875">(Monitoring Tool)</text></g><!--MD5=[ec4c93e45963a154c97e3947d19a9663]
+link User to Browser--><g id="link_User_Browser"><path d="M187.5,132.2813 C187.5,132.2813 187.5,217.7656 187.5,217.7656 " fill="none" id="User-to-Browser" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="187.5,225.5781,193.75,211.5156,187.5,217.7656,181.25,211.5156,187.5,225.5781" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="148.4375" x="37.5" y="168.8701">Interacts via UI</text></g><!--MD5=[4cdaa50335d64548dc3363b790759a4b]
+link Browser to Routes--><g id="link_Browser_Routes"><path d="M229.6875,324.3594 C229.6875,324.3594 229.6875,409.9375 229.6875,409.9375 " fill="none" id="Browser-to-Routes" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="229.6875,417.75,235.9375,403.6875,229.6875,409.9375,223.4375,403.6875,229.6875,417.75" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="217.1875" x="10.9375" y="361.0108">Sends HTTP Requests</text></g><!--MD5=[79fdd23912497ffb3e4e4acf70f22357]
+link Routes to Logic--><g id="link_Routes_Logic"><path d="M315.625,489.8438 C315.625,489.8438 315.625,575.2813 315.625,575.2813 " fill="none" id="Routes-to-Logic" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="315.625,583.0938,321.875,569.0313,315.625,575.2813,309.375,569.0313,315.625,583.0938" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="175" x="139.0625" y="526.417">Delegate to Logic</text></g><!--MD5=[35afdec4cce36f8e6fada7091cf0ce78]
+link Logic to Auth--><g id="link_Logic_Auth"><path d="M315.625,655.5781 C315.625,655.5781 315.625,753.8438 315.625,753.8438 " fill="none" id="Logic-to-Auth" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="315.625,761.6563,321.875,747.5938,315.625,753.8438,309.375,747.5938,315.625,761.6563" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="165.625" x="148.4375" y="698.5733">Validate Session</text></g><!--MD5=[5abd3d69b13da84dfeae921f3d948673]
+link Logic to Mongo--><g id="link_Logic_Mongo"><path d="M428.6875,619.5313 C480.9531,619.5313 531.6406,619.5313 531.6406,619.5313 C531.6406,619.5313 531.6406,741.1719 531.6406,741.1719 " fill="none" id="Logic-to-Mongo" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="531.6406,748.9844,537.8906,734.9219,531.6406,741.1719,525.3906,734.9219,531.6406,748.9844" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="125" x="533.2031" y="622.7295">Access Data</text></g><!--MD5=[72780ceba7f4185e339a86f4eae49595]
+link Prometheus to Routes--><g id="link_Prometheus_Routes"><path d="M377.0781,316.5 C377.0781,316.5 377.0781,409.6719 377.0781,409.6719 " fill="none" id="Prometheus-to-Routes" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="377.0781,417.4844,383.3281,403.4219,377.0781,409.6719,370.8281,403.4219,377.0781,417.4844" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="157.8125" x="378.6406" y="356.9326">Scrape /metrics</text></g><!--MD5=[eeb2734e40d019ce218ffa1307fee3a4]
+link Routes to Prometheus--><g id="link_Routes_Prometheus"><path d="M415.8906,417.7031 C415.8906,417.7031 415.8906,324.6094 415.8906,324.6094 " fill="none" id="Routes-to-Prometheus" style="stroke:#181818;stroke-width:1.5625;"/><polygon fill="#181818" points="415.8906,316.7969,409.6406,330.8594,415.8906,324.6094,422.1406,330.8594,415.8906,316.7969" style="stroke:#181818;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="150" x="417.4531" y="391.5733">Expose Metrics</text></g><!--MD5=[2808455eeacdbfb793d97562bfe93123]
+@startuml
+' Layout and styling
+skinparam defaultTextAlignment center
+skinparam shadowing true
+skinparam linetype ortho
+skinparam dpi 150
+skinparam rectangle {
+    BackgroundColor #FAFAFA
+    BorderColor #444444
+    RoundCorner 15
+}
+skinparam database {
+    BackgroundColor rgb(151, 255, 160)
+    BorderColor #388E3C
+    RoundCorner 20
+}
+skinparam cloud {
+    BackgroundColor #FFF3E0
+    BorderColor #FF9800
+    RoundCorner 20
+}
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    RoundCorner 20
+}
+
+' Set layout left to right for clarity
+
+actor User #darkblue
+
+cloud "Web Browser\n(Client)" as Browser #FFECB3
+
+package "Flask Backend Application" {
+    component Routes as "Routes / Controllers"
+    component Logic as "Business Logic"
+    component Auth as "Authentication Layer"
+}
+
+database "MongoDB\n(Database)" as Mongo
+rectangle "Prometheus\n(Monitoring Tool)" as Prometheus #FFFDE7
+
+' Connections
+User - -> Browser : Interacts via UI
+Browser - -> Routes : Sends HTTP Requests
+
+Routes - -> Logic : Delegate to Logic
+Logic - -> Auth : Validate Session
+Logic - -> Mongo : Access Data
+
+Prometheus - -> Routes : Scrape /metrics
+Routes - -> Prometheus : Expose Metrics
+@enduml
+
+@startuml
+skinparam defaultTextAlignment center
+skinparam shadowing true
+skinparam linetype ortho
+skinparam dpi 150
+skinparam rectangle {
+    BackgroundColor #FAFAFA
+    BorderColor #444444
+    RoundCorner 15
+}
+skinparam database {
+    BackgroundColor rgb(151, 255, 160)
+    BorderColor #388E3C
+    RoundCorner 20
+}
+skinparam cloud {
+    BackgroundColor #FFF3E0
+    BorderColor #FF9800
+    RoundCorner 20
+}
+skinparam component {
+    BackgroundColor #E3F2FD
+    BorderColor #1976D2
+    RoundCorner 20
+}
+
+
+actor User #darkblue
+
+cloud "Web Browser\n(Client)" as Browser #FFECB3
+
+package "Flask Backend Application" {
+    component Routes as "Routes / Controllers"
+    component Logic as "Business Logic"
+    component Auth as "Authentication Layer"
+}
+
+database "MongoDB\n(Database)" as Mongo
+rectangle "Prometheus\n(Monitoring Tool)" as Prometheus #FFFDE7
+
+User - -> Browser : Interacts via UI
+Browser - -> Routes : Sends HTTP Requests
+
+Routes - -> Logic : Delegate to Logic
+Logic - -> Auth : Validate Session
+Logic - -> Mongo : Access Data
+
+Prometheus - -> Routes : Scrape /metrics
+Routes - -> Prometheus : Expose Metrics
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

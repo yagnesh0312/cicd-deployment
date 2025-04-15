@@ -1,0 +1,28 @@
+@startuml
+title Add Task Sequence Diagram
+
+actor User
+participant "Flask App" as Flask
+participant "MongoDB" as Database
+participant "Prometheus" as Prometheus
+
+User -> Flask: POST /list (Task Details)
+activate Flask
+
+Flask -> Flask: Validate User Session
+alt User Logged In
+    Flask -> Database: Insert Task (name, desc, date, priority, username)
+    activate Database
+    Database --> Flask: Task Inserted
+    deactivate Database
+
+    Flask -> Prometheus: increment task_management_app_http_request_total
+    Prometheus --> Prometheus: Update Metrics
+
+    Flask -> User: Redirect to /list
+else User Not Logged In
+    Flask -> User: Redirect to /login
+end
+deactivate Flask
+
+@enduml

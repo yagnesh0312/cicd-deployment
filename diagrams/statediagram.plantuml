@@ -1,0 +1,31 @@
+@startuml
+title Task Management Application - State Diagram
+
+[*] --> Login : Access Application
+
+state Login {
+    [*] --> PromptLogin
+    PromptLogin --> Dashboard : Successful Login
+    PromptLogin --> PromptLogin : Failed Login
+}
+
+state Dashboard {
+    [*] --> ViewTasks
+    ViewTasks --> AddTask : Add Task
+    AddTask --> ViewTasks : Task Added
+
+    ViewTasks --> UpdateTask : Update Task
+    UpdateTask --> ViewTasks : Task Updated
+
+    ViewTasks --> DeleteTask : Delete Task
+    DeleteTask --> ViewTasks : Task Deleted
+
+    ViewTasks --> SearchResults : Search Task
+    SearchResults --> ViewTasks : Back to Dashboard
+}
+
+Login --> Dashboard
+Dashboard --> Logout : User Logs Out
+Logout --> Login : Redirect to Login Page
+
+@enduml

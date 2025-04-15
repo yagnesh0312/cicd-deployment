@@ -1,0 +1,56 @@
+@startuml
+title Task Management Application - Activity Diagram
+
+start
+
+:User accesses the application;
+if (User logged in?) then (Yes)
+    fork
+        :Fetch tasks from MongoDB;
+    fork again
+        :Render tasks in the UI;
+    end fork
+else (No)
+    :Redirect to Login Page (/login);
+    stop
+endif
+
+:User performs an action;
+switch (Action Type)
+case (Add Task)
+    :User submits task details (/create);
+    :Validate input;
+    :Insert task into MongoDB;
+    :Increment Prometheus metric (task_operations_total{operation="create"});
+    :Redirect to Dashboard (/list);
+case (Update Task)
+    :User submits updated task details (/updatetask);
+    :Validate input;
+    :Update task in MongoDB;
+    :Increment Prometheus metric (task_operations_total{operation="update"});
+    :Redirect to Dashboard (/list);
+case (Delete Task)
+    :User requests task deletion (/remove);
+    :Validate task ownership;
+    :Delete task from MongoDB;
+    :Increment Prometheus metric (task_operations_total{operation="delete"});
+    :Redirect to Dashboard (/list);
+case (Search Task)
+    :User submits search query (/search);
+    fork
+        :Query MongoDB with filters;
+    fork again
+        :Render search results in the UI;
+    end fork
+case (Mark Task as Done/Undone)
+    :User toggles task status (/done);
+    :Update task status in MongoDB;
+    :Redirect to Dashboard (/list);
+case (Logout)
+    :Clear user session;
+    :Redirect to Login Page (/login);
+endswitch
+
+stop
+
+@enduml

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="822px" preserveAspectRatio="none" style="width:1032px;height:822px;background:#FFFFFF;" version="1.1" viewBox="0 0 1032 822" width="1032px" zoomAndPan="magnify"><defs/><g><rect fill="#FFFFFF" height="26.2969" id="_title" style="stroke:none;stroke-width:1.0;" width="502" x="258" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="492" x="263" y="22.9951">Monitoring Stack - Prometheus &amp; Grafana (Kubernetes Based)</text><!--MD5=[37739ff1c9d7da6ccc5582143e13b30a]
+cluster Kubernetes Cluster--><g id="cluster_Kubernetes Cluster"><rect fill="#F2F6FF" height="635" rx="2.5" ry="2.5" style="stroke:#3970E4;stroke-width:1.0;" width="1019" x="7" y="181.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="155" x="439" y="196.792">Kubernetes Cluster</text></g><!--MD5=[5a6f8316ec20d377c6bc6f4cf491ad62]
+cluster Namespace: production--><g id="cluster_Namespace: production"><path d="M748.5,434.7969 L937.5,434.7969 A3.75,3.75 0 0 1 940,437.2969 L947,457.0938 L999.5,457.0938 A2.5,2.5 0 0 1 1002,459.5938 L1002,790.2969 A2.5,2.5 0 0 1 999.5,792.7969 L748.5,792.7969 A2.5,2.5 0 0 1 746,790.2969 L746,437.2969 A2.5,2.5 0 0 1 748.5,434.7969 " fill="#F2F6FF" style="stroke:#3970E4;stroke-width:1.5;"/><line style="stroke:#3970E4;stroke-width:1.5;" x1="746" x2="947" y1="457.0938" y2="457.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="188" x="750" y="449.792">Namespace: production</text></g><!--MD5=[5cb5d3ac85e24e79676ef0414585f7dd]
+cluster Flask Application\n[#E8F5E9]--><g id="cluster_Flask Application\n[#E8F5E9]"><polygon fill="#F2F6FF" points="770,487.7969,780,477.7969,978,477.7969,978,758.7969,968,768.7969,770,768.7969,770,487.7969" style="stroke:#3970E4;stroke-width:1.0;"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="968" x2="978" y1="487.7969" y2="477.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="770" x2="968" y1="487.7969" y2="487.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="968" x2="968" y1="487.7969" y2="768.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="132" x="804" y="503.792">Flask Application</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="81" x="829.5" y="520.0889">[#E8F5E9]</text></g><!--MD5=[d83c24a2b6efc5d66a93358037dc9912]
+cluster Namespace: prograf--><g id="cluster_Namespace: prograf"><path d="M33.5,224.7969 L195.5,224.7969 A3.75,3.75 0 0 1 198,227.2969 L205,247.0938 L719.5,247.0938 A2.5,2.5 0 0 1 722,249.5938 L722,773.7969 A2.5,2.5 0 0 1 719.5,776.2969 L33.5,776.2969 A2.5,2.5 0 0 1 31,773.7969 L31,227.2969 A2.5,2.5 0 0 1 33.5,224.7969 " fill="#F2F6FF" style="stroke:#3970E4;stroke-width:1.5;"/><line style="stroke:#3970E4;stroke-width:1.5;" x1="31" x2="205" y1="247.0938" y2="247.0938"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="161" x="35" y="239.792">Namespace: prograf</text></g><!--MD5=[6c81c2260f7d5cf6de0585e6ff5eea83]
+cluster Prometheus Operator--><g id="cluster_Prometheus Operator"><polygon fill="#F2F6FF" points="306,293.7969,316,283.7969,554,283.7969,554,742.2969,544,752.2969,306,752.2969,306,293.7969" style="stroke:#3970E4;stroke-width:1.0;"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="544" x2="554" y1="293.7969" y2="283.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="306" x2="544" y1="293.7969" y2="293.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="544" x2="544" y1="293.7969" y2="752.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="172" x="340" y="309.792">Prometheus Operator</text></g><!--MD5=[64a75bbf49e62cd0ea4529be5c63c7d9]
+cluster Grafana Service\n[#F3E5F5]--><g id="cluster_Grafana Service\n[#F3E5F5]"><polygon fill="#F2F6FF" points="80,277.7969,90,267.7969,282,267.7969,282,375.7969,272,385.7969,80,385.7969,80,277.7969" style="stroke:#3970E4;stroke-width:1.0;"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="272" x2="282" y1="277.7969" y2="267.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="80" x2="272" y1="277.7969" y2="277.7969"/><line style="stroke:#3970E4;stroke-width:1.0;" x1="272" x2="272" y1="277.7969" y2="385.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="126" x="114" y="293.792">Grafana Service</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="81" x="136.5" y="310.0889">[#F3E5F5]</text></g><!--MD5=[6e8f311b0aa23032184ffba0ef926f91]
+entity App--><g id="elem_App"><rect fill="#90EE90" height="62.5938" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="106" x="811" y="533.7969"/><rect fill="#90EE90" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="897" y="538.7969"/><rect fill="#90EE90" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="895" y="540.7969"/><rect fill="#90EE90" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="895" y="544.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="826" y="566.792">Flask App</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="826" y="583.0889"> </text></g><!--MD5=[b5f71b4c79b11f7daaaeb2db7a18ec47]
+entity Metrics--><g id="elem_Metrics"><rect fill="#90EE90" height="78.8906" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="156" x="786" y="673.7969"/><rect fill="#90EE90" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="922" y="678.7969"/><rect fill="#90EE90" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="920" y="680.7969"/><rect fill="#90EE90" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="920" y="684.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="801" y="706.792">Metrics Endpoint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="801" y="723.0889">(/metrics)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="801" y="739.3857"> </text></g><!--MD5=[ccae294770573269bd3cb327181b5299]
+entity PV1--><g id="elem_PV1"><path d="M570,692.2969 C570,682.2969 638,682.2969 638,682.2969 C638,682.2969 706,682.2969 706,692.2969 L706,733.8906 C706,743.8906 638,743.8906 638,743.8906 C638,743.8906 570,743.8906 570,733.8906 L570,692.2969 " fill="#FFFF00" style="stroke:#F5C518;stroke-width:0.5;"/><path d="M570,692.2969 C570,702.2969 638,702.2969 638,702.2969 C638,702.2969 706,702.2969 706,692.2969 " fill="none" style="stroke:#F5C518;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116" x="580" y="719.292">PV - Prometheus</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="580" y="735.5889">50Gi</text></g><!--MD5=[7ce0ce03f8aab1e02cea68028a3ac52c]
+entity PV2--><g id="elem_PV2"><path d="M47,544.2969 C47,534.2969 99,534.2969 99,534.2969 C99,534.2969 151,534.2969 151,544.2969 L151,585.8906 C151,595.8906 99,595.8906 99,595.8906 C99,595.8906 47,595.8906 47,585.8906 L47,544.2969 " fill="#F5DEB3" style="stroke:#F5C518;stroke-width:0.5;"/><path d="M47,544.2969 C47,554.2969 99,554.2969 99,554.2969 C99,554.2969 151,554.2969 151,544.2969 " fill="none" style="stroke:#F5C518;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="57" y="571.292">PV - Grafana</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="57" y="587.5889">20Gi</text></g><!--MD5=[37a35b61759196cfb2dc42f58845c5d3]
+entity Prom--><g id="elem_Prom"><rect fill="#ADD8E6" height="46.2969" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="173" x="364.5" y="542.2969"/><rect fill="#ADD8E6" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="517.5" y="547.2969"/><rect fill="#ADD8E6" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="515.5" y="549.2969"/><rect fill="#ADD8E6" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="515.5" y="553.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="379.5" y="575.292">Prometheus Server</text></g><!--MD5=[3c9c57a7798ac2c2903428bcb377c627]
+entity Alert--><g id="elem_Alert"><rect fill="#FFC0CB" height="46.2969" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="132" x="378" y="690.2969"/><rect fill="#FFC0CB" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="490" y="695.2969"/><rect fill="#FFC0CB" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="488" y="697.2969"/><rect fill="#FFC0CB" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="488" y="701.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="393" y="723.292">Alertmanager</text></g><!--MD5=[edcdcc4a1bbe04bafa0ded76de3de705]
+entity Exporter--><g id="elem_Exporter"><rect fill="#D3D3D3" height="46.2969" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="139" x="364.5" y="323.7969"/><rect fill="#D3D3D3" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="483.5" y="328.7969"/><rect fill="#D3D3D3" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="481.5" y="330.7969"/><rect fill="#D3D3D3" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="481.5" y="334.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99" x="379.5" y="356.792">Node Exporter</text></g><!--MD5=[a0b536765d3dd830364cc6e90e9d59e6]
+entity Graf--><g id="elem_Graf"><rect fill="#DDA0DD" height="46.2969" rx="2.5" ry="2.5" style="stroke:#444444;stroke-width:0.5;" width="110" x="156" y="323.7969"/><rect fill="#DDA0DD" height="10" style="stroke:#444444;stroke-width:0.5;" width="15" x="246" y="328.7969"/><rect fill="#DDA0DD" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="244" y="330.7969"/><rect fill="#DDA0DD" height="2" style="stroke:#444444;stroke-width:0.5;" width="4" x="244" y="334.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="171" y="356.792">Grafana UI</text></g><!--MD5=[4166c2533998e538f16711cc7763c23c]
+entity Dev--><g id="elem_Dev"><ellipse cx="392" cy="51.2969" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M392,59.2969 L392,86.2969 M379,67.2969 L405,67.2969 M392,86.2969 L379,101.2969 M392,86.2969 L405,101.2969 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="364.5" y="115.792">DevOps</text></g><!--MD5=[fbb54670c1da3abeeadbdc409e711396]
+link App to Metrics--><g id="link_App_Metrics"><path d="M864,596.9069 C864,617.6569 864,645.4169 864,668.4969 " fill="none" id="App-to-Metrics" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="864,673.6569,868,664.6569,864,668.6569,860,664.6569,864,673.6569" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[abd5935df52f45afd8a105d782be39ac]
+link Prom to Metrics--><g id="link_Prom_Metrics"><path d="M537.76,580.8269 C588.15,590.7269 652.3,605.8669 707,626.7969 C724.41,633.4569 760.04,652.6869 792.96,671.2269 " fill="none" id="Prom-to-Metrics" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="797.38,673.7169,791.5055,665.8118,793.0248,671.2608,787.5758,672.7801,797.38,673.7169" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="742" y="639.8638">Scrapes every 5s</text></g><!--MD5=[52d56f1512c5f91a4d775619853d3996]
+link Exporter to Prom--><g id="link_Exporter_Prom"><path d="M435.76,370.1469 C438.89,410.1169 445.46,493.6969 448.86,536.9869 " fill="none" id="Exporter-to-Prom" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="449.25,542.0669,452.5439,532.7852,448.8643,537.0818,444.5677,533.4022,449.25,542.0669" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="84" x="440" y="414.8638">Node Metrics</text></g><!--MD5=[7fd982a7abf08d646d0d5fb9d6d7c14a]
+link Prom to PV1--><g id="link_Prom_PV1"><path d="M479.4,588.4669 C510.13,612.4669 559.49,650.9969 594.98,678.7069 " fill="none" id="Prom-to-PV1" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="599.24,682.0369,594.6177,673.3401,595.3025,678.9553,589.6872,679.6401,599.24,682.0369" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="99" x="551" y="639.8638">Time-Series DB</text></g><!--MD5=[4feb8d0e6814905f56e876d751b046d8]
+link Prom to Alert--><g id="link_Prom_Alert"><path d="M399.35,588.5469 C383.86,597.9669 368.69,610.5769 360,626.7969 C347.32,650.4669 368.76,671.9969 393.15,687.5269 " fill="none" id="Prom-to-Alert" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="397.41,690.1669,391.8857,682.0132,393.166,687.5233,387.6559,688.8037,397.41,690.1669" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="361" y="639.8638">Triggers Alerts</text></g><!--MD5=[ff4cdea0b7a97b3cf676367feca3ce9a]
+link Graf to Prom--><g id="link_Graf_Prom"><path d="M240.14,370.1069 C262.1,385.8969 293.53,406.3769 324,418.7969 C339.58,425.1469 347.13,417.2669 361,426.7969 C400.84,454.1769 427.37,505.5469 440.75,537.1569 " fill="none" id="Graf-to-Prom" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="442.79,542.0569,443.0467,532.2114,440.8791,537.4364,435.654,535.2688,442.79,542.0569" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104" x="325" y="414.8638">PromQL Queries</text></g><!--MD5=[f7f1b66e4acbd0388a206bbba5719766]
+link Graf to PV2--><g id="link_Graf_PV2"><path d="M155.89,355.6469 C127.87,362.7269 96.18,376.2069 79,401.7969 C53.45,439.8569 68.03,494.4469 82.31,529.6369 " fill="none" id="Graf-to-PV2" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="84.23,534.2569,84.45,524.4105,82.3019,529.6436,77.0687,527.4955,84.23,534.2569" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="182" x="80" y="414.8638">Stores Config &amp; Dashboards</text></g><!--MD5=[92d7a78ea3b6ed28841f72d1c3d2f0ff]
+link Dev to Graf--><g id="link_Dev_Graf"><path d="M366.45,119.0569 C329.37,173.1469 261.54,272.0769 229.15,319.3169 " fill="none" id="Dev-to-Graf" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="226.32,323.4569,234.7066,318.293,229.146,319.3321,228.1069,313.7715,226.32,323.4569" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="106" x="344" y="161.8638">Visualize Metrics</text></g><!--MD5=[8a9c1e2f7b2b7bc6332c7ed4232805e5]
+link Dev to Prom--><g id="link_Dev_Prom"><path d="M419.64,92.6969 C450.45,106.4869 498.83,133.4069 521,173.7969 C573.45,269.3669 560.67,313.3469 533,418.7969 C521.12,464.0569 491.64,510.0669 471.46,537.9069 " fill="none" id="Dev-to-Prom" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="468.31,542.2069,476.8488,537.2989,471.2594,538.1694,470.3889,532.5799,468.31,542.2069" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81" x="558" y="351.3638">View Targets</text></g><!--MD5=[33ddcc10c40f5f6ac17902a02df50c00]
+@startuml
+' Title and general styles
+title Monitoring Stack - Prometheus & Grafana (Kubernetes Based)
+
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam node {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam package {
+    BackgroundColor #F2F6FF
+    BorderColor #3970E4
+}
+skinparam component {
+    BorderColor #444444
+    FontColor Black
+}
+skinparam database {
+    BackgroundColor #FFFBE6
+    BorderColor #F5C518
+    FontColor Black
+}
+
+actor DevOps as Dev 
+
+rectangle "Kubernetes Cluster" {
+  
+  package "Namespace: production" {
+    node "Flask Application\n[#E8F5E9]" {
+      [Flask App\n] as App #lightgreen
+      [Metrics Endpoint\n(/metrics)\n] as Metrics #lightgreen
+      App - -> Metrics
+    }
+  }
+
+  package "Namespace: prograf" {
+  
+    node "Prometheus Operator" {
+      component "Prometheus Server" as Prom #lightblue
+      component "Alertmanager" as Alert #pink
+      component "Node Exporter" as Exporter #lightgrey
+    }
+
+    node "Grafana Service\n[#F3E5F5]" {
+      [Grafana UI] as Graf #plum
+    }
+
+    database "PV - Prometheus\n50Gi" as PV1 #yellow
+    database "PV - Grafana\n20Gi" as PV2 #wheat
+
+    Prom - -> Metrics : Scrapes every 5s
+    Exporter - -> Prom : Node Metrics
+    Prom - -> PV1 : Time-Series DB
+    Prom - -> Alert : Triggers Alerts
+    Graf - -> Prom : PromQL Queries
+    Graf - -> PV2 : Stores Config & Dashboards
+
+    Dev - -> Graf : Visualize Metrics
+    Dev - -> Prom : View Targets
+  }
+}
+@enduml
+
+@startuml
+title Monitoring Stack - Prometheus & Grafana (Kubernetes Based)
+
+skinparam backgroundColor #ffffff
+skinparam shadowing false
+skinparam node {
+    BackgroundColor White
+    BorderColor Black
+    FontColor Black
+}
+skinparam package {
+    BackgroundColor #F2F6FF
+    BorderColor #3970E4
+}
+skinparam component {
+    BorderColor #444444
+    FontColor Black
+}
+skinparam database {
+    BackgroundColor #FFFBE6
+    BorderColor #F5C518
+    FontColor Black
+}
+
+actor DevOps as Dev 
+
+rectangle "Kubernetes Cluster" {
+  
+  package "Namespace: production" {
+    node "Flask Application\n[#E8F5E9]" {
+      [Flask App\n] as App #lightgreen
+      [Metrics Endpoint\n(/metrics)\n] as Metrics #lightgreen
+      App - -> Metrics
+    }
+  }
+
+  package "Namespace: prograf" {
+  
+    node "Prometheus Operator" {
+      component "Prometheus Server" as Prom #lightblue
+      component "Alertmanager" as Alert #pink
+      component "Node Exporter" as Exporter #lightgrey
+    }
+
+    node "Grafana Service\n[#F3E5F5]" {
+      [Grafana UI] as Graf #plum
+    }
+
+    database "PV - Prometheus\n50Gi" as PV1 #yellow
+    database "PV - Grafana\n20Gi" as PV2 #wheat
+
+    Prom - -> Metrics : Scrapes every 5s
+    Exporter - -> Prom : Node Metrics
+    Prom - -> PV1 : Time-Series DB
+    Prom - -> Alert : Triggers Alerts
+    Graf - -> Prom : PromQL Queries
+    Graf - -> PV2 : Stores Config & Dashboards
+
+    Dev - -> Graf : Visualize Metrics
+    Dev - -> Prom : View Targets
+  }
+}
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

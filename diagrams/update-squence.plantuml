@@ -1,0 +1,28 @@
+@startuml
+title Update Task Sequence Diagram
+
+actor User
+participant "Flask App" as Flask
+participant "MongoDB" as Database
+participant "Prometheus" as Monitor
+
+User -> Flask: POST /updatetask (Task Details)
+activate Flask
+
+Flask -> Flask: Validate User Session
+alt User Logged In
+    Flask -> Database: Update Task (by _id and username)
+    activate Database
+    Database --> Flask: Task Updated
+    deactivate Database
+
+    Flask -> Monitor: Increment task_management_app_http_request_total
+    Monitor --> Monitor: Update Metrics
+
+    Flask -> User: Redirect to /
+else User Not Logged In
+    Flask -> User: Redirect to /login
+end
+deactivate Flask
+
+@enduml

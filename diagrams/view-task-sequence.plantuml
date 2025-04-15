@@ -1,0 +1,26 @@
+@startuml
+title View Task Details Sequence Diagram
+
+actor User
+participant "Flask App" as Flask
+participant "MongoDB" as Database
+participant "Prometheus" as Monitor
+
+User -> Flask: GET /list
+activate Flask
+
+Flask -> Flask: Validate User Session
+alt User Logged In
+    Flask -> Database: Fetch Tasks (by username)
+    activate Database
+    Database --> Flask: Return Task List
+    deactivate Database
+    Flask -> Monitor: Increment task_management_app_http_request_total
+
+    Flask -> User: Render 'index.html' with Task List
+else User Not Logged In
+    Flask -> User: Redirect to /login
+end
+deactivate Flask
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+title Signup Sequence Diagram
+
+actor User
+participant "Flask App" as Flask
+participant "MongoDB" as Database
+participant "Prometheus" as Monitor
+
+User -> Flask: POST /signup (username, password, confirm_password)
+activate Flask
+
+Flask -> Flask: Validate Input (password == confirm_password)
+alt Passwords Match
+    Flask -> Database: Check if Username Exists
+    activate Database
+    alt Username Exists
+        Database --> Flask: Username Found
+        Flask -> User: Flash "Username already exists!"
+        Flask -> User: Redirect to /signup
+    else Username Does Not Exist
+        Database --> Flask: Username Not Found
+        Flask -> Database: Insert New User (username, password)
+        Database --> Flask: User Inserted
+        deactivate Database
+
+        Flask -> Monitor: increment task_management_app_http_request_total
+        Monitor --> Monitor: Update Metrics
+        Flask -> User: Flash "Signup successful! Please log in."
+        Flask -> User: Redirect to /login
+    end
+else Passwords Do Not Match
+    Flask -> User: Flash "Passwords do not match!"
+    Flask -> User: Redirect to /signup
+end
+deactivate Flask
+
+@enduml

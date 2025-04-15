@@ -1,0 +1,75 @@
+@startuml
+skinparam monochrome true
+skinparam defaultFontName Arial
+
+start
+
+:User accesses the application;
+
+if (Is user logged in?) then (Yes)
+    :Redirect to /list;
+    :Fetch tasks from MongoDB;
+    :Render task list (index.html);
+else (No)
+    :Redirect to /login;
+    :Render login.html;
+endif
+
+if (User submits login form?) then (Yes)
+    :Validate credentials with MongoDB;
+    if (Credentials valid?) then (Yes)
+        :Store session["username"];
+        :Redirect to /list;
+    else (No)
+        :Flash "Invalid login";
+        :Redirect to /login;
+    endif
+else (No)
+    :Wait for user action;
+endif
+
+if (User accesses /signup?) then (Yes)
+    :Render signup.html;
+    if (User submits signup form?) then (Yes)
+        :Check if username exists in MongoDB;
+        if (Username exists?) then (Yes)
+            :Flash "Username exists";
+            :Redirect to /signup;
+        else (No)
+            :Insert user into MongoDB;
+            :Redirect to /login;
+        endif
+    endif
+endif
+
+if (User performs task operations?) then (Yes)
+    switch (Operation type)
+        case (Create task)
+            :Insert task into MongoDB;
+            :Redirect to /list;
+        case (Update task)
+            :Update task in MongoDB;
+            :Redirect to /list;
+        case (Delete task)
+            :Delete task from MongoDB;
+            :Redirect to /list;
+        case (Toggle task status)
+            :Update task status in MongoDB;
+            :Redirect to /list;
+        case (Search tasks)
+            :Query tasks in MongoDB;
+            :Render search results;
+    endswitch
+endif
+
+if (User accesses /slow?) then (Yes)
+    :Simulate delay with time.sleep;
+    :Return slow response;
+endif
+
+if (Prometheus scrapes /metrics?) then (Yes)
+    :Expose application metrics;
+endif
+
+stop
+@enduml

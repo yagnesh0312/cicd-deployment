@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URL = os.environ.get("MONGO_CONN_STRING")
+BASE_URL = "http://3.3.3.101:31111"
 
 # Define the login endpoint
 LOGIN_ENDPOINT = "/login"
@@ -36,6 +36,18 @@ def brute_force_login(): ## login
                 print(f"Failed with status code: {response.status_code}")
 
             counter += 1
+            
+
+    response = requests.get(
+        url=f"{BASE_URL}/slow"
+    )
+
+    if response.status_code == 200:
+        print(f"Response: {response.text}")
+    else:
+        print(f"Failed with status code: {response.status_code}")
+
+        counter += 1
 
     ## for error
     for i in range(random.randint(10, 50)):
