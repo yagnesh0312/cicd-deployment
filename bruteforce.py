@@ -1,11 +1,7 @@
 import requests
 import random
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
-
-BASE_URL = os.environ.get("MONGO_CONN_STRING")
+BASE_URL = "http://34.68.30.199:31111"
 
 # Define the login endpoint
 LOGIN_ENDPOINT = "/login"

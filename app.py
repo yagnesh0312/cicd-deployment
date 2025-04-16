@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash  # Added session and flash for login
-from bson import ObjectId  
+from bson import ObjectId
 from pymongo import MongoClient
-from werkzeug.security import generate_password_hash, check_password_hash  # For password hashing
 from prometheus_flask_exporter import PrometheusMetrics  # Import PrometheusMetrics
+import logging
 
 from dotenv import load_dotenv
 import os
@@ -29,23 +29,9 @@ task_list = db[MONGO_CONN_NAME]  # Select the collection name
 users = db["users"]  # Collection for storing user credentials
 
 
-
-import logging
-
-logger = logging.getLogger("my-logger")
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Logging configurations
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger("task-logger")
 
 
 def redirect_url():
@@ -69,10 +55,15 @@ def login():
         if user and user["password"] == password:
             session["username"] = username
             flash("Login successful!", "success")
+            logger.info("User ", username, " is logged in.")
+
             return redirect("/list")  # Ensure proper redirection
         else:
             flash("Invalid username or password!", "danger")
+            logger.error("Invalid username or password!")
+
             return redirect("/login")
+
     return render_template("login.html", title="Login", heading="LOGIN")
 
 
@@ -94,8 +85,12 @@ def signup():
 
         # Store the password directly (no hashing)
         users.insert_one({"username": username, "password": password})
+
         flash("Signup successful! Please log in.", "success")
+        logger.info("Signup successful!")
+
         return redirect("/login")
+
     return render_template("signup.html", title="Signup", heading="SIGNUP")
 
 
@@ -103,7 +98,10 @@ def signup():
 @app.route("/logout")
 def logout():
     session.pop("username", None)
+
     flash("You have been logged out.", "info")
+    logger.info("You have been logged out.")
+
     return redirect("/login")
 
 
@@ -113,8 +111,11 @@ def login_required(func):
         if "username" not in session:
             flash("You need to log in first.", "warning")
             return redirect("/login")
+
         return func(*args, **kwargs)
+
     wrapper.__name__ = func.__name__
+
     return wrapper
 
 
@@ -143,13 +144,17 @@ def lists(): # Track task operations
             "done": False,
             "username": username
         })
+
         flash("Task added successfully!", "success")
+        logger.info("Task added successfully!")
+
         return redirect("/list")
 
     # Display the list of tasks
     all_tasks = task_list.find({"username": username})  # Filter tasks by username
+
     return render_template(
-        'index.html',
+        template_name_or_list='index.html',
         all="active",
         task_list=all_tasks,
         title=title,
@@ -164,17 +169,21 @@ def uncompleted():
     try:
         username = session["username"]  # Get the logged-in user's username
         uncompleted_tasks = task_list.find({"done": False, "username": username})  # Filter tasks by username
-        logger.info(stack_info=True, msg=f"User {username} viewed uncompleted tasks.")
+
+        logger.info(f"User {username} viewed uncompleted tasks.")
+
         return render_template(
-            'index.html',
+            template_name_or_list='index.html',
             uncompleted="active",
             task_list=uncompleted_tasks,
             title=title,
             heading=heading
         )
+
     except Exception as e:
         logger.error(f"Error while fetching uncompleted tasks for user {username}: {str(e)}")
         flash("An error occurred while fetching uncompleted tasks.", "danger")
+
         return redirect("/list")
 
 
@@ -260,14 +269,18 @@ def remove():
 
         # Delete the task only if it belongs to the logged-in user
         result = task_list.delete_one({"_id": ObjectId(key), "username": username})
+
         if result.deleted_count > 0:
             logger.info(stack_info=True, msg=f"Task {key} deleted by user {username}.")
         else:
             logger.warning(f"Task {key} not found or does not belong to user {username}.")
             flash("Task not found or unauthorized access.", "warning")
+
     except Exception as e:
+
         logger.error(f"Error while deleting task {key} for user {username}: {str(e)}")
         flash("An error occurred while deleting the task.", "danger")
+
     return redirect("/")
 
 
@@ -281,20 +294,25 @@ def update():
 
         # Find the task and ensure it belongs to the logged-in user
         task = task_list.find({"_id": ObjectId(id), "username": username})
-        if task:
+
+        if task.__empty:
             logger.info(stack_info=True, msg=f"User {username} is updating task {id}.")
+
             return render_template(
-                'update.html',
+                template_name_or_list='update.html',
                 tasks=task,
                 heading="Update Task",
                 title=title
             )
+
         else:
             logger.warning(f"Task {id} not found or does not belong to user {username}.")
             flash("Task not found or unauthorized access.", "warning")
+
     except Exception as e:
         logger.error(f"Error while fetching task {id} for update by user {username}: {str(e)}")
         flash("An error occurred while fetching the task for update.", "danger")
+
     return redirect("/list")
 
 
@@ -319,14 +337,17 @@ def update_task():
                 "priority": priority
             }
         })
+
         if result.matched_count > 0:
-            logger.info(stack_info=True, msg=f"Task {id} updated by user {username}.")
+            logger.info(stack_info=True, msg=f"Task {id} is updated by user {username}.")
         else:
             logger.warning(f"Task {id} not found or does not belong to user {username}.")
             flash("Task not found or unauthorized access.", "warning")
+
     except Exception as e:
         logger.error(f"Error while updating task {id} for user {username}: {str(e)}")
         flash("An error occurred while updating the task.", "danger")
+
     return redirect("/")
 
 
@@ -352,7 +373,7 @@ def search():
         })
 
     return render_template(
-        'searchlist.html',
+        template_name_or_list='searchlist.html',
         task_list=tasks,
         title="Search Results",
         heading="Search Results"
