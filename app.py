@@ -30,7 +30,7 @@ users = db["users"]  # Collection for storing user credentials
 
 
 # Logging configurations
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("task-logger")
 
 
