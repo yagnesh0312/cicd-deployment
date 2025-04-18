@@ -435,7 +435,7 @@
         }
       ],
       "title": "Available",
-      "transparent": false,
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -747,7 +747,7 @@
           }
         }
       ],
-      "transparent": false,
+      "transparent": true,
       "type": "stat"
     },
     {
@@ -840,7 +840,7 @@
           }
         }
       ],
-      "transparent": false,
+      "transparent": true,
       "type": "stat"
     },
     {
@@ -1033,7 +1033,7 @@
         }
       ],
       "title": "Response Time (P99, P95, P50)",
-      "transparent": false,
+      "transparent": true,
       "type": "gauge"
     },
     {
@@ -1161,7 +1161,7 @@
         }
       ],
       "title": "HTTP Request Rate (RPS)",
-      "transparent": false,
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -1263,7 +1263,7 @@
         }
       ],
       "title": "App Health Check Status",
-      "transparent": false,
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -1386,7 +1386,7 @@
           }
         }
       ],
-      "transparent": false,
+      "transparent": true,
       "type": "stat"
     },
     {
@@ -1512,7 +1512,7 @@
         }
       ],
       "title": " Error Rates (4xx, 5xx)",
-      "transparent": false,
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -1615,7 +1615,7 @@
         }
       ],
       "title": "Requests Per Second",
-      "transparent": false,
+      "transparent": true,
       "type": "timeseries"
     }
   ],

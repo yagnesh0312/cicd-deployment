@@ -3,3 +3,4 @@ pymongo
 dotenv
 pytest
 prometheus-flask-exporter
+python-logging-loki
