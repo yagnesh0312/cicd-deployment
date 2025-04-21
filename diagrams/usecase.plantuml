@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #f5f5f5
+  BorderColor #333333
+  ArrowColor #3c3c3c
+}
+
+actor User
+actor "DevOps Engineer" as DevOps
+
+rectangle  {
+    usecase SignUp
+    usecase Login
+    usecase Logout
+    usecase "View Dashboard" as ViewDashboard
+    usecase "Manage Tasks" as ManageTasks
+    usecase "Add Task" as AddTask
+    usecase "Update Task" as UpdateTask
+    usecase "View All Task" as ViewAllTask
+    usecase "View Completed Task" as ViewCompletedTask
+    usecase "View Uncompleted Task" as ViewUncompletedTask
+    usecase Metrics
+
+    User       -- SignUp
+    User       -- Login
+    User       -- Logout
+    User       -- ManageTasks
+
+    SignUp     ..> Login           : <<include>>
+    Login      .up.> ViewDashboard   : <<include>>
+    ViewDashboard      ..> ManageTasks   : <<include>>
+
+    AddTask              --|> ManageTasks : <<extend>>
+    UpdateTask           --|> ManageTasks : <<extend>>
+    ViewAllTask          --|> ManageTasks : <<extend>>
+    ViewCompletedTask    --|> ManageTasks : <<extend>>
+    ViewUncompletedTask  --|> ManageTasks : <<extend>>
+
+    DevOps     -- Metrics
+}
+@enduml

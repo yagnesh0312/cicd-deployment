@@ -1,8 +1,6 @@
 import requests
 import random
 
-load_dotenv()
-
 BASE_URL = "http://3.3.3.101:31111"
 
 # Define the login endpoint
