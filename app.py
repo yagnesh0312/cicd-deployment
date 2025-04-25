@@ -21,7 +21,12 @@ title = "Task Management Application"
 heading = "Task Management"
 
 # Initialize Prometheus metrics
-metrics = PrometheusMetrics(app, path="/metrics",defaults_prefix="task_management_app")
+metrics = PrometheusMetrics(
+    app = app,
+    path = "/metrics",
+    defaults_prefix = "task_management_app",
+    default_labels = {"service": "task_management_service"}
+)
 
 client = MongoClient(f"{MONGO_URL}/{MONGO_DB}")  # host uri
 db = client[MONGO_DB]  # Select the database
@@ -55,7 +60,7 @@ def login():
         if user and user["password"] == password:
             session["username"] = username
             flash("Login successful!", "success")
-            logger.info("User ", username, " is logged in.")
+            logger.info(f"User {username} is logged in.")
 
             return redirect("/list")  # Ensure proper redirection
         else:
@@ -110,6 +115,7 @@ def login_required(func):
     def wrapper(*args, **kwargs):
         if "username" not in session:
             flash("You need to log in first.", "warning")
+            logger.error("Unauthorized access attempt.")
             return redirect("/login")
 
         return func(*args, **kwargs)
