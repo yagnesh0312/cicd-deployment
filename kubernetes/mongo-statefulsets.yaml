@@ -103,7 +103,7 @@ spec:
     spec:
       containers:
         - name: mongo-server
-          image: mongo
+          image: yagneshjariwala/mongo
           ports:
             - containerPort: 27017
           volumeMounts:
