@@ -50,7 +50,7 @@ handler = logging.StreamHandler()
 handler.setFormatter(json_formatter)
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.ERROR)  
+logger.setLevel(logging.ERROR)
 logger.addHandler(handler)
 logger.propagate = False
 
@@ -317,7 +317,7 @@ def update():
         # Find the task and ensure it belongs to the logged-in user
         task = task_list.find({"_id": ObjectId(id), "username": username})
 
-        if task.__empty:
+        if task:
             logger.info(stack_info=True, msg=f"User {username} is updating task {id}.")
 
             return render_template(
