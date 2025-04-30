@@ -3,6 +3,7 @@ from bson import ObjectId
 from pymongo import MongoClient
 from prometheus_flask_exporter import PrometheusMetrics  # Import PrometheusMetrics
 import logging
+import json
 
 from dotenv import load_dotenv
 import os
@@ -34,9 +35,24 @@ task_list = db[MONGO_CONN_NAME]  # Select the collection name
 users = db["users"]  # Collection for storing user credentials
 
 
+class JSONFormatter(logging.Formatter):
+    def format(self, record) -> str:
+        log_record = {
+            "time": self.formatTime(record, self.datefmt),
+            "level": record.levelname,
+            "message": record.getMessage(),
+        }
+        return json.dumps(log_record)
+
 # Logging configurations
-logging.basicConfig(level=logging.INFO, format='{"time": "%(asctime)s", "level": "%(levelname)s", "message": "%(message)s"}', datefmt='%Y-%m-%d %H:%M:%S', force=True)
+json_formatter = JSONFormatter(datefmt='%Y-%m-%d %H:%M:%S')
+handler = logging.StreamHandler()
+handler.setFormatter(json_formatter)
+
 logger = logging.getLogger("task-logger")
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
+logger.propagate = False
 
 
 def redirect_url():
