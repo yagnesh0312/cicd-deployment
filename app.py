@@ -49,8 +49,8 @@ json_formatter = JSONFormatter(datefmt='%Y-%m-%d %H:%M:%S')
 handler = logging.StreamHandler()
 handler.setFormatter(json_formatter)
 
-logger = logging.getLogger("task-logger")
-logger.setLevel(logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.ERROR)  
 logger.addHandler(handler)
 logger.propagate = False
 
