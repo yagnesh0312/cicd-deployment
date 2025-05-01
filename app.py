@@ -45,7 +45,7 @@ class JSONFormatter(logging.Formatter):
         return json.dumps(log_record)
 
 # Logging configurations
-json_formatter = JSONFormatter(datefmt='%Y-%m-%d %H:%M:%S')
+json_formatter = JSONFormatter(datefmt="%Y-%m-%dT%H:%M:%S%zZ")
 handler = logging.StreamHandler()
 handler.setFormatter(json_formatter)
 
@@ -63,6 +63,7 @@ def redirect_url():
 # @app.route("/metrics")
 # def metrics_route():
 #     return "Custom metrics route"
+logger.error("Invalid username or password!")
 
 # Login Page
 @app.route("/login", methods=["GET", "POST"])
